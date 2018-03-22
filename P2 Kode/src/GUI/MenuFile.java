@@ -3,6 +3,9 @@ package GUI;
 import java.util.Map.Entry;
 import javafx.application.Application; */
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 /*import javafx.scene.effect.DropShadow;
@@ -26,6 +29,18 @@ public class MenuFile {
 
 
         Menu menuFile = new Menu("Files");
+            MenuItem addFile = new MenuItem("Add");
+                addFile.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        Stage srcFile = new Stage();
+                        srcFile.setTitle("Select source file");
+                        Group ass = new Group();
+                        Scene fileScene = new Scene(ass, 50, 600);
+                        srcFile.show();
+                    }
+                });
+            menuFile.getItems().add(addFile);
 
         Menu menuSetting = new Menu("Settings");
 
