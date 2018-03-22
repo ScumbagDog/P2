@@ -22,6 +22,6 @@ public class MainGUI extends Application {
     public void start(Stage primaryStage) {
         Stage stage = new Stage();
         MenuFile mainMenu = new MenuFile();
-        MenuFile.Hallo(stage);
+        MenuFile.MainMenu(stage);
     }
 }
