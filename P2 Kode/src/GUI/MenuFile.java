@@ -30,7 +30,7 @@ import java.util.List;
 public class MenuFile {
 
     public static void MainMenu(Stage stage) {
-        stage.setTitle("Menu Sample");
+        stage.setTitle("Main Menu");
         Scene scene = new Scene(new VBox(), 400, 350);
         scene.setFill(Color.OLDLACE);
         List<File> compFileList = new ArrayList<>();
