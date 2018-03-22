@@ -15,10 +15,13 @@ import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView; */
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,7 +34,12 @@ public class MenuFile {
 
     public static void MainMenu(Stage stage) {
         stage.setTitle("Main Menu");
+        int windowWidth = 400, windowHeight = 350;
         List<File> compFileList = new ArrayList<>();
+
+        Text infoBar = new Text();
+            infoBar.setTextAlignment(TextAlignment.CENTER);
+            infoBar.setText("Awaiting action...");
 
         MenuBar menuBar = new MenuBar();
 
@@ -44,8 +52,7 @@ public class MenuFile {
                     browseSourceFile.setTitle("Select a source file");
                     File filePath = browseSourceFile.showOpenDialog(srcFile);
 
-                    Text fileName = new Text();
-                    fileName.setText("File " + filePath.getName() + " has been added!");
+                    infoBar.setText("File " + filePath.getName() + " has been added!");
                 });
             menuFile.getItems().add(addFile);
 
@@ -55,8 +62,14 @@ public class MenuFile {
 
         menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
 
-        VBox elementHolder = new VBox();
-        elementHolder.getChildren().addAll(menuBar);
+        BorderPane elementHolder = new BorderPane();
+            //elementHolder.getChildren().add(infoBar);
+                elementHolder.setBottom(infoBar);
+                elementHolder.setTop(menuBar);
+       // VBox menuHolder = new VBox();
+         //   menuHolder.getChildren().addAll(menuBar, elementHolder);
+
+
         Scene scene = new Scene(elementHolder, 400, 350);
         scene.setFill(Color.OLDLACE);
 
