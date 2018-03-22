@@ -49,7 +49,7 @@ public class MenuFile {
                     browseSourceFile.setTitle("Select a source file");
                     File filePath = browseSourceFile.showOpenDialog(srcFile);
 
-                    infoBar.setText("File " + filePath.getName() + " has been added!");
+                    infoBar.setText("File " + filePath.getName() + " has been added as source file!");
                 });
             menuFile.getItems().add(addFile);
 
@@ -60,7 +60,7 @@ public class MenuFile {
         Menu menuAlgorithm = new Menu("Algorithm");
         CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
         addAlgorithm.setOnAction(event -> {
-            if (addAlgorithm.isSelected() == true) {
+            if (addAlgorithm.isSelected()) {
                 System.out.println("Algorithm 1 has been selected");
             } else {
                 System.out.println("Algorithm 1 has been removed");
