@@ -31,7 +31,7 @@ public class MenuFile {
         stage.setTitle("Menu Sample");
         Scene scene = new Scene(new VBox(), 400, 350);
         scene.setFill(Color.OLDLACE);
-        List<File> fileList = new ArrayList<>();
+        List<File> compFileList = new ArrayList<>();
 
         MenuBar menuBar = new MenuBar();
 
