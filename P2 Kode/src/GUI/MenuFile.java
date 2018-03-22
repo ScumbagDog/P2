@@ -60,7 +60,19 @@ public class MenuFile {
 
         Menu menuCompare = new Menu("Compare");
 
-        menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
+        Menu menuAlgorithm = new Menu("Algorithm");
+        CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
+        addAlgorithm.setOnAction(event -> {
+            if (addAlgorithm.isSelected() == true) {
+                System.out.println("Algorithm 1 has been selected");
+            } else {
+                System.out.println("Algorithm 1 has been removed");
+              }
+
+        });
+        menuAlgorithm.getItems().add(addAlgorithm);
+
+        menuBar.getMenus().addAll(menuFile, menuCompare, menuAlgorithm, menuSetting);
 
         BorderPane elementHolder = new BorderPane();
             //elementHolder.getChildren().add(infoBar);
