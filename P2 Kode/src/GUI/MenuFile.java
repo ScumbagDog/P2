@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView; */
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MenuFile {
@@ -38,6 +39,8 @@ public class MenuFile {
                         Group ass = new Group();
                         Scene fileScene = new Scene(ass, 200, 500);
                         srcFile.setScene(fileScene);
+                        srcFile.initModality(Modality.WINDOW_MODAL);
+                        srcFile.initOwner(stage);
                         srcFile.show();
                     }
                 });
