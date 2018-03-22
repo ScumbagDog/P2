@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView; */
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,23 +38,24 @@ public class MenuFile {
 
         Menu menuFile = new Menu("Files");
             MenuItem addFile = new MenuItem("Add");
-                addFile.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        Stage srcFile = new Stage();
-                        srcFile.setTitle("Select source file");
-                        GridPane fileSelect = new GridPane();
+                addFile.setOnAction(event -> {
+                    Stage srcFile = new Stage();
+                    srcFile.setTitle("Select source file");
+                    VBox fileShowCase = new VBox();
 
-                        FileChooser browseSourceFile = new FileChooser();
-                        browseSourceFile.setTitle("Select a source file");
-                        browseSourceFile.showOpenDialog(srcFile);
+                    FileChooser browseSourceFile = new FileChooser();
+                    browseSourceFile.setTitle("Select a source file");
+                    File filePath = browseSourceFile.showOpenDialog(srcFile);
 
-                        Scene fileScene = new Scene(fileSelect, 200, 500);
-                        srcFile.setScene(fileScene);
-                        srcFile.initModality(Modality.WINDOW_MODAL);
-                        srcFile.initOwner(stage);
-                        srcFile.show();
-                    }
+                    Text fileName = new Text();
+                    fileName.setText(filePath.getName());
+                    fileShowCase.getChildren().add(fileName);
+
+                    Scene fileScene = new Scene(fileShowCase);
+                    srcFile.setScene(fileScene);
+                    srcFile.initModality(Modality.WINDOW_MODAL);
+                    srcFile.initOwner(stage);
+                    srcFile.show();
                 });
             menuFile.getItems().add(addFile);
 
