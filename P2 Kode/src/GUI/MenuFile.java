@@ -1,7 +1,4 @@
 package GUI;
-/*import java.util.AbstractMap.SimpleEntry;
-import java.util.Map.Entry;
-import javafx.application.Application; */
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -75,12 +72,8 @@ public class MenuFile {
         menuBar.getMenus().addAll(menuFile, menuCompare, menuAlgorithm, menuSetting);
 
         BorderPane elementHolder = new BorderPane();
-            //elementHolder.getChildren().add(infoBar);
-                elementHolder.setBottom(infoBar);
-                elementHolder.setTop(menuBar);
-       // VBox menuHolder = new VBox();
-         //   menuHolder.getChildren().addAll(menuBar, elementHolder);
-
+            elementHolder.setBottom(infoBar);
+            elementHolder.setTop(menuBar);
 
         Scene scene = new Scene(elementHolder, 400, 350);
         scene.setFill(Color.OLDLACE);
