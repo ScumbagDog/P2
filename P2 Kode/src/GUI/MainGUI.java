@@ -24,15 +24,15 @@ public class MainGUI extends Application {
         Button source = new Button();
         Button compare = new Button();
         Button run = new Button();
-        run.setText("Run!");
         Button settings = new Button();
-        settings.setText("Settings");
 
         source.setText("Source files");
         compare.setText("Comparison files");
-
+        run.setText("Run!");
+        settings.setText("Settings");
 
         source.setMaxWidth(windowWidth / 4);
+        source.setMaxWidth()
 
         root.getChildren().add(source);
         root.getChildren().add(compare);
