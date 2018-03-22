@@ -29,12 +29,10 @@ public class MenuFile {
 
         Menu menuSetting = new Menu("Settings");
 
-        Menu menuAlgorithm = new Menu("Algorithms");
-
         Menu menuCompare = new Menu("Compare");
 
 
-        menuBar.getMenus().addAll(menuFile, menuSetting, menuAlgorithm, menuCompare);
+        menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
 
 
         ((VBox) scene.getRoot()).getChildren().addAll(menuBar);
