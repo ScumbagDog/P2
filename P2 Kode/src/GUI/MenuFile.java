@@ -36,7 +36,8 @@ public class MenuFile {
                         Stage srcFile = new Stage();
                         srcFile.setTitle("Select source file");
                         Group ass = new Group();
-                        Scene fileScene = new Scene(ass, 50, 600);
+                        Scene fileScene = new Scene(ass, 200, 500);
+                        srcFile.setScene(fileScene);
                         srcFile.show();
                     }
                 });
