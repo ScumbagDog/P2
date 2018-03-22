@@ -32,7 +32,9 @@ public class MainGUI extends Application {
         settings.setText("Settings");
 
         source.setMaxWidth(windowWidth / 4);
-        source.setMaxWidth()
+        compare.setMaxWidth(windowWidth / 4);
+        run.setMaxWidth(windowWidth / 4);
+        settings.setMaxWidth(windowWidth / 4);
 
         root.getChildren().add(source);
         root.getChildren().add(compare);
