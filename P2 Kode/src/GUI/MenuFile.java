@@ -31,8 +31,6 @@ public class MenuFile {
 
     public static void MainMenu(Stage stage) {
         stage.setTitle("Main Menu");
-        Scene scene = new Scene(new VBox(), 400, 350);
-        scene.setFill(Color.OLDLACE);
         List<File> compFileList = new ArrayList<>();
 
         MenuBar menuBar = new MenuBar();
@@ -55,11 +53,12 @@ public class MenuFile {
 
         Menu menuCompare = new Menu("Compare");
 
-
         menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
 
-
-        ((VBox) scene.getRoot()).getChildren().addAll(menuBar);
+        VBox elementHolder = new VBox();
+        elementHolder.getChildren().addAll(menuBar);
+        Scene scene = new Scene(elementHolder, 400, 350);
+        scene.setFill(Color.OLDLACE);
 
         stage.setScene(scene);
         stage.show();
