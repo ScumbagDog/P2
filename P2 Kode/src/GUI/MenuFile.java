@@ -1,4 +1,7 @@
 package GUI;
+/*import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import javafx.application.Application; */
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,13 +15,10 @@ import javafx.scene.effect.Glow;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView; */
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,12 +31,7 @@ public class MenuFile {
 
     public static void MainMenu(Stage stage) {
         stage.setTitle("Main Menu");
-        int windowWidth = 400, windowHeight = 350;
         List<File> compFileList = new ArrayList<>();
-
-        Text infoBar = new Text();
-            infoBar.setTextAlignment(TextAlignment.CENTER);
-            infoBar.setText("Awaiting action...");
 
         MenuBar menuBar = new MenuBar();
 
@@ -49,7 +44,8 @@ public class MenuFile {
                     browseSourceFile.setTitle("Select a source file");
                     File filePath = browseSourceFile.showOpenDialog(srcFile);
 
-                    infoBar.setText("File " + filePath.getName() + " has been added as source file!");
+                    Text fileName = new Text();
+                    fileName.setText("File " + filePath.getName() + " has been added!");
                 });
             menuFile.getItems().add(addFile);
 
@@ -60,7 +56,7 @@ public class MenuFile {
         Menu menuAlgorithm = new Menu("Algorithm");
         CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
         addAlgorithm.setOnAction(event -> {
-            if (addAlgorithm.isSelected()) {
+            if (addAlgorithm.isSelected() == true) {
                 System.out.println("Algorithm 1 has been selected");
             } else {
                 System.out.println("Algorithm 1 has been removed");
@@ -71,10 +67,8 @@ public class MenuFile {
 
         menuBar.getMenus().addAll(menuFile, menuCompare, menuAlgorithm, menuSetting);
 
-        BorderPane elementHolder = new BorderPane();
-            elementHolder.setBottom(infoBar);
-            elementHolder.setTop(menuBar);
-
+        VBox elementHolder = new VBox();
+        elementHolder.getChildren().addAll(menuBar);
         Scene scene = new Scene(elementHolder, 400, 350);
         scene.setFill(Color.OLDLACE);
 
