@@ -5,6 +5,7 @@ import javafx.application.Application; */
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -40,22 +41,13 @@ public class MenuFile {
             MenuItem addFile = new MenuItem("Add");
                 addFile.setOnAction(event -> {
                     Stage srcFile = new Stage();
-                    srcFile.setTitle("Select source file");
-                    VBox fileShowCase = new VBox();
 
                     FileChooser browseSourceFile = new FileChooser();
                     browseSourceFile.setTitle("Select a source file");
                     File filePath = browseSourceFile.showOpenDialog(srcFile);
 
                     Text fileName = new Text();
-                    fileName.setText(filePath.getName());
-                    fileShowCase.getChildren().add(fileName);
-
-                    Scene fileScene = new Scene(fileShowCase);
-                    srcFile.setScene(fileScene);
-                    srcFile.initModality(Modality.WINDOW_MODAL);
-                    srcFile.initOwner(stage);
-                    srcFile.show();
+                    fileName.setText("File " + filePath.getName() + " has been added!");
                 });
             menuFile.getItems().add(addFile);
 
