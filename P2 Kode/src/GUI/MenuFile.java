@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class MenuFile {
 
-    public void Hallo(Stage stage) {
+    public static void MainMenu(Stage stage) {
         stage.setTitle("Menu Sample");
         Scene scene = new Scene(new VBox(), 400, 350);
         scene.setFill(Color.OLDLACE);
