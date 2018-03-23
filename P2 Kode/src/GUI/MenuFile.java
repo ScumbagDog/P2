@@ -39,6 +39,9 @@ public class MenuFile {
 
         Menu menuCompare = new Menu("Compare");
 
+
+        MenuBar algorithmBar = new MenuBar();
+
         Menu menuAlgorithm = new Menu("Algorithm");
         CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
         addAlgorithm.setOnAction(event -> {
@@ -51,11 +54,14 @@ public class MenuFile {
         });
         menuAlgorithm.getItems().add(addAlgorithm);
 
-        menuBar.getMenus().addAll(menuFile, menuCompare, menuAlgorithm, menuSetting);
+        menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
+        algorithmBar.getMenus().addAll(menuAlgorithm);
 
         BorderPane elementHolder = new BorderPane();
-        //elementHolder.getChildren().addAll(menuBar);
+        BorderPane leftPane = new BorderPane();
         elementHolder.setTop(menuBar);
+        elementHolder.setLeft(leftPane);
+            leftPane.setBottom(algorithmBar);
         elementHolder.setBottom(fileName);
         
         Scene scene = new Scene(elementHolder, 400, 350);
