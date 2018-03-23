@@ -36,7 +36,8 @@ public class MenuFile {
 
         Menu menuSetting = new Menu("Window");
             menuSetting.setOnAction(event -> {
-
+                String version = "???";
+                SettingsMenu.WindowSettings(version);
             });
 
         Menu menuCompare = new Menu("Compare");
