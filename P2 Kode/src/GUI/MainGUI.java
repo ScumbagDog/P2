@@ -21,7 +21,6 @@ public class MainGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         Stage stage = new Stage();
-        MenuFile mainMenu = new MenuFile();
         MenuFile.MainMenu(stage);
     }
 }

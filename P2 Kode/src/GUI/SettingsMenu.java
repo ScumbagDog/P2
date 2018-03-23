@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -15,5 +16,9 @@ public class SettingsMenu {
         Text versionInfo = new Text(version);
         versionPane.setRight(versionInfo);
 
+        Scene scene = new Scene(generalPane, 500, 500);
+        stage.setScene(scene);
+
+        stage.show();
     }
 }

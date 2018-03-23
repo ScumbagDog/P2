@@ -35,10 +35,12 @@ public class MenuFile {
             menuFile.getItems().add(addFile);
 
         Menu menuSetting = new Menu("Window");
-            menuSetting.setOnAction(event -> {
-                String version = "???";
-                SettingsMenu.WindowSettings(version);
-            });
+            MenuItem addSetting = new MenuItem("Settings");
+                addSetting.setOnAction(event -> {
+                    String version = "???";
+                    SettingsMenu.WindowSettings(version);
+                });
+            menuSetting.getItems().add(addSetting);
 
         Menu menuCompare = new Menu("Compare");
 
