@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -17,6 +18,7 @@ public class MenuFile {
     public static void MainMenu(Stage stage) {
         stage.setTitle("Main Menu");
         List<File> compFileList = new ArrayList<>();
+        Text fileName = new Text("Awaiting action...");
 
         MenuBar menuBar = new MenuBar();
 
@@ -29,7 +31,6 @@ public class MenuFile {
                     browseSourceFile.setTitle("Select a source file");
                     File filePath = browseSourceFile.showOpenDialog(srcFile);
 
-                    Text fileName = new Text();
                     fileName.setText("File " + filePath.getName() + " has been added!");
                 });
             menuFile.getItems().add(addFile);
@@ -52,8 +53,11 @@ public class MenuFile {
 
         menuBar.getMenus().addAll(menuFile, menuCompare, menuAlgorithm, menuSetting);
 
-        VBox elementHolder = new VBox();
-        elementHolder.getChildren().addAll(menuBar);
+        BorderPane elementHolder = new BorderPane();
+        //elementHolder.getChildren().addAll(menuBar);
+        elementHolder.setTop(menuBar);
+        elementHolder.setBottom(fileName);
+        
         Scene scene = new Scene(elementHolder, 400, 350);
         scene.setFill(Color.OLDLACE);
 
