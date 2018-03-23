@@ -3,7 +3,6 @@ package GUI;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -35,7 +34,10 @@ public class MenuFile {
                 });
             menuFile.getItems().add(addFile);
 
-        Menu menuSetting = new Menu("Settings");
+        Menu menuSetting = new Menu("Window");
+            menuSetting.setOnAction(event -> {
+
+            });
 
         Menu menuCompare = new Menu("Compare");
 
