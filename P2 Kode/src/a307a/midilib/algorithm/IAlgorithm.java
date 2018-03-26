@@ -1,4 +1,4 @@
-package algorithm;
+package a307a.midilib.algorithm;
 
 import java.io.File;
 
