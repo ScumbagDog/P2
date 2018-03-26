@@ -1,0 +1,2 @@
+N-gram-fokuseret parser
+Klasser for hver algoritme --//-- En enkelt algoritmeklasse
