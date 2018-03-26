@@ -75,10 +75,10 @@ public class MenuFile {
         hbox.getChildren().add(algorithm1);
 
         BorderPane elementHolder = new BorderPane();
-        BorderPane leftPane = new BorderPane();
+        BorderPane algorithmList = new BorderPane();
         elementHolder.setTop(menuBar);
-        elementHolder.setLeft(leftPane);
-        leftPane.setBottom(algorithmBar);
+        elementHolder.setLeft(algorithmList);
+        algorithmList.setBottom(algorithmBar);
         elementHolder.setBottom(fileName);
 
         Scene scene = new Scene(elementHolder, 600, 600);
