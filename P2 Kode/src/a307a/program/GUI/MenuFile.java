@@ -1,4 +1,4 @@
-package GUI;
+package a307a.program.GUI;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -7,10 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
-import jdk.jfr.Percentage;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package GUI;
+package a307a.program.GUI;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
