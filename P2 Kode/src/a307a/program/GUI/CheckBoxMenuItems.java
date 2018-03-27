@@ -14,8 +14,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckBoxMenuItems extends JMenuItem {
-    VBox vbox = new VBox();
+public class CheckBoxMenuItems {
+   /* VBox vbox = new VBox();
     vbox.setTranslateX(50);
     vbox.setTranslateY(50);
     CheckBox firstCheckBox = new CheckBox("Algoritme 1");
@@ -23,6 +23,6 @@ public class CheckBoxMenuItems extends JMenuItem {
     CheckBox thirdCheckBox = new CheckBox("Algoritme 3");
     firstCheckBox.setSelected(false);
     secondCheckBox.setSelected(false);
-    thirdCheckBox.setSelected(false);
+    thirdCheckBox.setSelected(false); */
 
 }
