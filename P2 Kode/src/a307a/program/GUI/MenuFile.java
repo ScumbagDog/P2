@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,14 +65,14 @@ public class MenuFile {
         algorithmBar.getMenus().addAll(menuAlgorithm);
 
         //Panel del
-        HBox hbox = new HBox(50);
-        hbox.setTranslateX(50);
-        hbox.setTranslateY(50);
+        VBox vbox = new VBox(50);
+        vbox.setTranslateX(50);
+        vbox.setTranslateY(50);
         SplitPane rightSplitPanel = new SplitPane();
         rightSplitPanel.setPrefSize(300, 500);
         final CheckBox algorithm1 = new CheckBox("Algoritme1");
         rightSplitPanel.getItems().addAll(algorithm1);
-        hbox.getChildren().add(algorithm1);
+        vbox.getChildren().add(algorithm1);
 
         BorderPane elementHolder = new BorderPane();
         BorderPane algorithmList = new BorderPane();
