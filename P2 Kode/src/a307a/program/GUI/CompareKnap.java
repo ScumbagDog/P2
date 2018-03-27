@@ -24,7 +24,7 @@ public class CompareKnap extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Comparing..");
+                System.out.println("Comparing...");
             }
         });
 
