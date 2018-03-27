@@ -1,9 +1,7 @@
 package a307a.program.GUI;
 
 import javafx.application.Application;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
