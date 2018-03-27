@@ -1,5 +1,6 @@
 package a307a.midilib.parser;
 
-public interface MidiSequenceReader{
-
+public abstract class MidiSequenceReader{
+	abstract Note getNextNote();
+	abstract Note getNextNoteOnChannel(int channel);
 }
