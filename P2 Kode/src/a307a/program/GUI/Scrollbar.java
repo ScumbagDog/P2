@@ -27,7 +27,7 @@ public class Scrollbar extends Application {
         sc.setOrientation(Orientation.VERTICAL);
         sc.setPrefHeight(180);
         sc.setMax(360);
-        sc.setValue(50);
+
 
         primaryStage.show();
     }
