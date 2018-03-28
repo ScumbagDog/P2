@@ -1,5 +1,6 @@
 package a307a.midilib.parser;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -11,5 +12,7 @@ public class MidiTools{
 		return null;
 	}
 
-	public static getSequenceReader
+	public static MidiSequenceReader getSequenceReader(File midiFile){
+
+	}
 }
