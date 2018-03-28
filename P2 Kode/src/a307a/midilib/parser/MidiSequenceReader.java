@@ -1,15 +1,30 @@
 package a307a.midilib.parser;
 
+import javax.sound.midi.Sequence;
 import java.util.List;
 
 /**
- * Represents a midi file being read. Returns different
- * melodic sequences.
+ * Represents a midi sequence being read. Contains methods
+ * for extracting data from the sequence.
  */
 public abstract class MidiSequenceReader{
+	protected Sequence sequence;
+
 	/**
-	 * Returns the next note of the sequence across tracks
-	 * @return next note of the sequence.
+	 * Constructs a reader from the given MIDI sequence.
+	 * @param sequence
+	 */
+	public MidiSequenceReader(Sequence sequence){
+		this.sequence = sequence;
+	}
+
+	private MidiSequenceReader(){}
+
+	/**
+	 * Reads the sequence and returns all notes on specified
+	 * channel.
+	 * @param channel
+	 * @return notes on channel.
 	 */
 	public abstract List<Note> getAllNotesOnChannel(int channel);
 

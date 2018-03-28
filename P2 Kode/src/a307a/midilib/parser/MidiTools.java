@@ -8,10 +8,15 @@ import java.util.List;
  * midi files. Used in algorithmic comparisons.
  */
 public class MidiTools{
-	public static List<NGram<Integer>> getMelodicNGrams(int n, int channel){
+
+	public static NGrammifier<Integer> getMelodicNGrammifier(File file){
 		return null;
 	}
-
+	/**
+	 * adfasdf
+	 * @param midiFile
+	 * @return
+	 */
 	public static MidiSequenceReader getSequenceReader(File midiFile){
 		return null;
 	}
