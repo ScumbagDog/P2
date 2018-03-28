@@ -17,20 +17,27 @@ public class Scrollbar extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        /* Vi skal have en borderpane som alle være ting skal være i. Inde i den borderpane skal der være en scrollbar til hver af vinduerne, i dette tilfælde
+        center vinduet*/
+
+        //her laves borderpanen
         BorderPane borderPane = new BorderPane();
         Scene scene = new Scene(borderPane, 180, 180);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Scrollbar");
 
+        //her laves scrollbaren
         final ScrollBar scrollbar = new ScrollBar();
 
+        //her gives scrollbaren nogle egenskaber
         scrollbar.setLayoutX(scene.getWidth()-scrollbar.getWidth());
         scrollbar.setMin(0);
         scrollbar.setOrientation(Orientation.VERTICAL);
         scrollbar.setPrefHeight(180);
         scrollbar.setMax(360);
 
+        //her sættes scrollbaren i centervinduet
         borderPane.setCenter(scrollbar);
 
         primaryStage.show();

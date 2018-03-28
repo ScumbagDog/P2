@@ -21,13 +21,17 @@ public class CompareButton extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        /* Vi skal have en borderpane som alle være ting skal være i. Inde i den borderpane skal der være en vertical box i højre vindue. Inde i den box
+        skal vi have compareknap*/
+
+        //Her laves borderpanen
         BorderPane root = new BorderPane();
         primaryStage.setScene(new Scene(root, 300, 250));
 
+        //Her laves vertical boxen
         VBox vBox = new VBox();
-        root.setRight(vBox);
 
-
+        //Her laves compareknappen og sættes til at skrive Comparing... når man klikker på den
         Button compareButton = new Button();
         compareButton.setText("Compare");
         compareButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -37,7 +41,11 @@ public class CompareButton extends Application {
             }
         });
 
+        //Her indsættes knappen i vertical boxen
         vBox.getChildren().add(compareButton);
+
+        //Her sættes boxen i det højre vindue.
+        root.setRight(vBox);
 
         primaryStage.show();
     }

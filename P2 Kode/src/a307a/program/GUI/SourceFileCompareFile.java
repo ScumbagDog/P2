@@ -67,11 +67,11 @@ public class SourceFileCompareFile extends Application {
         Button button = new Button();
         button.setText("Get file");
         button.setOnAction(event -> {
-            Stage srcFile = new Stage();
+            Stage stage = new Stage();
 
             FileChooser browseSourceFile = new FileChooser();
             browseSourceFile.setTitle("Select a source file");
-            File filePath = browseSourceFile.showOpenDialog(srcFile);
+            browseSourceFile.showOpenDialog(stage);
 
         });
 
@@ -83,11 +83,11 @@ public class SourceFileCompareFile extends Application {
         Button button2 = new Button();
         button2.setText("Get file");
         button2.setOnAction(event -> {
-            Stage srcFile = new Stage();
+            Stage stage = new Stage();
 
             FileChooser browseSourceFile = new FileChooser();
-            browseSourceFile.setTitle("Select a source file");
-            File filePath = browseSourceFile.showOpenDialog(srcFile);
+            browseSourceFile.setTitle("Select a compare file");
+            browseSourceFile.showOpenDialog(stage);
 
         });
 
