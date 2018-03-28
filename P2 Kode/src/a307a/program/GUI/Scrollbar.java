@@ -5,6 +5,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Scrollbar extends Application {
@@ -16,8 +17,9 @@ public class Scrollbar extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        Group root = new Group();
-        Scene scene = new Scene(root, 180, 180);
+        BorderPane borderPane = new BorderPane();
+        Scene scene = new Scene(borderPane, 180, 180);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Scrollbar");
 
@@ -29,7 +31,7 @@ public class Scrollbar extends Application {
         scrollbar.setPrefHeight(180);
         scrollbar.setMax(360);
 
-        root.getChildren().addAll(scrollbar);
+        borderPane.setCenter(scrollbar);
 
         primaryStage.show();
     }
