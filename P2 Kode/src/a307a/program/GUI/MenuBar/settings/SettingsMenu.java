@@ -1,4 +1,4 @@
-package a307a.program.GUI.settings;
+package a307a.program.GUI.MenuBar.settings;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
