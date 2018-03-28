@@ -43,13 +43,25 @@ public class SourceFileCompareFile extends Application {
         splitPane2.setDividerPositions(0.5);
         splitPane2.setOrientation(Orientation.VERTICAL);
 
+        SplitPane splitPane3 = new SplitPane();
+        StackPane stackPane5 = new StackPane();
+        StackPane stackPane6 = new StackPane();
+
+        splitPane3.setDividerPositions(0.5);
+        splitPane3.setOrientation(Orientation.HORIZONTAL);
+
+
 
         Text text = new Text("Source File");
         Text text2 = new Text("Compare file");
 
 
-        HBox hBox = new HBox(70);
-        hBox.getChildren().addAll(text, text2);
+        HBox hBox = new HBox();
+        hBox.getChildren().add(text);
+
+        HBox hBox2 = new HBox();
+        hBox2.getChildren().add(text2);
+
 
 
         Button button = new Button();
@@ -90,11 +102,14 @@ public class SourceFileCompareFile extends Application {
         stackPane2.getChildren().add(button2);
 
 
-        splitPane2.getItems().addAll(stackPane3, stackPane4);
 
+        splitPane2.getItems().addAll(stackPane3, stackPane4); //stackPane3 skal have menuen
 
-        stackPane3.getChildren().addAll(hBox);
+        stackPane4.getChildren().add(splitPane3);
+        splitPane3.getItems().addAll(stackPane5, stackPane6);
 
+        stackPane5.getChildren().add(hBox);
+        stackPane6.getChildren().add(hBox2);
 
         primaryStage.show();
 
