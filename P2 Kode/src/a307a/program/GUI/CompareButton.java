@@ -36,11 +36,6 @@ public class CompareButton extends Application {
         root.getChildren().add(btn);
 
         primaryStage.show();
-
-
-
-
-
     }
 
 }
