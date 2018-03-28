@@ -1,5 +1,8 @@
 package a307a.program.GUI;
 
+import a307a.program.GUI.settings.SettingsFile;
+import a307a.program.GUI.settings.SettingsMenu;
+
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -15,9 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuFile {
-
-    public static void MainMenu(Stage stage) {
+    public static void MainMenu(Stage stage){
         stage.setTitle("Main Menu");
+        int windowHeight, windowWidth;
+        Boolean windowFullscreen;
+
+        windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
+        windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
+        windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
+
         List<File> compFileList = new ArrayList<>();
         Text fileName = new Text("Awaiting action...");
 
@@ -81,10 +90,11 @@ public class MenuFile {
         algorithmList.setBottom(algorithmBar);
         elementHolder.setBottom(fileName);
 
-        Scene scene = new Scene(elementHolder, 600, 600);
+        Scene scene = new Scene(elementHolder, windowWidth, windowHeight);
         scene.setFill(Color.OLDLACE);
 
         stage.setScene(scene);
+        stage.setFullScreen(windowFullscreen);
         stage.show();
     }
 }
