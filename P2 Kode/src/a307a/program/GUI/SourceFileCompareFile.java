@@ -52,7 +52,6 @@ public class SourceFileCompareFile extends Application {
         hBox.getChildren().addAll(text, text2);
 
 
-
         Button button = new Button();
         button.setText("Get file");
         button.setOnAction(event -> {
@@ -65,10 +64,8 @@ public class SourceFileCompareFile extends Application {
         });
 
 
-
         button.setLayoutX(235);
         button.setLayoutY(225);
-
 
 
         Button button2 = new Button();
@@ -86,15 +83,11 @@ public class SourceFileCompareFile extends Application {
         button2.setLayoutY(225);
 
 
-
-
-
         splitPane.getItems().addAll(stackPane, stackPane2);
 
 
         stackPane.getChildren().add(button);
         stackPane2.getChildren().add(button2);
-
 
 
         splitPane2.getItems().addAll(stackPane3, stackPane4);
@@ -103,11 +96,7 @@ public class SourceFileCompareFile extends Application {
         stackPane3.getChildren().addAll(hBox);
 
 
-
-
         primaryStage.show();
-
-
 
     }
 }

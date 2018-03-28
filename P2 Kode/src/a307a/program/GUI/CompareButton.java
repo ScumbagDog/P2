@@ -18,6 +18,9 @@ public class CompareButton extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        Pane root = new Pane();
+        primaryStage.setScene(new Scene(root, 300, 250));
+
         Button btn = new Button();
         btn.setText("Compare");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -27,11 +30,11 @@ public class CompareButton extends Application {
             }
         });
 
-        Pane root = new Pane();
         btn.setLayoutX(235);
         btn.setLayoutY(225);
+
         root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 250));
+
         primaryStage.show();
 
 
