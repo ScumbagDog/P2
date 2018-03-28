@@ -8,6 +8,9 @@ import java.util.List;
  * for extracting data from the sequence.
  */
 public abstract class MidiSequenceReader{
+	/**
+	 * The sequence that is being operated on.
+	 */
 	protected Sequence sequence;
 
 	/**

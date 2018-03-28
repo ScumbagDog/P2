@@ -13,11 +13,12 @@ public class MidiTools{
 		return null;
 	}
 	/**
-	 * adfasdf
+	 * Returns a MidiSequenceReader object from
+	 * the given file.
 	 * @param midiFile
-	 * @return
+	 * @return new MidiSequenceReader object.
 	 */
-	public static MidiSequenceReader getSequenceReader(File midiFile){
+	public static MidiSequenceReader getMidiSequenceReader(File midiFile){
 		return null;
 	}
 }
