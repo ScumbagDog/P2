@@ -11,7 +11,12 @@ public abstract class MidiSequenceReader{
 	 * Returns the next note of the sequence across tracks
 	 * @return next note of the sequence.
 	 */
-	abstract List<Note> getAllNotes();
-	abstract List<Note> getAllNotesOnChannel(int channel);
+	public abstract List<Note> getAllNotesOnChannel(int channel);
 
+	/**
+	 * Returns number of channels being played in the sequ-
+	 * ence.
+	 * @return channels
+	 */
+	public abstract int getNumberOfPlayedChannels();
 }

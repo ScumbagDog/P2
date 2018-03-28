@@ -1,6 +1,6 @@
 package a307a.midilib.parser;
 import java.util.List;
 
-public interface NGrammifier {
-	public List<List<Double>> getNGrams(List<T> inputNotes, int nGramMagnitude);
+public interface NGrammifier<T> {
+	public List<NGram<T>> getNGrams(List<T> inputList, int nGramMagnitude);
 }
