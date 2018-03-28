@@ -9,4 +9,5 @@ public interface Note{
 	int getDuration();
 	int getMelodicDuration();
 	int getTick();
+	int getChannel();
 }
