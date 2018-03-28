@@ -22,13 +22,14 @@ public class Scrollbar extends Application {
         primaryStage.setTitle("Scrollbar");
 
         final ScrollBar scrollbar = new ScrollBar();
-        root.getChildren().addAll(scrollbar);
 
         scrollbar.setLayoutX(scene.getWidth()-scrollbar.getWidth());
         scrollbar.setMin(0);
         scrollbar.setOrientation(Orientation.VERTICAL);
         scrollbar.setPrefHeight(180);
         scrollbar.setMax(360);
+
+        root.getChildren().addAll(scrollbar);
 
         primaryStage.show();
     }
