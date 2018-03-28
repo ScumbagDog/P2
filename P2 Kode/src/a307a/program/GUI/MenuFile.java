@@ -3,27 +3,25 @@ package a307a.program.GUI;
 import a307a.program.GUI.MenuBar.FileTab;
 import a307a.program.GUI.MenuBar.settings.SettingsFile;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
-
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.SplitPane;
-import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuFile {
-    public static void MainMenu(Stage stage){
+    public static void MainMenu(Stage stage) {
         stage.setTitle("Main Menu");
         int windowHeight, windowWidth;
         Boolean windowFullscreen;
-        List<File>  srcFileList = new ArrayList<>(),
-                    compFileList = new ArrayList<>();
+        List<File> srcFileList = new ArrayList<>(),
+                compFileList = new ArrayList<>();
         Text fileName = new Text("Awaiting action...");
 
 
@@ -32,40 +30,42 @@ public class MenuFile {
         windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
 
         MenuBar menuBar = new MenuBar();
-            Menu menuFile = new Menu("File");
-                MenuItem addFile = new MenuItem("Add");
-                    addFile.setOnAction(event -> {
-                        srcFileList.add(FileTab.AddFile());
-                        fileName.setText("File " + srcFileList.get(srcFileList.size() - 1) + " has been added!");
-                    });
-                menuFile.getItems().add(addFile);
+        Menu menuFile = new Menu("Files");
+        MenuItem addSrcFile = new MenuItem("Add Source");
+        addSrcFile.setOnAction(event -> {
+            srcFileList.add(FileTab.AddFile());
+            fileName.setText("File " + srcFileList.get(srcFileList.size() - 1) + " has been added!");
+        });
+        MenuItem addCompFile = new MenuItem("Add Comparison");
+        addCompFile.setOnAction(event -> {
+            compFileList.add(FileTab.AddFile());
+            fileName.setText("File " + compFileList.get(compFileList.size() - 1) + " has been added!");
+        });
+        menuFile.getItems().addAll(addSrcFile, addCompFile);
 
-            Menu menuSetting = new Menu("Window");
-            MenuItem addSetting = new MenuItem("Settings");
-            addSetting.setOnAction(event -> {
-                String version = "???";
-                SettingsMenu.WindowSettings(version);
-            });
-            menuSetting.getItems().add(addSetting);
+        Menu menuSetting = new Menu("Window");
+        MenuItem addSetting = new MenuItem("Settings");
+        addSetting.setOnAction(event -> {
+            String version = "???";
+            SettingsMenu.WindowSettings(version);
+        });
+        menuSetting.getItems().add(addSetting);
 
-            Menu menuCompare = new Menu("Compare");
+        MenuBar algorithmBar = new MenuBar();
 
+        Menu menuAlgorithm = new Menu("Algorithm");
+        CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
+        addAlgorithm.setOnAction(event -> {
+            if (addAlgorithm.isSelected()) {
+                System.out.println("Algorithm 1 has been selected");
+            } else {
+                System.out.println("Algorithm 1 has been removed");
+            }
 
-            MenuBar algorithmBar = new MenuBar();
+        });
+        menuAlgorithm.getItems().add(addAlgorithm);
 
-            Menu menuAlgorithm = new Menu("Algorithm");
-            CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
-            addAlgorithm.setOnAction(event -> {
-                if (addAlgorithm.isSelected()) {
-                    System.out.println("Algorithm 1 has been selected");
-                } else {
-                    System.out.println("Algorithm 1 has been removed");
-                }
-
-            });
-            menuAlgorithm.getItems().add(addAlgorithm);
-
-        menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
+        menuBar.getMenus().addAll(menuFile, menuSetting);
         algorithmBar.getMenus().addAll(menuAlgorithm);
 
         //Panel del
