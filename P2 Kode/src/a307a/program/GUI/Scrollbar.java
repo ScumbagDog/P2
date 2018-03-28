@@ -9,17 +9,19 @@ import javafx.stage.Stage;
 
 public class Scrollbar extends Application {
 
-    final ScrollBar sc = new ScrollBar();
 
 
     public static void main(String[] args) { launch(args); }
 
     @Override
     public void start(Stage primaryStage) {
+
         Group root = new Group();
         Scene scene = new Scene(root, 180, 180);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Scrollbar");
+
+        final ScrollBar sc = new ScrollBar();
         root.getChildren().addAll(sc);
 
         sc.setLayoutX(scene.getWidth()-sc.getWidth());
