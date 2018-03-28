@@ -1,8 +1,6 @@
-package a307a.program.backend;
+package a307a.midilib.parser;
 import java.util.List;
 
-import a307a.midilib.parser.Note;
-
-public interface NGrammifyer {
+public interface NGrammifizierer {
 	public List<List<Note>> getNGrams(List<Note> inputNotes, int nGramMagnitude);
 }
