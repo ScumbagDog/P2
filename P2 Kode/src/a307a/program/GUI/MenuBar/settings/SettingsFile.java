@@ -1,4 +1,4 @@
-package a307a.program.GUI.settings;
+package a307a.program.GUI.MenuBar.settings;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

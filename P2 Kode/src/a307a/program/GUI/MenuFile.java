@@ -1,14 +1,14 @@
 package a307a.program.GUI;
 
-import a307a.program.GUI.settings.SettingsFile;
-import a307a.program.GUI.settings.SettingsMenu;
+import a307a.program.GUI.MenuBar.FileTab;
+import a307a.program.GUI.MenuBar.settings.SettingsFile;
+import a307a.program.GUI.MenuBar.settings.SettingsMenu;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
@@ -22,53 +22,48 @@ public class MenuFile {
         stage.setTitle("Main Menu");
         int windowHeight, windowWidth;
         Boolean windowFullscreen;
+        List<File>  srcFileList = new ArrayList<>(),
+                    compFileList = new ArrayList<>();
+        Text fileName = new Text("Awaiting action...");
+
 
         windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
         windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
         windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
 
-        List<File> compFileList = new ArrayList<>();
-        Text fileName = new Text("Awaiting action...");
-
         MenuBar menuBar = new MenuBar();
+            Menu menuFile = new Menu("File");
+                MenuItem addFile = new MenuItem("Add");
+                    addFile.setOnAction(event -> {
+                        srcFileList.add(FileTab.AddFile());
+                        fileName.setText("File " + srcFileList.get(srcFileList.size() - 1) + " has been added!");
+                    });
+                menuFile.getItems().add(addFile);
 
-        Menu menuFile = new Menu("Files");
-        MenuItem addFile = new MenuItem("Add");
-        addFile.setOnAction(event -> {
-            Stage srcFile = new Stage();
+            Menu menuSetting = new Menu("Window");
+            MenuItem addSetting = new MenuItem("Settings");
+            addSetting.setOnAction(event -> {
+                String version = "???";
+                SettingsMenu.WindowSettings(version);
+            });
+            menuSetting.getItems().add(addSetting);
 
-            FileChooser browseSourceFile = new FileChooser();
-            browseSourceFile.setTitle("Select a source file");
-            File filePath = browseSourceFile.showOpenDialog(srcFile);
-
-            fileName.setText("File " + filePath.getName() + " has been added!");
-        });
-        menuFile.getItems().add(addFile);
-
-        Menu menuSetting = new Menu("Window");
-        MenuItem addSetting = new MenuItem("Settings");
-        addSetting.setOnAction(event -> {
-            String version = "???";
-            SettingsMenu.WindowSettings(version);
-        });
-        menuSetting.getItems().add(addSetting);
-
-        Menu menuCompare = new Menu("Compare");
+            Menu menuCompare = new Menu("Compare");
 
 
-        MenuBar algorithmBar = new MenuBar();
+            MenuBar algorithmBar = new MenuBar();
 
-        Menu menuAlgorithm = new Menu("Algorithm");
-        CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
-        addAlgorithm.setOnAction(event -> {
-            if (addAlgorithm.isSelected()) {
-                System.out.println("Algorithm 1 has been selected");
-            } else {
-                System.out.println("Algorithm 1 has been removed");
-            }
+            Menu menuAlgorithm = new Menu("Algorithm");
+            CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
+            addAlgorithm.setOnAction(event -> {
+                if (addAlgorithm.isSelected()) {
+                    System.out.println("Algorithm 1 has been selected");
+                } else {
+                    System.out.println("Algorithm 1 has been removed");
+                }
 
-        });
-        menuAlgorithm.getItems().add(addAlgorithm);
+            });
+            menuAlgorithm.getItems().add(addAlgorithm);
 
         menuBar.getMenus().addAll(menuFile, menuCompare, menuSetting);
         algorithmBar.getMenus().addAll(menuAlgorithm);
