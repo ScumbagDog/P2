@@ -13,6 +13,6 @@ public class MidiTools{
 	}
 
 	public static MidiSequenceReader getSequenceReader(File midiFile){
-
+		return null;
 	}
 }
