@@ -21,19 +21,19 @@ public class CompareButton extends Application {
         Pane root = new Pane();
         primaryStage.setScene(new Scene(root, 300, 250));
 
-        Button btn = new Button();
-        btn.setText("Compare");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        Button compareButton = new Button();
+        compareButton.setText("Compare");
+        compareButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Comparing...");
             }
         });
 
-        btn.setLayoutX(235);
-        btn.setLayoutY(225);
+        compareButton.setLayoutX(235);
+        compareButton.setLayoutY(225);
 
-        root.getChildren().add(btn);
+        root.getChildren().add(compareButton);
 
         primaryStage.show();
     }
