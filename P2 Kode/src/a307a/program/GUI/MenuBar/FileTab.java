@@ -13,7 +13,7 @@ public class FileTab {
         Stage srcFile = new Stage();
 
         FileChooser browseSourceFile = new FileChooser();
-        browseSourceFile.setTitle("Select a source file");
+        browseSourceFile.setTitle("Select a file to be added");
         File filePath = browseSourceFile.showOpenDialog(srcFile);
 
         return filePath;
