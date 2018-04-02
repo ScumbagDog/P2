@@ -5,6 +5,14 @@ class _Note implements Note{
 	int velocity;
 	int tick;
 	double duration;
+	
+
+	public _Note(int pitch, int velocity, int tick, double duration) {
+		this.pitch = pitch;
+		this.velocity = velocity;
+		this.tick = tick;
+		this.duration = duration;
+	}
 
 	public void setPitch(int pitch){
 		this.pitch = pitch;

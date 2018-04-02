@@ -2,20 +2,20 @@ package a307a.midilib.parser;
 
 import java.util.List;
 
-class _NGram<T> implements NGram {
+class _NGram implements NGram {
 	int frequency;
-	List<T> intervals;
-	 _NGram(int frequency, List<T> nGrams) {
+	List<Interval> intervals;
+	 _NGram(int frequency, List<Interval> intervals) {
 		super();
 		this.frequency = frequency;
-		this.intervals = nGrams;
+		this.intervals = intervals;
 	}
 
 	public int getFrequency() {
 		return frequency;
 	}
 
-	public List<T> getIntervals() {
+	public List<Interval> getIntervals() {
 		return intervals;
 	}
 	public void increment() {
