@@ -3,7 +3,7 @@ import java.util.List;
 
 <<<<<<< Updated upstream
 public interface NGrammifier {
-	public List<NGram> getNGrams(List<Interval> IntervalList, int nGramMagnitude);
+	public List<NGram> getNGrams(List<Integer> IntervalList, int nGramMagnitude);
 }
 =======
 public interface NGrammifier<T> {
