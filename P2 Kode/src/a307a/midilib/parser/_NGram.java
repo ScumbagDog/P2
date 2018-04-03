@@ -4,8 +4,8 @@ import java.util.List;
 
 class _NGram implements NGram {
 	int frequency;
-	List<Interval> intervals;
-	 _NGram(int frequency, List<Interval> intervals) {
+	List<Integer> intervals;
+	 _NGram(int frequency, List<Integer> Integers) {
 		super();
 		this.frequency = frequency;
 		this.intervals = intervals;
@@ -15,7 +15,7 @@ class _NGram implements NGram {
 		return frequency;
 	}
 
-	public List<Interval> getIntervals() {
+	public List<Integer> getIntervals() {
 		return intervals;
 	}
 	public void increment() {
