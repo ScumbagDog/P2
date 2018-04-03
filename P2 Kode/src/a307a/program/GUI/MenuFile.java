@@ -30,6 +30,11 @@ public class MenuFile {
         windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
 
         MenuBar menuBar = new MenuBar();
+
+        /**
+         * Knappen der tilføjer musik filer.
+         * Koden der tilføjer filerne er sat ind i klassen FileTab da det bruges flere gange.
+         */
         Menu menuFile = new Menu("Files");
         MenuItem addSrcFile = new MenuItem("Add Source");
         addSrcFile.setOnAction(event -> {

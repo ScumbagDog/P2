@@ -14,6 +14,10 @@ public class FileTab {
 
         FileChooser browseSourceFile = new FileChooser();
         browseSourceFile.setTitle("Select a file to be added");
+
+        //Stopper folk fra at v;lge filer vi ikke kan arbejde med.
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("MIDI (*.mid)", "*.mid");
+        browseSourceFile.getExtensionFilters().add(filter);
         File filePath = browseSourceFile.showOpenDialog(srcFile);
 
         return filePath;
