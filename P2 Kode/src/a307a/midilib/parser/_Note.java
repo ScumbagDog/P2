@@ -3,15 +3,14 @@ package a307a.midilib.parser;
 class _Note implements Note{
 	int	pitch;
 	int velocity;
-	int tick;
-	double duration;
-	
+	long tick;
+	long duration;
+	long melodicDuration;
 
-	public _Note(int pitch, int velocity, int tick, double duration) {
+	public _Note(int pitch, int velocity, long tick) {
 		this.pitch = pitch;
 		this.velocity = velocity;
 		this.tick = tick;
-		this.duration = duration;
 	}
 
 	public void setPitch(int pitch){
@@ -26,7 +25,7 @@ class _Note implements Note{
 		this.tick = tick;
 	}
 
-	public void setDuration(double duration){
+	public void setDuration(long duration){
 		this.duration = duration;
 	}
 
