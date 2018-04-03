@@ -56,7 +56,7 @@ class _MidiSequenceReader extends MidiSequenceReader{
 		for(Track t: tracks){
 			int length = t.size();
 			for(int i = 0; i < length; i++){
-
+				MidiEvent event = t.get(i);
 			}
 		}
 	}
