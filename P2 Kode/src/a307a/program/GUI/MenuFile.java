@@ -31,10 +31,9 @@ public class MenuFile {
 
         MenuBar menuBar = new MenuBar();
 
-        /**
-         * Knappen der tilføjer musik filer.
-         * Koden der tilføjer filerne er sat ind i klassen FileTab da det bruges flere gange.
-         */
+        /*  Knappen der tilføjer musik filer.
+            Koden der tilføjer filerne er sat ind i klassen FileTab da det bruges flere gange.
+        */
         Menu menuFile = new Menu("Files");
         MenuItem addSrcFile = new MenuItem("Add Source");
         addSrcFile.setOnAction(event -> {
@@ -56,22 +55,7 @@ public class MenuFile {
         });
         menuSetting.getItems().add(addSetting);
 
-        MenuBar algorithmBar = new MenuBar();
-
-        Menu menuAlgorithm = new Menu("Algorithm");
-        CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
-        addAlgorithm.setOnAction(event -> {
-            if (addAlgorithm.isSelected()) {
-                System.out.println("Algorithm 1 has been selected");
-            } else {
-                System.out.println("Algorithm 1 has been removed");
-            }
-
-        });
-        menuAlgorithm.getItems().add(addAlgorithm);
-
         menuBar.getMenus().addAll(menuFile, menuSetting);
-        algorithmBar.getMenus().addAll(menuAlgorithm);
 
         //Panel del
         VBox vbox = new VBox(50);
@@ -85,10 +69,13 @@ public class MenuFile {
 
         BorderPane elementHolder = new BorderPane();
         BorderPane algorithmList = new BorderPane();
+
+        FileList splitLists = new FileList();
+
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmList);
-        algorithmList.setBottom(algorithmBar);
         elementHolder.setBottom(fileName);
+        elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
 
         Scene scene = new Scene(elementHolder, windowWidth, windowHeight);
         scene.setFill(Color.OLDLACE);
