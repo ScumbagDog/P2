@@ -1,8 +1,12 @@
 package a307a.midilib.parser;
 import java.util.List;
-import java.util.Set;
 
+<<<<<<< Updated upstream
 public interface NGrammifier {
-	public Set<NGram> getNGrams(List<Integer> IntervalList, int nGramMagnitude);
+	public List<NGram> getNGrams(List<Integer> IntervalList, int nGramMagnitude);
 }
-
+=======
+public interface NGrammifier<T> {
+	public List<NGram<T>> getNGrams(List<T> inputList, int nGramMagnitude);
+}
+>>>>>>> Stashed changes
