@@ -1,57 +1,76 @@
 package a307a.midilib.parser;
 
-/**
- * Represents a note.
- */
-public interface Note{
-	/**
-	 * @return the MIDI pitch of the note.
-	 */
-	int getPitch();
+class Note implements INote{
+	int	pitch;
+	int velocity;
+	long tick;
+	long duration;
+	long melodicDuration;
 
-	/**
-	 * @return the MIDI velocity of the note.
-	 */
-	int getVelocity();
+	public Note(int pitch, int velocity, long tick) {
+		this.pitch = pitch;
+		this.velocity = velocity;
+		this.tick = tick;
+	}
 
-	/**
-	 * The absolute beat, measured in quarter notes
-	 * of the note.
-	 * @return absolute beat.
-	 */
-	double getBeat();
+	public void setPitch(int pitch){
+		this.pitch = pitch;
+	}
 
-	/**
-	 * @return duration of the note in quarter notes.
-	 */
-	double getDuration();
+	public void setVelocity(int velocity){
+		this.velocity = velocity;
+	}
 
-	/**
-	 * The melodic duration is the time from when this
-	 * note is played to the next note in the melody.
-	 * @return melodic duration of the note in quarter notes.
-	 */
-	double getMelodicDuration();
+	public void setTick(int tick){
+		this.tick = tick;
+	}
 
-	/**
-	 * @return the absolute tick of the note.
-	 */
-	int getTick();
+	public void setDuration(long duration){
+		this.duration = duration;
+	}
 
-	/**
-	 * @return duration of the note in MIDI ticks.
-	 */
-	int getTickDuration();
+	@Override
+	public int getPitch(){
+		return 0;
+	}
 
-	/**
-	 * The melodic duration is the time from when this
-	 * note is played to the next note in the melody.
-	 * @return the melodic duration of the note in MIDI ticks.
-	 */
-	int getMelodicTickDuration();
+	@Override
+	public int getVelocity(){
+		return 0;
+	}
 
-	/**
-	 * @return the channel the note was played on.
-	 */
-	int getChannel();
+	@Override
+	public double getBeat(){
+		return 0;
+	}
+
+	@Override
+	public double getDuration(){
+		return 0;
+	}
+
+	@Override
+	public double getMelodicDuration(){
+		return 0;
+	}
+
+	@Override
+	public int getTick(){
+		return 0;
+	}
+
+	@Override
+	public int getTickDuration(){
+		return 0;
+	}
+
+	@Override
+	public int getMelodicTickDuration(){
+		return 0;
+	}
+
+	@Override
+	public int getChannel(){
+		return 0;
+	}
 }

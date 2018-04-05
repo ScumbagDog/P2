@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class MidiTools{
 
-	public static NGrammifier<Integer> getMelodicNGrammifier(File file){
+	public static INGramFactory<Integer> getMelodicNGrammifier(File file){
 		return null;
 	}
 	/**
@@ -22,8 +22,8 @@ public class MidiTools{
 	 * @param midiFile
 	 * @return new MidiSequenceReader object.
 	 */
-	public static MidiSequenceReader getMidiSequenceReader(File midiFile) throws InvalidMidiDataException, IOException{
+	public static AMidiSequenceReader getMidiSequenceReader(File midiFile) throws InvalidMidiDataException, IOException{
 		Sequence sequence = MidiSystem.getSequence(midiFile);
-		return new _MidiSequenceReader(sequence);
+		return new MidiSequenceReader(sequence);
 	}
 }
