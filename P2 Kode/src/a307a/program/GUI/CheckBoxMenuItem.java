@@ -1,20 +1,26 @@
 package a307a.program.GUI;
 
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+public class CheckBoxMenuItem
+{
 
-public class CheckBoxMenuItems {
+    public VBox ListAlgorithm() {
+         VBox vbox = new VBox();
+         vbox.setTranslateX(50);
+         vbox.setTranslateY(50);
+         String findAlgorithm = getClass().getName();
+         for (int i = 0; i <= 1; i++) {
+
+         ComboBox Cb1 = new ComboBox();
+         }
+         vbox.getChildren();
+
+         return vbox;
+    }
+
+    /* TODO dette er et midlertidigt løsning */
    /* VBox vbox = new VBox();
     vbox.setTranslateX(50);
     vbox.setTranslateY(50);
