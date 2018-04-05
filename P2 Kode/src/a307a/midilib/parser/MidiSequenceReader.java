@@ -1,40 +1,63 @@
 package a307a.midilib.parser;
 
+import javax.sound.midi.MidiEvent;
 import javax.sound.midi.Sequence;
+import javax.sound.midi.Track;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-/**
- * Represents a midi sequence being read. Contains methods
- * for extracting data from the sequence.
- */
-public abstract class MidiSequenceReader{
-	/**
-	 * The sequence that is being operated on.
-	 */
-	protected Sequence sequence;
-
+class MidiSequenceReader extends AMidiSequenceReader{
+	private int numChannels;
+	private Track[] tracks;
+	private Set<Integer> channels;
 	/**
 	 * Constructs a reader from the given MIDI sequence.
 	 * @param sequence
 	 */
 	public MidiSequenceReader(Sequence sequence){
-		this.sequence = sequence;
+		super(sequence);
+		this.setup(sequence);
 	}
 
-	private MidiSequenceReader(){}
+	@Override
+	public List<INote> getAllNotesOnChannel(int channel){
+		return null;
+	}
 
-	/**
-	 * Reads the sequence and returns all notes on specified
-	 * channel.
-	 * @param channel
-	 * @return notes on channel.
-	 */
-	public abstract List<Note> getAllNotesOnChannel(int channel);
+	@Override
+	public int getNumberOfPlayedChannels(){
+		return channels.size();
+	}
 
-	/**
-	 * Returns number of channels being played in the sequ-
-	 * ence.
-	 * @return channels
-	 */
-	public abstract int getNumberOfPlayedChannels();
+	private void setup(Sequence sequence){
+		this.tracks = sequence.getTracks();
+		this.channels = this.countChannels(this.tracks);
+		int numTracks = 0;
+		for(Track track: tracks){
+			int numEvents = tracks.length;
+			for(int i = 0; i < numEvents; i++){
+				MidiEvent event = track.get(i);;
+				byte[] msg = event.getMessage().getMessage();
+				int status = msg[0] & 0xff;
+				if((status & 0xF0) == 0x90){
+					int velocity = msg[2] & 0xff;
+					if(velocity > 0 ){
+
+					}
+				}
+			}
+		}
+	}
+
+	private Set<Integer> countChannels(Track[] tracks){
+		Set<Integer> channels = new HashSet<>();
+
+		for(Track t: tracks){
+			int length = t.size();
+			for(int i = 0; i < length; i++){
+				MidiEvent event = t.get(i);
+			}
+		}
+	}
 }

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Test_MidiSequenceReader{
 	Sequence sequence;
 	File file;
-	MidiSequenceReader msr;
+	AMidiSequenceReader msr;
 	@BeforeAll
 	void beforeAll() throws InvalidMidiDataException, IOException{
 		this.file = new File("C:\\Users\\Conrad\\Desktop\\MIDI\\March i G.mid");
