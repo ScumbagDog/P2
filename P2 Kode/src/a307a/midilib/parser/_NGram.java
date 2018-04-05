@@ -1,15 +1,16 @@
 package a307a.midilib.parser;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class _NGram implements NGram {
+
+
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + frequency;
-		result = prime * result + ((intervals == null) ? 0 : intervals.hashCode());
-		return result;
+		return Objects.hash(intervals);
 	}
 
 	@Override
@@ -21,8 +22,6 @@ class _NGram implements NGram {
 		if (getClass() != obj.getClass())
 			return false;
 		_NGram other = (_NGram) obj;
-		if (frequency != other.frequency)
-			return false;
 		if (intervals == null) {
 			if (other.intervals != null)
 				return false;
@@ -30,12 +29,12 @@ class _NGram implements NGram {
 			return false;
 		return true;
 	}
-	int frequency;
-	List<Integer> intervals;
-	 _NGram(int frequency, List<Integer> intervals) {
+	private int frequency;
+	private List<Integer> intervals;
+	 _NGram(List<Integer> intervals) {
 		super();
-		this.frequency = frequency;
-		this.intervals = intervals;
+		this.frequency = 1;
+		this.intervals = new ArrayList<Integer>(intervals);
 	}
 
 	public int getFrequency() {
@@ -45,7 +44,7 @@ class _NGram implements NGram {
 	public List<Integer> getIntervals() {
 		return intervals;
 	}
-	public void increment() {
+	public void incrementFrequency() {
 		frequency++;
 	}
 	
