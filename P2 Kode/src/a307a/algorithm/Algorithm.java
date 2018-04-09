@@ -10,5 +10,4 @@ public class Algorithm implements IAlgorithm {
     public String getName(){
         return name;
     }
-
 }

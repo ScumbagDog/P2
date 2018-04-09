@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-public interface IMelody extends Iterable<INote>{
-	double getBeat(INote note);
-	Set<Integer> getChannels(File file)throws IOException, InvalidMidiDataException;
+public interface IMelody{
 	List<Integer> getIntervals();
+	List<INote> getNotes();
 }

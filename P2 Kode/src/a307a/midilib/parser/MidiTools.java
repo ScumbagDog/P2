@@ -24,6 +24,10 @@ public class MidiTools{
 	 */
 	public static AMidiSequenceReader getMidiSequenceReader(File midiFile) throws InvalidMidiDataException, IOException{
 		Sequence sequence = MidiSystem.getSequence(midiFile);
+		return getMidiSequenceReader(sequence);
+	}
+
+	public static AMidiSequenceReader getMidiSequenceReader(Sequence sequence){
 		return new MidiSequenceReader(sequence);
 	}
 }
