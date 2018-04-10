@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class MidiTools{
 
-	public static INGramFactory<Integer> getMelodicNGrammifier(File file){
+	public static INGramFactory getMelodicNGrammifier(File file){
 		return null;
 	}
 	/**

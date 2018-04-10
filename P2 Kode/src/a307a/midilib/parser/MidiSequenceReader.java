@@ -12,20 +12,16 @@ class MidiSequenceReader extends AMidiSequenceReader{
 
 	private final int midiNoteOn = 0x9;
 
-	/**
-	 * Constructs a reader from the given MIDI sequence.
-	 * @param sequence
-	 */
 	public MidiSequenceReader(Sequence sequence){
 		super(sequence);
 		this.setup(sequence);
 	}
+
 	@Override
 	public IMelody getMelody(int channel){
 		List<INote> notes = getNotesOnChannel(channel);
 		return new Melody(notes);
 	}
-
 
 	@Override
 	public List<INote> getNotesOnChannel(int channel){
@@ -49,10 +45,9 @@ class MidiSequenceReader extends AMidiSequenceReader{
 				}
 			}
 		}
+
 		return notes;
 	}
-
-
 
 	private List<Track> findTracksWithChannel(int channel){
 		List<Track> tracks = new LinkedList<Track>();

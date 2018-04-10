@@ -1,11 +1,16 @@
 package a307a.midilib.parser;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Represents a midi sequence being read. Contains methods
- * for extracting data from the sequence.
+ * for extracting data from the sequence and creating IMelody
+ * objects..
  */
 public abstract class AMidiSequenceReader{
 	/**
@@ -21,8 +26,25 @@ public abstract class AMidiSequenceReader{
 		this.sequence = sequence;
 	}
 
+	/**
+	 * Constructs a reader from the given MIDI file.
+	 * @param midiFile
+	 */
+	public AMidiSequenceReader(File midiFile)
+			throws InvalidMidiDataException, IOException{
+		this.sequence = MidiSystem.getSequence(midiFile);
+	}
+
+	/* Communicates that subclasses should not have a parameterless
+	 * constructor. */
 	private AMidiSequenceReader(){}
 
+	/**
+	 * Creates an IMelody object from notes on the given
+	 * channel.
+	 * @param channel
+	 * @return IMelody object.
+	 */
 	public abstract IMelody getMelody(int channel);
 
 	/**
