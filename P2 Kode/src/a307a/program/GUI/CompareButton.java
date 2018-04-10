@@ -31,7 +31,7 @@ public class CompareButton extends Application {
         //Her laves vertical boxen
         VBox vBox = new VBox();
 
-        //Her laves compareknappen og sættes til at skrive Comparing... når man klikker på den
+        //Her laves compareknappen og sættes til at skrive "Comparing..." når man klikker på den
         Button compareButton = new Button();
         compareButton.setText("Compare");
         compareButton.setOnAction(new EventHandler<ActionEvent>() {
