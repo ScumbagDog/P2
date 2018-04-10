@@ -24,22 +24,31 @@ public class MenuFile {
                 compFileList = new ArrayList<>();
         Text fileName = new Text("Awaiting action...");
 
+        BorderPane elementHolder = new BorderPane();
+        FileList splitLists = new FileList();
 
         windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
         windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
         windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
 
         MenuBar menuBar = new MenuBar();
+
+        /*  Knappen der tilføjer musik filer.
+            Koden der tilføjer filerne er sat ind i klassen FileTab da det bruges flere gange.
+        */
         Menu menuFile = new Menu("Files");
+
         MenuItem addSrcFile = new MenuItem("Add Source");
         addSrcFile.setOnAction(event -> {
             srcFileList.add(FileTab.AddFile());
-            fileName.setText("File " + srcFileList.get(srcFileList.size() - 1) + " has been added!");
+            fileName.setText("File \"" + srcFileList.get(srcFileList.size() - 1).getName() + "\" has been added!");
+            elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
         MenuItem addCompFile = new MenuItem("Add Comparison");
         addCompFile.setOnAction(event -> {
             compFileList.add(FileTab.AddFile());
-            fileName.setText("File " + compFileList.get(compFileList.size() - 1) + " has been added!");
+            fileName.setText("File \"" + compFileList.get(compFileList.size() - 1).getName() + "\" has been added!");
+            elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile);
 
@@ -51,22 +60,7 @@ public class MenuFile {
         });
         menuSetting.getItems().add(addSetting);
 
-        MenuBar algorithmBar = new MenuBar();
-
-        Menu menuAlgorithm = new Menu("Algorithm");
-        CheckMenuItem addAlgorithm = new CheckMenuItem("Algorithm1");
-        addAlgorithm.setOnAction(event -> {
-            if (addAlgorithm.isSelected()) {
-                System.out.println("Algorithm 1 has been selected");
-            } else {
-                System.out.println("Algorithm 1 has been removed");
-            }
-
-        });
-        menuAlgorithm.getItems().add(addAlgorithm);
-
         menuBar.getMenus().addAll(menuFile, menuSetting);
-        algorithmBar.getMenus().addAll(menuAlgorithm);
 
         //Panel del
         VBox vbox = new VBox(50);
@@ -78,12 +72,13 @@ public class MenuFile {
         rightSplitPanel.getItems().addAll(algorithm1);
         vbox.getChildren().add(algorithm1);
 
-        BorderPane elementHolder = new BorderPane();
         BorderPane algorithmList = new BorderPane();
+
+
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmList);
-        algorithmList.setBottom(algorithmBar);
         elementHolder.setBottom(fileName);
+        elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
 
         Scene scene = new Scene(elementHolder, windowWidth, windowHeight);
         scene.setFill(Color.OLDLACE);
