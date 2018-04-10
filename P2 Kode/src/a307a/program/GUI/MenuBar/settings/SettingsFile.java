@@ -17,7 +17,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
 public class SettingsFile {
-    public static Document ReadFile(){
+    private static Document ReadFile(){
         try{
             File windowSettings = new File("options.xml");
             DocumentBuilderFactory settingsFactory = DocumentBuilderFactory.newInstance();
@@ -29,7 +29,7 @@ public class SettingsFile {
         return null;
     }
 
-    public static Element getInformation(Document document){
+    private static Element getInformation(Document document){
         NodeList nList = document.getElementsByTagName("window");
         Node nNode = nList.item(0);
         return (Element) nNode;
