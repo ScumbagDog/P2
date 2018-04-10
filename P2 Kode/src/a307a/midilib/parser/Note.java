@@ -25,4 +25,9 @@ class Note implements INote{
 	public long getTick(){
 		return tick;
 	}
+
+	@Override
+	public INote clone(){
+		return new Note(this.pitch, this.velocity, this.tick);
+	}
 }

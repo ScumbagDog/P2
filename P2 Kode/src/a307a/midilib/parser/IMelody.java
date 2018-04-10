@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface IMelody{
-	List<Integer> getIntervals();
+	List<Integer> getPitchIntervals();
 	List<INote> getNotes();
 }

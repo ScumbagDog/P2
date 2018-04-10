@@ -3,7 +3,7 @@ package a307a.midilib.parser;
 /**
  * Represents a note.
  */
-public interface INote{
+public interface INote extends Cloneable{
 	/**
 	 * @return the MIDI pitch of the note.
 	 */

@@ -23,13 +23,15 @@ public abstract class AMidiSequenceReader{
 
 	private AMidiSequenceReader(){}
 
+	public abstract IMelody getMelody(int channel);
+
 	/**
 	 * Reads the sequence and returns all notes on specified
 	 * channel.
 	 * @param channel
 	 * @return notes on channel.
 	 */
-	public abstract List<INote> getAllNotesOnChannel(int channel);
+	public abstract List<INote> getNotesOnChannel(int channel);
 
 	/**
 	 * Returns number of channels being played in the sequ-
