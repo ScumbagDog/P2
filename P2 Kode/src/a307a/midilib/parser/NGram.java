@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 class NGram implements INGram {
+	private int frequency;
 
-
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(intervals);
@@ -29,7 +28,6 @@ class NGram implements INGram {
 			return false;
 		return true;
 	}
-	private int frequency;
 	private List<Integer> intervals;
 	 NGram(List<Integer> intervals) {
 		super();
@@ -47,6 +45,4 @@ class NGram implements INGram {
 	public void incrementFrequency() {
 		frequency++;
 	}
-	
-	
 }

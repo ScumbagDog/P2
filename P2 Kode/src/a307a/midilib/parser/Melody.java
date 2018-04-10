@@ -1,39 +1,61 @@
 package a307a.midilib.parser;
 
 import javax.sound.midi.*;
-import javax.sound.midi.spi.MidiFileReader;
 import java.io.*;
 import java.util.*;
 
 public class Melody implements IMelody{
-    public double getBeat(INote note){
-        return 0;
-    }
+	private final List<INote> notes;
+	private final int notesSize;
+	Melody(List<INote> notes){
+		this.notes = this.getMonophonicNotes(notes);
+		this.notesSize = this.notes.size();
+	}
 
-    public Set<Integer> getChannels(File file) throws IOException, InvalidMidiDataException {
-        Set<Integer> channelSet = new TreeSet<>();
-        Sequence midiSequence = MidiSystem.getSequence(file);
-        Track[] trackStorage = midiSequence.getTracks();
-        int channelHolder;
+	private List<INote> getMonophonicNotes(List<INote> notes){
+		List<INote> monophonic = new LinkedList<>(notes.subList(0, notes.size()));
+		int monophonicSize = monophonic.size();
 
-        for(int trackCount = 0; trackCount < trackStorage.length; ++trackCount){
-            for(int eventCount = 0; eventCount < trackStorage[trackCount].size(); ++eventCount){
-                if((trackStorage[trackCount].get(eventCount).getMessage().getStatus() / 0x10) == 9){
-                    channelSet.add(trackStorage[trackCount].get(eventCount).getMessage().getStatus() % 0x10);
-                }
-            }
-        }
+		for(int i = 0; i < monophonicSize - 1; i++){
+			INote firstNote = monophonic.get(i);
+			INote secondNote = monophonic.get(i);
+			long tick1 = firstNote.getTick();
+			long tick2 = secondNote.getTick();
+			if(tick1 == tick2){
+				List<INote> congruentNotes = new LinkedList<INote>();
+				congruentNotes.add(firstNote);
 
+				for(int j = i + 1; j < monophonicSize
+						&& secondNote.getTick() == tick1; j++)
+					congruentNotes.add(monophonic.get(j));
 
-        return channelSet;
-    }
+				int highestPitch = 0;
+				while(congruentNotes.size() > 1)
+					for(INote n : congruentNotes)
+						if(n.getPitch() < highestPitch)
+							congruentNotes.remove(n);
+						else
+							highestPitch = n.getPitch();
 
-    public List<Integer> getIntervals(){
-        return null;
-    }
+				monophonicSize = monophonic.size();
+			}
+		}
+		return monophonic;
+	}
 
-    @Override
-    public Iterator<INote> iterator() {
-        return null;
-    }
+	@Override
+  public List<INote> getNotes(){
+			return this.notes;
+  }
+
+  @Override
+  public List<Integer> getPitchIntervals(){
+		List<Integer> intervals = new LinkedList<>();
+
+		for(int i = 0; i < this.notesSize-1; i++)
+			intervals.add(this.notes.get(i).getPitch()
+					- this.notes.get(i+1).getPitch());
+
+		return intervals;
+  }
 }
