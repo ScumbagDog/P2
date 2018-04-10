@@ -6,6 +6,7 @@ import javax.sound.midi.Sequence;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a midi sequence being read. Contains methods
@@ -38,6 +39,8 @@ public abstract class AMidiSequenceReader{
 	/* Communicates that subclasses should not have a parameterless
 	 * constructor. */
 	private AMidiSequenceReader(){}
+
+	public abstract Set<Integer> getChannels();
 
 	/**
 	 * Creates an IMelody object from notes on the given

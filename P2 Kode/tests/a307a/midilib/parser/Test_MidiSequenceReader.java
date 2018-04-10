@@ -22,10 +22,11 @@ class Test_MidiSequenceReader{
 		this.file = new File("C:\\Users\\Conrad\\Desktop\\MIDI\\March i G.mid");
 		this.sequence = MidiSystem.getSequence(file);
 		this.msr = MidiTools.getMidiSequenceReader(file);
-
 	}
 	@Test
 	void test1() throws InvalidMidiDataException, IOException{
-		assertEquals(3, msr.getNumberOfPlayedChannels());
+		System.err.println(msr.getChannels());
+		System.err.println(msr.getNumberOfPlayedChannels());
+		System.err.println(msr.getNotesOnChannel(1).size());
 	}
 }
