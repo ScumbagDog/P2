@@ -1,4 +1,4 @@
-package a307a.program.GUI;
+package a307a.program.GUI.Splits;
 
 import a307a.program.GUI.Splits.CenterSplits;
 import javafx.scene.layout.BorderPane;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FileList{
 
-    public BorderPane ListsOfFiles(List<File> srcFiles, List<File> cmpFiles) {
+    public static BorderPane ListsOfFiles(List<File> srcFiles, List<File> cmpFiles) {
         BorderPane centralLayout = new BorderPane();
 
         CenterSplits listSplit = new CenterSplits();

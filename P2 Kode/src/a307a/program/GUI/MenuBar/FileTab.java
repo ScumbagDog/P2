@@ -15,8 +15,7 @@ public class FileTab {
         //Stopper folk fra at vælge filer vi ikke kan arbejde med.
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("MIDI (*.mid)", "*.mid");
         browseSourceFile.getExtensionFilters().add(filter);
-        File filePath = browseSourceFile.showOpenDialog(srcFile);
 
-        return filePath;
+        return browseSourceFile.showOpenDialog(srcFile);
     }
 }

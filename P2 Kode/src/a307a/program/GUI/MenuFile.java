@@ -3,6 +3,7 @@ package a307a.program.GUI;
 import a307a.program.GUI.MenuBar.FileTab;
 import a307a.program.GUI.MenuBar.settings.SettingsFile;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
+import a307a.program.GUI.Splits.FileList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -73,8 +74,7 @@ public class MenuFile {
         vbox.getChildren().add(algorithm1);
 
         BorderPane algorithmList = new BorderPane();
-
-
+        
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmList);
         elementHolder.setBottom(fileName);
