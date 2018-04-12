@@ -1,10 +1,6 @@
 package a307a.midilib.parser;
 
-import javax.sound.midi.InvalidMidiDataException;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Represents a monophonic melody.
@@ -22,4 +18,10 @@ public interface IMelody{
 	 * @return List of notes.
 	 */
 	List<INote> getNotes();
+
+	/**
+	 * Returns the number of notes in the melody.
+	 * @return number of notes.
+	 */
+	int size();
 }

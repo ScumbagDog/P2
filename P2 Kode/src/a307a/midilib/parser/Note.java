@@ -1,7 +1,7 @@
 package a307a.midilib.parser;
 
 class Note implements INote{
-	int	pitch;
+	int pitch;
 	int velocity;
 	long tick;
 
