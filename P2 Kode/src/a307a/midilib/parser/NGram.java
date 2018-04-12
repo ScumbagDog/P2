@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-class NGram implements INGram {
+public class NGram implements INGram {
 	private int frequency;
 
 	@Override
