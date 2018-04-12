@@ -10,6 +10,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 
 	private final int midiNoteOn = 0x9;
 
+	// Constructor :^)
 	public MidiSequenceReader(Sequence sequence){
 		super(sequence);
 		this.tracks = sequence.getTracks();
