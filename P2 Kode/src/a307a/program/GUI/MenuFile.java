@@ -52,6 +52,11 @@ public class MenuFile {
             elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile);
+/*
+        Button removeFile = new Button("Remove file...");
+        removeFile.setOnAction(event -> {
+
+        });*/
 
         Menu menuSetting = new Menu("Window");
         MenuItem addSetting = new MenuItem("Settings");
