@@ -76,6 +76,7 @@ public class MainGUI extends Application {
 
         BorderPane algorithmList = new BorderPane();
 
+        /* Kan ikke stå i en klasse for sig selv fordi det ikke kan opdateres derfor ligger det herinde */
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmList);
         elementHolder.setBottom(fileName);
