@@ -52,6 +52,11 @@ public class MenuFile {
             elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile);
+/*
+        Button removeFile = new Button("Remove file...");
+        removeFile.setOnAction(event -> {
+
+        });*/
 
         Menu menuSetting = new Menu("Window");
         MenuItem addSetting = new MenuItem("Settings");
@@ -62,16 +67,6 @@ public class MenuFile {
         menuSetting.getItems().add(addSetting);
 
         menuBar.getMenus().addAll(menuFile, menuSetting);
-
-        //Panel del
-        VBox vbox = new VBox(50);
-        vbox.setTranslateX(50);
-        vbox.setTranslateY(50);
-        SplitPane rightSplitPanel = new SplitPane();
-        rightSplitPanel.setPrefSize(300, 500);
-        final CheckBox algorithm1 = new CheckBox("Algoritme1");
-        rightSplitPanel.getItems().addAll(algorithm1);
-        vbox.getChildren().add(algorithm1);
 
         BorderPane algorithmList = new BorderPane();
         

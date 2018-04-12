@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-class NGramFactory implements INGramFactory {
+public class NGramFactory implements INGramFactory {
 
 	public List<INGram> getNGrams(List<Integer> intervalList, int nGramMagnitude) {
 		List<INGram> returnList = new ArrayList<>();
