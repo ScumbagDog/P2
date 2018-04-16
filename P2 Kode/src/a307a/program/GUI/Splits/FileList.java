@@ -1,6 +1,10 @@
 package a307a.program.GUI.Splits;
 
+import a307a.program.GUI.Scrollbar;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -18,9 +22,9 @@ public class FileList{
         BorderPane centralLayout = new BorderPane();
         Text srcText = new Text("Source File");
         Text compText = new Text("Compare file");
-        FileList fileList = new FileList();
 
-        centralLayout.setCenter(SplitMaker(GridMaker(srcFiles), GridMaker(cmpFiles)));
+        //centralLayout.setCenter(SplitMaker(GridMaker(srcFiles), GridMaker(cmpFiles)));
+        centralLayout.setCenter(SplitMaker2(GridMaker(srcFiles), GridMaker(cmpFiles)));
         centralLayout.setTop(SplitMaker(srcText, compText));
 
         return centralLayout;
@@ -34,10 +38,31 @@ public class FileList{
         stackPane1.maxWidthProperty().bind(splitPane.widthProperty().multiply(0.49));
         stackPane2.maxWidthProperty().bind(splitPane.widthProperty().multiply(0.49));
 
-        stackPane1.getChildren().add(object1);
-        stackPane2.getChildren().add(object2);
+
+
+
+        stackPane1.getChildren().addAll(object1);
+        stackPane2.getChildren().addAll(object2);
         splitPane.getItems().addAll(stackPane1, stackPane2);
         return splitPane;
+    }
+
+    private static SplitPane SplitMaker2(Node object1, Node object2) {
+        SplitPane splitPane2 = new SplitPane();
+        ScrollPane scrollPane1 = new ScrollPane();
+        ScrollPane scrollPane2 = new ScrollPane();
+        scrollPane1.maxWidthProperty().bind(splitPane2.widthProperty().multiply(0.49));
+        scrollPane2.maxWidthProperty().bind(splitPane2.widthProperty().multiply(0.49));
+
+        scrollPane1.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane2.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+
+        scrollPane1.setContent(object1);
+        scrollPane2.setContent(object2);
+        splitPane2.getItems().addAll(scrollPane1, scrollPane2);
+        return splitPane2;
+
     }
 
     private static GridPane GridMaker(List<File> files){
@@ -51,6 +76,8 @@ public class FileList{
 
             fileIndex.add(new Text(Integer.toString(count) ));
             fileList.add(fileIndex.get(count), 1, count);
+
+
         }
 
         return fileList;
