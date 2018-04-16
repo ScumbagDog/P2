@@ -22,4 +22,6 @@ public interface INote extends Cloneable{
 	 * @return the absolute tick of the note.
 	 */
 	long getTick();
+
+	INote clone();
 }

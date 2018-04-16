@@ -29,7 +29,10 @@ public class Ukkonen implements IAlgorithm {
 		
 		for (INGram n : firstMelodyNGrams) {
 			if (secondMelodyNGrams.contains(n)) {
-				INGram theNGram = secondMelodyNGrams.stream().filter(x -> x.equals(n)).findFirst().orElse(null);
+				INGram theNGram = secondMelodyNGrams.stream()
+						.filter(x -> x.equals(n))
+						.findFirst()
+						.orElse(null);
 				nGramFrequencyDifferenceSum += Math.abs(n.getFrequency() - theNGram.getFrequency());
 			} else {
 				nGramFrequencyDifferenceSum += n.getFrequency();
