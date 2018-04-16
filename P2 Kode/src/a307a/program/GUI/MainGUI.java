@@ -61,6 +61,8 @@ public class MainGUI extends Application {
 
         MenuItem removeFile = new MenuItem("Remove");
         removeFile.setOnAction(event -> {
+            FileListEditor.Remove(srcFileList, compFileList);
+            elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
 
