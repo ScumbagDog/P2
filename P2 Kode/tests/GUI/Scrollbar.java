@@ -5,6 +5,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -31,11 +32,13 @@ public class Scrollbar extends Application {
         final ScrollBar scrollbar = new ScrollBar();
 
         //her gives scrollbaren nogle egenskaber
-        scrollbar.setLayoutX(scene.getWidth()-scrollbar.getWidth());
+
         scrollbar.setMin(0);
         scrollbar.setOrientation(Orientation.VERTICAL);
         scrollbar.setPrefHeight(180);
         scrollbar.setMax(360);
+
+
 
         //her sættes scrollbaren i centervinduet
         borderPane.setCenter(scrollbar);

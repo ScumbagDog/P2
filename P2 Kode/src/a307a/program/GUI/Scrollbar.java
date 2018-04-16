@@ -12,6 +12,7 @@ public class Scrollbar {
         //her laves scrollbaren
         ScrollBar scrollbar = new ScrollBar();
 
+
         //her gives scrollbaren nogle egenskaber
         scrollbar.setMin(0);
         scrollbar.setOrientation(Orientation.VERTICAL);
