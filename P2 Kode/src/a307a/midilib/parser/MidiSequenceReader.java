@@ -10,7 +10,6 @@ class MidiSequenceReader extends AMidiSequenceReader{
 
 	private final int midiNoteOn = 0x9;
 
-	// Constructor :^)b saergsad
 	public MidiSequenceReader(Sequence sequence){
 		super(sequence);
 		this.tracks = sequence.getTracks();
@@ -18,6 +17,8 @@ class MidiSequenceReader extends AMidiSequenceReader{
 		this.numChannels = this.channels.size();
 	}
 
+	/* Returns a list of the 0-indexed channels being played on
+	 * in the sequence. */
 	@Override
 	public Set<Integer> getChannels(){
 		return this.getChannels(this.tracks);
@@ -28,15 +29,16 @@ class MidiSequenceReader extends AMidiSequenceReader{
 		for(Track t : tracks)
 			for(int i = 0; i < t.size(); i++){
 				MidiMessage midiMessage = t.get(i).getMessage();
-				if(isMidiNoteOnMessage(midiMessage)){
+				/* For each note played, add the channel the note
+				 * was played on. */
+				if(isMidiNoteOnMessage(midiMessage))
 					channels.add(
 							getChannelFromMidiNoteOnMessage(midiMessage));
-					break;
-				}
 			}
 		return channels;
 	}
 
+	/* Function checks if a midi-message is a note-on message. */
 	private boolean isMidiNoteOnMessage(MidiMessage message){
 		return (message.getStatus() >> 4)
 				== this.midiNoteOn;
@@ -53,6 +55,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 		return new Melody(notes);
 	}
 
+	/* Creates a list of notes being played on a channel. */
 	@Override
 	public List<INote> getNotesOnChannel(int channel){
 		List<Track> tracks = findTracksWithChannel(channel);
@@ -61,8 +64,13 @@ class MidiSequenceReader extends AMidiSequenceReader{
 		for(Track t: tracks)
 			for(int i = 0; i < t.size(); i++){
 				MidiEvent event = t.get(i);
+				/* If a message in the track is a note-on message,
+				 * create a short message. */
 				if(isMidiNoteOnMessage(event.getMessage())){
 					ShortMessage message = (ShortMessage)event.getMessage();
+
+					/* Use the data from the short message to create
+					 * a Note object and add it to the list. */
 					int velocity = message.getData2();
 					if(velocity > 0){
 						int pitch = message.getData1();
@@ -74,8 +82,8 @@ class MidiSequenceReader extends AMidiSequenceReader{
 		return notes;
 	}
 
-	// Creates a list of tracks that a channel is being played
-	// on.
+	/* Return a list of tracks that a channel is being played
+	 * on. */
 	private List<Track> findTracksWithChannel(int channel){
 		List<Track> tracksOnChannel = new LinkedList<Track>();
 		for(Track t : this.tracks)
