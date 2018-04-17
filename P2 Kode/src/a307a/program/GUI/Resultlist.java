@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Resultlist {
-    public TableView AddResultTable() {
+    public static TableView AddResultTable() {
      final ObservableList<DataResult> data = FXCollections.observableArrayList(
             new DataResult("Midifile1", 0.5),
             new DataResult("Midifile2", 0.7)
@@ -18,7 +18,7 @@ public class Resultlist {
 
 
         TableView table = new TableView();
-        Pane pane = new Pane();
+        //Pane pane = new Pane();
 
 
         TableColumn fileName1 = new TableColumn("Files");
@@ -34,14 +34,14 @@ public class Resultlist {
         table.getColumns().addAll(fileName1, result);
 
 
-        final VBox vbox = new VBox();
-        vbox.getChildren().add(table);
+       // VBox vBox = new VBox();
+       // vBox.getChildren().add(table);
 
-        pane.getChildren().add(vbox);
+        //pane.getChildren().add(vBox);
         return table;
     }
 
-    public static class DataResult {
+  /*  public static class DataResult {
 
         private final SimpleStringProperty fileName;
         private final double resultValue;
@@ -65,5 +65,6 @@ public class Resultlist {
         }
 
     }
+    */
 
 }

@@ -1,9 +1,6 @@
 package a307a.program.GUI.Splits;
 
-import a307a.program.GUI.Scrollbar;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
@@ -56,7 +53,6 @@ public class FileList{
 
         scrollPane1.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane2.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
 
         scrollPane1.setContent(object1);
         scrollPane2.setContent(object2);

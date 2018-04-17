@@ -6,11 +6,14 @@ import a307a.program.GUI.MenuBar.settings.SettingsFile;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
 import a307a.program.GUI.Splits.FileList;
 import javafx.application.Application;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -76,11 +79,21 @@ public class MainGUI extends Application {
 
         BorderPane algorithmList = new BorderPane();
 
+
+
+        SplitPane resultSplit = new SplitPane();
+        resultSplit.setOrientation(Orientation.VERTICAL);
+        resultSplit.setDividerPositions(0.9);
+        StackPane resultStack1 = new StackPane(Resultlist.AddResultTable());
+        StackPane resultStack2 = new StackPane(CompareButton.AddButton());
+        resultSplit.getItems().addAll(resultStack1, resultStack2);
+
         /* Kan ikke stå i en klasse for sig selv fordi det ikke kan opdateres derfor ligger det herinde */
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmList);
         elementHolder.setBottom(fileName);
         elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
+        elementHolder.setRight(resultSplit);
 
         Scene scene = new Scene(elementHolder, windowWidth, windowHeight);
         scene.setFill(Color.OLDLACE);
