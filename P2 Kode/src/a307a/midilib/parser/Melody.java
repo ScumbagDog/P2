@@ -18,7 +18,7 @@ public class Melody implements IMelody{
 			INote firstNote = notes.get(i);
 			INote secondNote = notes.get(i+1);
 			if(firstNote.getTick() == secondNote.getTick()){
-				monophonicNotes.add(firstNote.getPitch() >= secondNote.getPitch()?
+				monophonicNotes.add(firstNote.getPitch() > secondNote.getPitch()?
 						firstNote.clone() : secondNote.clone());
 				i--;
 			}
@@ -37,7 +37,7 @@ public class Melody implements IMelody{
   @Override
   public List<Integer> getPitchIntervals(){
 		List<Integer> intervals = new LinkedList<>();
-		intervals.add(0);
+//		intervals.add(0);
 		for(int i = 0; i < this.notesSize-1; i++)
 			intervals.add(this.notes.get(i+1).getPitch()
 					- this.notes.get(i).getPitch());
