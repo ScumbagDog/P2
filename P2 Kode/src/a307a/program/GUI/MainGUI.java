@@ -78,7 +78,7 @@ public class MainGUI extends Application {
         menuBar.getMenus().addAll(menuFile, menuSetting);
 
         BorderPane algorithmList = new BorderPane();
-
+        StackPane algorithmStack = new StackPane(AlgorithmList.ListAlgorithm());
 
 
         SplitPane resultSplit = new SplitPane();
@@ -90,7 +90,7 @@ public class MainGUI extends Application {
 
         /* Kan ikke stå i en klasse for sig selv fordi det ikke kan opdateres derfor ligger det herinde */
         elementHolder.setTop(menuBar);
-        elementHolder.setLeft(algorithmList);
+        elementHolder.setLeft(algorithmStack);
         elementHolder.setBottom(fileName);
         elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         elementHolder.setRight(resultSplit);
