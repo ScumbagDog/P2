@@ -14,7 +14,7 @@ public  class AlgorithmList
          String findAlgorithm = getClass().getName();
          for (int i = 0; i <= 1; i++) {
 
-         ComboBox Cb1 = new ComboBox();
+         CheckBox cb1 = new CheckBox();
          }
          vbox.getChildren();
 
