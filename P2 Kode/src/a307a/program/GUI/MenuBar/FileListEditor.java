@@ -1,9 +1,12 @@
 package a307a.program.GUI.MenuBar;
 
+import a307a.Exceptions.InvalidInputException;
+import a307a.program.GUI.Splits.FileList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileListEditor {
-    public static void Remove(List<File> srcFiles, List<File> compFiles){
+    public static void Remove(List<File> srcFiles, List<File> compFiles, BorderPane elementHolder){
         Stage stage = new Stage();
         List<Integer> listOfFiles = new ArrayList<>();
         Text minFlavorText = new Text("From file number:");
@@ -32,12 +35,22 @@ public class FileListEditor {
 
         Button listCutter = new Button("Remove from list");
         listCutter.setOnAction((ActionEvent event) -> {
-            if(src.isSelected()){
-                RemoveSelectedFile(minFlavorText, maxFlavorText, srcFiles);
-            }else if(comp.isSelected()){
-                RemoveSelectedFile(minFlavorText, maxFlavorText, compFiles);
-            }else{
-                ErrorWindow("You did goofed now kiddo.");
+            try{
+                if(src.isSelected()){
+                    RemoveSelectedFile(minFileNumber, maxFileNumber, srcFiles);
+                    elementHolder.setCenter(FileList.ListsOfFiles(srcFiles, compFiles));
+                }else if(comp.isSelected()){
+                    RemoveSelectedFile(minFileNumber, maxFileNumber, compFiles);
+                    elementHolder.setCenter(FileList.ListsOfFiles(srcFiles, compFiles));
+                }else{
+                    ErrorWindow("Please select a list to remove files from.");
+                }
+            }catch(InvalidInputException e){ //https://mangadex.org/chapter/20209/16
+                ErrorWindow("Invalid input detcted. Please ensure that:" +
+                        "               \n* None of the fields are empty." +
+                        "               \n* No negative numbers have been inserted." +
+                        "               \n* The index number of the first file is not lower then the number of the last file." +
+                        "               \n* None of the inputs are larger than the size of the file list.");
             }
         });
 
@@ -56,20 +69,34 @@ public class FileListEditor {
         Scene scene = new Scene(gridPane);
         stage.setScene(scene);
         stage.show();
-
     }
 
-    private static void RemoveSelectedFile(Text minFileNumber, Text maxFileNumber, List<File> fileList){
-        for(int x = Integer.parseInt(maxFileNumber.getText()); x <= Integer.parseInt(minFileNumber.getText()); --x){
+    private static void RemoveSelectedFile(TextField minFileNumber, TextField maxFileNumber, List<File> fileList) throws InvalidInputException {
+        int minNumber = Integer.parseInt(minFileNumber.getText()),
+            maxNumber = Integer.parseInt(maxFileNumber.getText());
+
+        if(maxNumber == 0){
+            maxNumber = minNumber;
+        }
+        if((minNumber < 0)||(maxNumber < 0)){
+            throw new InvalidInputException();
+        }else if(minNumber > maxNumber){
+            throw new InvalidInputException();
+        }else if((minNumber > fileList.size()) || maxNumber > fileList.size()){
+            throw new InvalidInputException();
+        }
+        for(int x = maxNumber; x >= minNumber; --x){
+            System.out.println(x);
             fileList.remove(x);
         }
+
     }
 
     private static void ErrorWindow(String errorMessage){
         Stage stage = new Stage();
-        Pane pane = new Pane();
+        BorderPane pane = new BorderPane();
         Text message = new Text(errorMessage);
-        pane.getChildren().add(message);
+        pane.setCenter(message);
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);

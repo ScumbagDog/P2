@@ -38,9 +38,6 @@ public class FileList{
         stackPane1.maxWidthProperty().bind(splitPane.widthProperty().multiply(0.49));
         stackPane2.maxWidthProperty().bind(splitPane.widthProperty().multiply(0.49));
 
-
-
-
         stackPane1.getChildren().addAll(object1);
         stackPane2.getChildren().addAll(object2);
         splitPane.getItems().addAll(stackPane1, stackPane2);
@@ -56,7 +53,6 @@ public class FileList{
 
         scrollPane1.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane2.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
 
         scrollPane1.setContent(object1);
         scrollPane2.setContent(object2);
@@ -76,8 +72,6 @@ public class FileList{
 
             fileIndex.add(new Text(Integer.toString(count) ));
             fileList.add(fileIndex.get(count), 1, count);
-
-
         }
 
         return fileList;

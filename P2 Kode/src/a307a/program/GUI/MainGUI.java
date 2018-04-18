@@ -30,7 +30,6 @@ public class MainGUI extends Application {
         List<File> srcFileList = new ArrayList<>(),
                 compFileList = new ArrayList<>();
         Text fileName = new Text("Awaiting action...");
-        FileListEditor listEditor = new FileListEditor();
 
         BorderPane elementHolder = new BorderPane();
         FileList splitLists = new FileList();
@@ -61,8 +60,7 @@ public class MainGUI extends Application {
 
         MenuItem removeFile = new MenuItem("Remove");
         removeFile.setOnAction(event -> {
-            FileListEditor.Remove(srcFileList, compFileList);
-            elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
+            FileListEditor.Remove(srcFileList, compFileList, elementHolder);
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
 
@@ -78,7 +76,7 @@ public class MainGUI extends Application {
 
         BorderPane algorithmList = new BorderPane();
 
-        /* Kan ikke stå i en klasse for sig selv fordi det ikke kan opdateres derfor ligger det herinde */
+        /* Kan ikke stå i klasser for sig selv, da man ellers ikke kan opdatere instansen af elementHolder i vores Main.*/
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmList);
         elementHolder.setBottom(fileName);
