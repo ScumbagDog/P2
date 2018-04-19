@@ -5,6 +5,10 @@ class Note implements INote{
 	private int velocity;
 	private long tick;
 
+	public Note(BufferedMidiEvent event){
+		this(event.getPitch(), event.getVelocity(), event.getTick());
+	}
+
 	public Note(int pitch, int velocity, long tick){
 		this.pitch = pitch;
 		this.velocity = velocity;
