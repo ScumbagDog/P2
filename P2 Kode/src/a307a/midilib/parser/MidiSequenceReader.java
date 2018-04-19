@@ -40,12 +40,15 @@ class MidiSequenceReader extends AMidiSequenceReader{
 
 	/* Function checks if a midi-message is a note-on message. */
 	private boolean isMidiNoteOnMessage(MidiMessage message){
+		/* Most significant 4 bits of the status byte tells the type
+		 * of the midi message. */
 		return (message.getStatus() >> 4)
 				== this.midiNoteOn;
 	}
 
-	private int getChannelFromMidiNoteOnMessage(
-			MidiMessage message){
+	private int getChannelFromMidiNoteOnMessage(MidiMessage message){
+		/* Mask returns bit of status byte that shows what
+		 * channel a note is played on. */
 		return message.getStatus() & 0x0f;
 	}
 
@@ -62,30 +65,37 @@ class MidiSequenceReader extends AMidiSequenceReader{
 		List<INote> notes = new LinkedList<>();
 
 		for(Track t: tracks)
-			for(int i = 0; i < t.size(); i++){
-				MidiEvent event = t.get(i);
-				/* If a message in the track is a note-on message,
-				 * create a short message. */
-				if(isMidiNoteOnMessage(event.getMessage())){
-					ShortMessage message = (ShortMessage)event.getMessage();
+			notes.addAll(getNotesOnChannelFromTrack(channel, t));
+		return notes;
+	}
 
-					/* Use the data from the short message to create
-					 * a Note object and add it to the list. */
-					int velocity = message.getData2();
-					if(velocity > 0){
-						int pitch = message.getData1();
-						long tick = event.getTick();
-						notes.add(new Note(pitch, velocity, tick));
-					}
+	//TODO: Gør privat.
+	public List<INote> getNotesOnChannelFromTrack(int integer, Track t){
+		List<INote> notes = new LinkedList<>();
+		for(int i = 0; i < t.size(); i++){
+			MidiEvent event = t.get(i);
+			/* If a message in the track is a note-on message,
+			 * create a short message. */
+			if(isMidiNoteOnMessage(event.getMessage())){
+				ShortMessage message = (ShortMessage)event.getMessage();
+
+				/* Use the data from the short message to create
+				 * a Note object and add it to the list. */
+				int velocity = message.getData2();
+				if(velocity > 0){
+					int pitch = message.getData1();
+					long tick = event.getTick();
+					notes.add(new Note(pitch, velocity, tick));
 				}
 			}
+		}
 		return notes;
 	}
 
 	/* Return a list of tracks that a channel is being played
 	 * on. */
 	private List<Track> findTracksWithChannel(int channel){
-		List<Track> tracksOnChannel = new LinkedList<Track>();
+		List<Track> tracksOnChannel = new LinkedList<>();
 		for(Track t : this.tracks)
 			for(int i = 0; i < t.size(); i++){
 				MidiMessage message = t.get(i).getMessage();
