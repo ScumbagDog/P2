@@ -8,6 +8,12 @@ public class NGram implements INGram {
 	private int frequency;
 	private List<Integer> intervals;
 
+	NGram(List<Integer> intervals) {
+		super();
+		this.frequency = 1;
+		this.intervals = new ArrayList<Integer>(intervals);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(intervals);
@@ -29,11 +35,6 @@ public class NGram implements INGram {
 		else if (!intervals.equals(other.intervals))
 			return false;
 		return true;
-	}
-  NGram(List<Integer> intervals) {
-		super();
-		this.frequency = 1;
-		this.intervals = new ArrayList<Integer>(intervals);
 	}
 
 	public int getFrequency() {

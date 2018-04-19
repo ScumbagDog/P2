@@ -2,51 +2,57 @@ package a307a.midilib.parser;
 
 import javax.sound.midi.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 class MidiSequenceReader extends AMidiSequenceReader{
 	private final Track[] tracks;
 	private final Set<Integer> channels;
 	private final int numChannels;
-
-	private final int midiNoteOn = 0x9;
+	private final List<MidiEvent> events;
+	private final List<BufferedMidiEvent> bufferedEvents;
 
 	public MidiSequenceReader(Sequence sequence){
 		super(sequence);
 		this.tracks = sequence.getTracks();
+		this.events = this.getEventsFromTracks(this.tracks);
+		this.bufferedEvents = this.getBufferedEvents(this.events);
 		this.channels = this.getChannels();
 		this.numChannels = this.channels.size();
 	}
 
-	/* Returns a list of the 0-indexed channels being played on
-	 * in the sequence. */
+	private List<MidiEvent> getEventsFromTracks(Track[] tracks){
+		List<MidiEvent> events = new ArrayList<>();
+		for(Track t: this.tracks)
+			events.addAll(getEventsFromTrack(t));
+
+		/* Sort the list according to when events occur (tick). */
+		events.sort((e1, e2)->(int) (e1.getTick() - e2.getTick()));
+		return events;
+	}
+
+	private List<MidiEvent> getEventsFromTrack(Track track){
+		int numEvents = track.size();
+		List<MidiEvent> events = new ArrayList<>();
+		for(int i = 0; i < numEvents; i++)
+			events.add(track.get(i));
+		return events;
+	}
+
+	/* Returns a list of BufferedMidiEvent objects from the list of
+	 * events in the MIDI sequence. */
+	private List<BufferedMidiEvent> getBufferedEvents(List<MidiEvent> events){
+		return events.stream()
+				.map(BufferedMidiEvent::new)
+				.collect(Collectors.toList());
+	}
+
+	/* Returns a set of the 0-indexed channels being played on
+	 * in the sequence.  */
 	@Override
 	public Set<Integer> getChannels(){
-		return this.getChannels(this.tracks);
-	}
-
-	private Set<Integer> getChannels(Track[] tracks){
-		Set<Integer> channels = new HashSet<>();
-		for(Track t : tracks)
-			for(int i = 0; i < t.size(); i++){
-				MidiMessage midiMessage = t.get(i).getMessage();
-				/* For each note played, add the channel the note
-				 * was played on. */
-				if(isMidiNoteOnMessage(midiMessage))
-					channels.add(
-							getChannelFromMidiNoteOnMessage(midiMessage));
-			}
-		return channels;
-	}
-
-	/* Function checks if a midi-message is a note-on message. */
-	private boolean isMidiNoteOnMessage(MidiMessage message){
-		return (message.getStatus() >> 4)
-				== this.midiNoteOn;
-	}
-
-	private int getChannelFromMidiNoteOnMessage(
-			MidiMessage message){
-		return message.getStatus() & 0x0f;
+		return bufferedEvents.stream()
+				.map(BufferedMidiEvent::getChannel)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -58,47 +64,14 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	/* Creates a list of notes being played on a channel. */
 	@Override
 	public List<INote> getNotesOnChannel(int channel){
-		List<Track> tracks = findTracksWithChannel(channel);
-		List<INote> notes = new LinkedList<>();
-
-		for(Track t: tracks)
-			for(int i = 0; i < t.size(); i++){
-				MidiEvent event = t.get(i);
-				/* If a message in the track is a note-on message,
-				 * create a short message. */
-				if(isMidiNoteOnMessage(event.getMessage())){
-					ShortMessage message = (ShortMessage)event.getMessage();
-
-					/* Use the data from the short message to create
-					 * a Note object and add it to the list. */
-					int velocity = message.getData2();
-					if(velocity > 0){
-						int pitch = message.getData1();
-						long tick = event.getTick();
-						notes.add(new Note(pitch, velocity, tick));
-					}
-				}
-			}
-		return notes;
+		return this.bufferedEvents.stream()
+				.filter(BufferedMidiEvent::isNoteOn)
+				.filter(bme -> bme.getChannel() == channel)
+				.map(Note::new)
+				.collect(Collectors.toList());
 	}
 
-	/* Return a list of tracks that a channel is being played
-	 * on. */
-	private List<Track> findTracksWithChannel(int channel){
-		List<Track> tracksOnChannel = new LinkedList<Track>();
-		for(Track t : this.tracks)
-			for(int i = 0; i < t.size(); i++){
-				MidiMessage message = t.get(i).getMessage();
-				if(isMidiNoteOnMessage(message)
-						&& getChannelFromMidiNoteOnMessage(message)
-						== channel){
-					tracksOnChannel.add(t);
-					break;
-				}
-			}
-		return tracksOnChannel;
-	}
-
+	/* Returns the number of channels being played on in the sequence. */
 	@Override
 	public int getNumberOfPlayedChannels(){
 		return this.channels.size();

@@ -26,13 +26,17 @@ public class Ukkonen implements IAlgorithm {
 		List<INGram> firstMelodyNGrams = nGramFactory.getNGrams(midiMelody1.getPitchIntervals(), nGramMagnitude);
 		List<INGram> secondMelodyNGrams = nGramFactory.getNGrams(midiMelody2.getPitchIntervals(), nGramMagnitude);
 		int nGramFrequencyDifferenceSum = 0;
+		int amountOfNGrams = 0;
+		for(INGram n : firstMelodyNGrams) {
+			amountOfNGrams += n.getFrequency();
+		}
+		for(INGram n : secondMelodyNGrams) {
+			amountOfNGrams += n.getFrequency();
+		}
 		
 		for (INGram n : firstMelodyNGrams) {
 			if (secondMelodyNGrams.contains(n)) {
-				INGram theNGram = secondMelodyNGrams.stream()
-						.filter(x -> x.equals(n))
-						.findFirst()
-						.orElse(null);
+				INGram theNGram = this.findNGramInList(secondMelodyNGrams, n);
 				nGramFrequencyDifferenceSum += Math.abs(n.getFrequency() - theNGram.getFrequency());
 			} else {
 				nGramFrequencyDifferenceSum += n.getFrequency();
@@ -44,7 +48,12 @@ public class Ukkonen implements IAlgorithm {
 			}
 		}
 		
-		return 1 - (nGramFrequencyDifferenceSum / (firstMelodyNGrams.size() + secondMelodyNGrams.size()));
-		// Not yet implemented
+		return 1 - (nGramFrequencyDifferenceSum / amountOfNGrams);
+	}
+	INGram findNGramInList(List<INGram> listWithNGram, INGram nGramToFind) {
+		return listWithNGram.stream()
+		.filter(x -> x.equals(nGramToFind))
+		.findFirst()
+		.orElse(null);
 	}
 }
