@@ -26,6 +26,13 @@ public class Ukkonen implements IAlgorithm {
 		List<INGram> firstMelodyNGrams = nGramFactory.getNGrams(midiMelody1.getPitchIntervals(), nGramMagnitude);
 		List<INGram> secondMelodyNGrams = nGramFactory.getNGrams(midiMelody2.getPitchIntervals(), nGramMagnitude);
 		int nGramFrequencyDifferenceSum = 0;
+		int amountOfNGrams = 0;
+		for(INGram n : firstMelodyNGrams) {
+			amountOfNGrams += n.getFrequency();
+		}
+		for(INGram n : secondMelodyNGrams) {
+			amountOfNGrams += n.getFrequency();
+		}
 		
 		for (INGram n : firstMelodyNGrams) {
 			if (secondMelodyNGrams.contains(n)) {
@@ -41,7 +48,6 @@ public class Ukkonen implements IAlgorithm {
 			}
 		}
 		
-		return 1 - (nGramFrequencyDifferenceSum / (firstMelodyNGrams.size() + secondMelodyNGrams.size()));
-		// Not yet implemented
+		return 1 - (nGramFrequencyDifferenceSum / amountOfNGrams);
 	}
 }
