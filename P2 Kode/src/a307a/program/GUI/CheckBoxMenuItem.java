@@ -19,7 +19,8 @@ public class CheckBoxMenuItem extends CheckBox {
 
          } */
          CheckBox cb1 = new CheckBox(findAlgorithm);
-
+         cb1.setSelected(false);
+         cb1.setIndeterminate(false);
          vbox.getChildren().addAll(cb1);
 
          return vbox;
