@@ -47,7 +47,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	}
 
 	/* Returns a set of the 0-indexed channels being played on
-	 * in the sequence. */
+	 * in the sequence.  */
 	@Override
 	public Set<Integer> getChannels(){
 		return bufferedEvents.stream()
