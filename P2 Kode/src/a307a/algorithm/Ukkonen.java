@@ -36,10 +36,7 @@ public class Ukkonen implements IAlgorithm {
 		
 		for (INGram n : firstMelodyNGrams) {
 			if (secondMelodyNGrams.contains(n)) {
-				INGram theNGram = secondMelodyNGrams.stream()
-						.filter(x -> x.equals(n))
-						.findFirst()
-						.orElse(null);
+				INGram theNGram = this.findNGramInList(secondMelodyNGrams, n);
 				nGramFrequencyDifferenceSum += Math.abs(n.getFrequency() - theNGram.getFrequency());
 			} else {
 				nGramFrequencyDifferenceSum += n.getFrequency();
@@ -52,5 +49,11 @@ public class Ukkonen implements IAlgorithm {
 		}
 		
 		return 1 - (nGramFrequencyDifferenceSum / amountOfNGrams);
+	}
+	INGram findNGramInList(List<INGram> listWithNGram, INGram nGramToFind) {
+		return listWithNGram.stream()
+		.filter(x -> x.equals(nGramToFind))
+		.findFirst()
+		.orElse(null);
 	}
 }
