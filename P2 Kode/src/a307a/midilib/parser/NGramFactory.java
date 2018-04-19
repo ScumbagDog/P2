@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class NGramFactory implements INGramFactory {
-
 	public List<INGram> getNGrams(List<Integer> intervalList, int nGramMagnitude) {
 		List<INGram> returnList = new ArrayList<>();
 		int i = 0;
@@ -22,7 +21,8 @@ public class NGramFactory implements INGramFactory {
 						}
 					}
 
-				} else {
+				}
+				else {
 					returnList.add(newNGram);
 				}
 				i++;
@@ -32,7 +32,6 @@ public class NGramFactory implements INGramFactory {
 	}
 
 	private INGram createNGram(List<Integer> intervalList, Integer currentIndex, int nGramMagnitude) {
-
 		INGram returnNGram;
 		List<Integer> nGramIntervals = new ArrayList<>();
 		for (int i = 0; i < nGramMagnitude; i++) {

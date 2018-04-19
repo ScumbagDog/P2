@@ -25,8 +25,18 @@ class Test_MidiSequenceReader{
 	}
 	@Test
 	void test1() throws InvalidMidiDataException, IOException{
-		System.err.println(msr.getChannels());
-		System.err.println(msr.getNumberOfPlayedChannels());
-		System.err.println(msr.getNotesOnChannel(1).size());
+//		System.err.println(msr.getChannels());
+		assertEquals(3 ,msr.getNumberOfPlayedChannels());
+		System.err.println("Notes on channel: "
+				+ msr.getNotesOnChannel(1).size());
+
+		IMelody melody = msr.getMelody(1);
+		System.err.println(melody.size());
+	}
+
+	@Test
+	void test2(){
+		assertEquals(msr.getNotesOnChannel(1).size(), msr.getMelody(1).getNotes().size());
+		assertEquals(msr.getNotesOnChannel(2).size(), msr.getMelody(2).size());
 	}
 }

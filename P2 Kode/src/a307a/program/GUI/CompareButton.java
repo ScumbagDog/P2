@@ -16,6 +16,7 @@ public class CompareButton {
 
         //Her laves compareknappen og sættes til at skrive "Comparing..." når man klikker på den
         Button compareButton = new Button();
+        compareButton.setStyle("-fx-font-size: 10pt;");
         compareButton.setText("Compare");
         compareButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

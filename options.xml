@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
-	<settings>
-		<window width = "1000" height = "600" fullscreen = "false"></window>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><settings>
+		<window fullscreen="false" height="600" width="600"/>
 	</settings>

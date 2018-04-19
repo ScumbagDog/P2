@@ -1,19 +1,23 @@
 package a307a.program.GUI;
 
+
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+
+import java.awt.*;
 
 public class CheckBoxMenuItem
 {
 
     public VBox ListAlgorithm() {
+         final int SizeOf = 5;
          VBox vbox = new VBox();
          vbox.setTranslateX(50);
          vbox.setTranslateY(50);
          String findAlgorithm = getClass().getName();
-         for (int i = 0; i <= 1; i++) {
+         for (int i = 0; i <= SizeOf ; i++) {
 
-         ComboBox Cb1 = new ComboBox();
+         Checkbox Cb1 = new Checkbox();
          }
          vbox.getChildren();
 
