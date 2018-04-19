@@ -10,13 +10,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+//All methods are static as they only contain code for executing specific tasks.
+//Furthermore, this class does not house any values that would be useful to have in instances of this class.
 public class FileListEditor {
+    //This window for removing files was added as an alternative to having a removal button next to each individual file entry.
+    //The feature for having individual buttons for each file entry may be readded in the future.
     public static void Remove(List<File> srcFiles, List<File> compFiles, BorderPane elementHolder){
         Stage stage = new Stage();
         List<Integer> listOfFiles = new ArrayList<>();
@@ -71,9 +76,11 @@ public class FileListEditor {
         stage.show();
     }
 
+    //The code for removing files is placed in its own method as it's used multiple times.
     private static void RemoveSelectedFile(TextField minFileNumber, TextField maxFileNumber, List<File> fileList) throws InvalidInputException {
         int minNumber = Integer.parseInt(minFileNumber.getText()),
-            maxNumber = Integer.parseInt(maxFileNumber.getText());
+            maxNumber = Integer.parseInt(maxFileNumber.getText()),
+            numberOfFilesRemoved = maxNumber - minNumber;
 
         if(maxNumber == 0){
             maxNumber = minNumber;
@@ -86,12 +93,26 @@ public class FileListEditor {
             throw new InvalidInputException();
         }
         for(int x = maxNumber; x >= minNumber; --x){
-            System.out.println(x);
             fileList.remove(x);
         }
 
     }
 
+    //AddFile was made to reduce instances of code in MainGUI
+    public static List<File> AddFile(){
+        Stage srcFile = new Stage();
+
+        FileChooser browseSourceFile = new FileChooser();
+        browseSourceFile.setTitle("Select a file to be added");
+
+        //Stopper folk fra at vælge filer vi ikke kan arbejde med.
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("MIDI (*.mid)", "*.mid");
+        browseSourceFile.getExtensionFilters().add(filter);
+
+        return browseSourceFile.showOpenMultipleDialog(srcFile);
+    }
+
+    //An error window to tell the user when they fuck up in the removal process.
     private static void ErrorWindow(String errorMessage){
         Stage stage = new Stage();
         BorderPane pane = new BorderPane();
