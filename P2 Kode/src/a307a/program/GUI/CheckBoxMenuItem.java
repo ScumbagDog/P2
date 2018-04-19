@@ -1,25 +1,26 @@
 package a307a.program.GUI;
 
 
+import a307a.algorithm.Ukkonen;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.CheckBox;
 
-import java.awt.*;
-
-public class CheckBoxMenuItem
-{
+public class CheckBoxMenuItem extends CheckBox {
 
     public VBox ListAlgorithm() {
          final int SizeOf = 5;
+         Ukkonen algo1 = new Ukkonen();
          VBox vbox = new VBox();
          vbox.setTranslateX(50);
          vbox.setTranslateY(50);
-         String findAlgorithm = getClass().getName();
-         for (int i = 0; i <= SizeOf ; i++) {
+         String findAlgorithm = algo1.getName();
+         /*for (int i = 0; i <= SizeOf ; i++) {
 
-         Checkbox Cb1 = new Checkbox();
-         }
-         vbox.getChildren();
+         } */
+         CheckBox cb1 = new CheckBox(findAlgorithm);
+
+         vbox.getChildren().addAll(cb1);
 
          return vbox;
     }
