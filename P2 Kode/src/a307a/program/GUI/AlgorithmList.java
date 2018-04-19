@@ -14,7 +14,7 @@ public  class AlgorithmList
          String findAlgorithm = getClass().getName();
          for (int i = 0; i <= 1; i++) {
 
-         ComboBox Cb1 = new ComboBox();
+         CheckBox cb1 = new CheckBox();
          }
          vbox.getChildren();
 
@@ -23,9 +23,9 @@ public  class AlgorithmList
 */
         /* TODO dette er et midlertidigt løsning */
         VBox vBox = new VBox();
-        CheckBox firstCheckBox = new CheckBox("Algoritme 1");
-        CheckBox secondCheckBox = new CheckBox("Alogritme 2");
-        CheckBox thirdCheckBox = new CheckBox("Algoritme 3");
+        CheckBox firstCheckBox = new CheckBox("Algorithm 1");
+        CheckBox secondCheckBox = new CheckBox("Alogrithm 2");
+        CheckBox thirdCheckBox = new CheckBox("Algorithm 3");
         firstCheckBox.setSelected(false);
         secondCheckBox.setSelected(false);
         thirdCheckBox.setSelected(false);

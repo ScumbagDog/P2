@@ -37,7 +37,6 @@ public class Melody implements IMelody{
   @Override
   public List<Integer> getPitchIntervals(){
 		List<Integer> intervals = new LinkedList<>();
-//		intervals.add(0);
 		for(int i = 0; i < this.notesSize-1; i++)
 			intervals.add(this.notes.get(i+1).getPitch()
 					- this.notes.get(i).getPitch());

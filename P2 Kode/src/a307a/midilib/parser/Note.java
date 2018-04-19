@@ -1,9 +1,9 @@
 package a307a.midilib.parser;
 
 class Note implements INote{
-	int pitch;
-	int velocity;
-	long tick;
+	private int pitch;
+	private int velocity;
+	private long tick;
 
 	public Note(int pitch, int velocity, long tick){
 		this.pitch = pitch;
