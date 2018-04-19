@@ -50,12 +50,6 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	 * in the sequence. */
 	@Override
 	public Set<Integer> getChannels(){
-		return this.getChannels(this.tracks);
-	}
-
-	/* Returns a set of the 0-indexed channels being played on
-	 * on a specific track. */
-	private Set<Integer> getChannels(Track[] tracks){
 		return bufferedEvents.stream()
 				.map(BufferedMidiEvent::getChannel)
 				.collect(Collectors.toSet());
