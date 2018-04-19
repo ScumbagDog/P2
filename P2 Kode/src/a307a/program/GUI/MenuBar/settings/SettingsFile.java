@@ -17,31 +17,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
 public class SettingsFile {
-    private static Document ReadFile(){
-        try{
-            File windowSettings = new File("options.xml");
-            DocumentBuilderFactory settingsFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder settingsBuilder = settingsFactory.newDocumentBuilder();
-            return settingsBuilder.parse(windowSettings);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private static Element getInformation(Document document){
-        NodeList nList = document.getElementsByTagName("window");
-        Node nNode = nList.item(0);
-        return (Element) nNode;
-    }
-
-    public static String AccessSettings(String string){
-            Document settingsDoc = SettingsFile.ReadFile();
-            Element eElement = SettingsFile.getInformation(settingsDoc);
-
-            return eElement.getAttribute(string);
-    }
-
+    //The code for editing the settings was made into its own method due to it being used multiple times.
     public static void EditSettings(String setting, String value){
         Document settingsDoc = SettingsFile.ReadFile();
         Element eElement = SettingsFile.getInformation(settingsDoc);
@@ -56,6 +32,39 @@ public class SettingsFile {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
+
+    //The purpose of this method is to read the settings from the 'start' method in MainGUI.
+    public static String AccessSettings(String string){
+        Document settingsDoc = SettingsFile.ReadFile();
+        Element eElement = SettingsFile.getInformation(settingsDoc);
+        return eElement.getAttribute(string);
+    }
+
+    //This method was made to create elements used to access and edit the settings,
+    //which two of the methods in this class needs to do.
+    private static Element getInformation(Document document){
+        NodeList nList = document.getElementsByTagName("window");
+        Node nNode = nList.item(0);
+        return (Element) nNode;
+    }
+
+    //This method was purely made to make the public methods more readable by abstracting some of the code.
+    private static Document ReadFile(){
+        try{
+            File windowSettings = new File("options.xml");
+            DocumentBuilderFactory settingsFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder settingsBuilder = settingsFactory.newDocumentBuilder();
+            return settingsBuilder.parse(windowSettings);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+
+
 }
