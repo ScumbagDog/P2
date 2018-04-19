@@ -7,17 +7,14 @@ import java.util.stream.Collectors;
 class MidiSequenceReader extends AMidiSequenceReader{
 	private final Track[] tracks;
 	private final Set<Integer> channels;
-	private final int numChannels;
-	private final List<MidiEvent> events;
 	private final List<BufferedMidiEvent> bufferedEvents;
 
 	public MidiSequenceReader(Sequence sequence){
 		super(sequence);
 		this.tracks = sequence.getTracks();
-		this.events = this.getEventsFromTracks(this.tracks);
-		this.bufferedEvents = this.getBufferedEvents(this.events);
+		List<MidiEvent> events = this.getEventsFromTracks(this.tracks);
+		this.bufferedEvents = this.getBufferedEvents(events);
 		this.channels = this.getChannels();
-		this.numChannels = this.channels.size();
 	}
 
 	private List<MidiEvent> getEventsFromTracks(Track[] tracks){
