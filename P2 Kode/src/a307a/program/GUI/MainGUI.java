@@ -75,7 +75,6 @@ public class MainGUI extends Application {
         menuBar.getMenus().addAll(menuFile, menuSetting);
 
         // Ian har ændret her
-        BorderPane algorithmList = new BorderPane();
         StackPane algorithmStack = new StackPane(AlgorithmList.ListAlgorithm());
 
         SplitPane resultSplit = new SplitPane();
