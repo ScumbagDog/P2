@@ -14,14 +14,17 @@ public class Test_Melody{
 	void test1() throws InvalidMidiDataException, IOException{
 		File file = new File("C:\\Users\\Conrad\\IdeaProjects\\P2_\\P2 Kode\\src\\a307a\\midilib\\parser\\Mester-Jakob.mid");
 		AMidiSequenceReader msr = MidiTools.getMidiSequenceReader(file);
-		IMelody melody = msr.getMelody(0);
+		List<INote> notes1 = msr.getNotesOnChannel(0);
+		IMelody melody = new MonophonicMelody(notes1);
+
 		List<Integer> intervals = melody.getPitchIntervals();
 		List<INote> notes = melody.getNotes();
-		notes.stream().map(INote::getPitch)
-				.forEach(System.err::print);
+
+		notes1.stream().map(INote::getPitch)
+				.forEach(n -> System.err.print(n + " "));
 		System.err.println();
-		System.err.println(intervals);
-		System.err.println(intervals.size());
+		notes.stream().map(INote::getPitch)
+				.forEach(n -> System.err.print(n + " "));
 	}
 
 	// Tester toner direkte fra sekvens
