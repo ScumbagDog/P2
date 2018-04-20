@@ -83,6 +83,7 @@ public class MainGUI extends Application {
         resultSplit.setDividerPositions(0.9);
         StackPane resultStack1 = new StackPane(Resultlist.AddResultTable());
         StackPane resultStack2 = new StackPane(CompareButton.AddButton());
+        resultStack2.setMaxSize(100, 100);
         resultSplit.getItems().addAll(resultStack1, resultStack2);
 
         elementHolder.setTop(menuBar);
