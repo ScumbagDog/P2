@@ -4,23 +4,23 @@ import a307a.algorithm.Ukkonen;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.CheckBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AlgorithmList extends CheckBox {
 
-    public static VBox ListAlgorithm() {
-        final int SizeOf = 5;
-        Ukkonen algo1 = new Ukkonen();
-        VBox vbox = new VBox();
-        String findAlgorithm = algo1.getName();
-         /*for (int i = 0; i <= SizeOf ; i++) {
+    public static List<CheckBox> ListAlgorithm() {
+        List<CheckBox> checkboxList = new ArrayList<>();
+        List<String> algorithmName = new ArrayList<>();
+        Ukkonen ukonnen = new Ukkonen();
+        algorithmName.add(ukonnen.getName());
+         for (int i = 0; i < algorithmName.size() ; i++) {
+            checkboxList.add(new CheckBox(algorithmName.get(i)));
+            checkboxList.get(i).setSelected(false);
+            checkboxList.get(i).setIndeterminate(false);
+         }
 
-         } */
-
-        CheckBox cb1 = new CheckBox(findAlgorithm);
-        cb1.setSelected(false);
-        cb1.setIndeterminate(false);
-        vbox.getChildren().addAll(cb1);
-
-        return vbox;
+        return checkboxList;
     }
 }
         /* TODO dette er et midlertidigt løsning */
