@@ -13,6 +13,9 @@ import java.util.List;
  */
 public class MidiTools{
 
+	/* Cannot create an instance of MidiTools. */
+	private MidiTools(){}
+
 	public static INGramFactory getMelodicNGrammifier(File file){
 		return null;
 	}

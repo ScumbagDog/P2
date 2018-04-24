@@ -11,6 +11,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SettingsMenu {
+
+    //This method is needed to create the window users interact with to change the settings.
     public static void WindowSettings(String version){
         Stage stage = new Stage();
         stage.setTitle("Settings");
@@ -27,14 +29,8 @@ public class SettingsMenu {
         CheckBox fullscrn = new CheckBox();
         Button  saveSettings = new Button("Save"),
                 clearSettings = new Button("Reset Settings");
-        dimensions.getChildren().addAll(dimensionWidthText,
-                dimensionHeightText,
-                checkboxText,
-                dimensionWidth,
-                dimensionHeight,
-                fullscrn,
-                saveSettings,
-                clearSettings);
+        dimensions.getChildren().addAll(dimensionWidthText, dimensionHeightText, checkboxText,
+                dimensionWidth, dimensionHeight, fullscrn, saveSettings, clearSettings);
 
         saveSettings.setOnAction(event -> {
             SettingsFile fileEditor = new SettingsFile();

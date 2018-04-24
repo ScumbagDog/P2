@@ -16,10 +16,15 @@ public class Test_Melody{
 		AMidiSequenceReader msr = MidiTools.getMidiSequenceReader(file);
 		IMelody melody = msr.getMelody(0);
 		List<Integer> intervals = melody.getPitchIntervals();
+		List<INote> notes = melody.getNotes();
+		notes.stream().map(INote::getPitch)
+				.forEach(System.err::print);
+		System.err.println();
 		System.err.println(intervals);
 		System.err.println(intervals.size());
 	}
 
+	// Tester toner direkte fra sekvens
 	@Test
 	void test2() throws InvalidMidiDataException{
 		Sequence seq = new Sequence((float) 0.0, 60000);
@@ -43,6 +48,7 @@ public class Test_Melody{
 			System.err.println(n.getPitch());
 	}
 
+	//TODO: Implementer test der sørger for den højeste tone bliver valgt i melodien.
 	@Test
 	void test3() throws InvalidMidiDataException{
 		Sequence seq = new Sequence((float) 0.0, 60000);

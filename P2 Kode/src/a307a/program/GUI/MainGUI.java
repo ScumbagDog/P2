@@ -1,19 +1,16 @@
 package a307a.program.GUI;
 
 import a307a.program.GUI.MenuBar.FileListEditor;
-import a307a.program.GUI.MenuBar.FileTab;
 import a307a.program.GUI.MenuBar.settings.SettingsFile;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
 import a307a.program.GUI.Splits.FileList;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,8 +19,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+//This class exists solely to house the 'start' method
 public class MainGUI extends Application {
 
+    //Essentially the 'main' method of JavaFX.
     @Override
     public void start(Stage primaryStage) {
         Stage stage = new Stage();
@@ -32,8 +31,8 @@ public class MainGUI extends Application {
         Boolean windowFullscreen;
         List<File> srcFileList = new ArrayList<>(),
                 compFileList = new ArrayList<>();
+        List<CheckBox> listOfAlgorithms = AlgorithmList.ListAlgorithm();
         Text fileName = new Text("Awaiting action...");
-        FileListEditor listEditor = new FileListEditor();
 
         BorderPane elementHolder = new BorderPane();
         FileList splitLists = new FileList();
@@ -44,26 +43,23 @@ public class MainGUI extends Application {
 
         MenuBar menuBar = new MenuBar();
 
-        /*  Knappen der tilføjer musik filer.
-            Koden der tilføjer filerne er sat ind i klassen FileTab da det bruges flere gange.
-        */
         Menu menuFile = new Menu("Files");
-
         MenuItem addSrcFile = new MenuItem("Add Source");
         addSrcFile.setOnAction(event -> {
-            srcFileList.add(FileTab.AddFile());
+            srcFileList.addAll(FileListEditor.AddFile());
             fileName.setText("File \"" + srcFileList.get(srcFileList.size() - 1).getName() + "\" has been added!");
             elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
         MenuItem addCompFile = new MenuItem("Add Comparison");
         addCompFile.setOnAction(event -> {
-            compFileList.add(FileTab.AddFile());
+            compFileList.addAll(FileListEditor.AddFile());
             fileName.setText("File \"" + compFileList.get(compFileList.size() - 1).getName() + "\" has been added!");
             elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         });
 
         MenuItem removeFile = new MenuItem("Remove");
         removeFile.setOnAction(event -> {
+            FileListEditor.Remove(srcFileList, compFileList, elementHolder);
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
 
@@ -77,20 +73,24 @@ public class MainGUI extends Application {
 
         menuBar.getMenus().addAll(menuFile, menuSetting);
 
-        BorderPane algorithmList = new BorderPane();
+        Button compareMelodies = new Button();
 
-
+        VBox algorithms = new VBox();
+        for(int i = 0; i < listOfAlgorithms.size(); ++i){
+            algorithms.getChildren().add(listOfAlgorithms.get(i));
+        }
+        StackPane algorithmStack = new StackPane(algorithms);
 
         SplitPane resultSplit = new SplitPane();
         resultSplit.setOrientation(Orientation.VERTICAL);
         resultSplit.setDividerPositions(0.9);
         StackPane resultStack1 = new StackPane(Resultlist.AddResultTable());
         StackPane resultStack2 = new StackPane(CompareButton.AddButton());
+        resultStack2.setMaxSize(100, 100);
         resultSplit.getItems().addAll(resultStack1, resultStack2);
 
-        /* Kan ikke stå i en klasse for sig selv fordi det ikke kan opdateres derfor ligger det herinde */
         elementHolder.setTop(menuBar);
-        elementHolder.setLeft(algorithmList);
+        elementHolder.setLeft(algorithmStack);
         elementHolder.setBottom(fileName);
         elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
         elementHolder.setRight(resultSplit);

@@ -25,9 +25,13 @@ public class Resultlist {
         fileName1.setCellValueFactory(
                 new PropertyValueFactory<DataResult, String>("fileName"));
 
+
         TableColumn result = new TableColumn("Result");
         result.setCellValueFactory(
                 new PropertyValueFactory<DataResult, String>("resultValue"));
+
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setMaxWidth(150);
 
 
         table.setItems(data);

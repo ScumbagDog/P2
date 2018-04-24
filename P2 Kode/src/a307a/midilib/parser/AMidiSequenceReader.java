@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Represents a midi sequence being read. Contains methods
  * for extracting data from the sequence and creating IMelody
- * objects..
+ * objects.
  */
 public abstract class AMidiSequenceReader{
 	/**
