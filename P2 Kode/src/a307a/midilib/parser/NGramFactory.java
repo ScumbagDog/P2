@@ -3,7 +3,9 @@ package a307a.midilib.parser;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/*
+ * NGramFactory creates NGrams from a list of intervals.
+ */
 public class NGramFactory implements INGramFactory {
 	public List<INGram> getNGrams(List<Integer> intervalList, int nGramMagnitude) {
 		List<INGram> returnList = new ArrayList<>();
@@ -13,14 +15,7 @@ public class NGramFactory implements INGramFactory {
 			while (intervalList.size() >= (nGramMagnitude + i)) {
 				INGram newNGram = this.createNGram(intervalList, i, nGramMagnitude);
 				if (returnList.contains(newNGram)) {
-					for (Iterator<INGram> it = returnList.iterator(); it.hasNext();) {
-						INGram n = it.next();
-						if (n.equals(newNGram)) {
-							n.incrementFrequency();
-							break;
-						}
-					}
-
+					this.incrementNGram(returnList, newNGram);
 				}
 				else {
 					returnList.add(newNGram);
@@ -39,5 +34,14 @@ public class NGramFactory implements INGramFactory {
 		}
 		returnNGram = new NGram(nGramIntervals);
 		return returnNGram;
+	}
+	private void incrementNGram(List<INGram> nGramList, INGram nGramToIncrement) {
+		for (Iterator<INGram> it = nGramList.iterator(); it.hasNext();) {
+			INGram n = it.next();
+			if (n.equals(nGramToIncrement)) {
+				n.incrementFrequency();
+				break;
+			}
+		}
 	}
 }
