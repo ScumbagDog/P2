@@ -56,7 +56,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	@Override
 	public IMelody getMelody(int channel){
 		List<INote> notes = getNotesOnChannel(channel);
-		return new AMelody2(notes);
+		return new MonophonicMelody(notes);
 	}
 
 	/* Creates a list of the notes being played on given channel. */

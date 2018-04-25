@@ -7,11 +7,14 @@ import java.util.stream.Collectors;
 
 public class MonophonicMelody extends IMelody {
 	MonophonicMelody(List<INote> notes){
-		super(notes);
-		this.notes = getMonophonicNotes(notes);
+		super(
+				getMonophonicNotes(notes)
+		);
 	}
 
-	List<INote> getMonophonicNotes(List<INote> notes){
+	/* Returns a monophonic list of note (only one note at
+	 * any given moment) by taking the note with highest pitch. */
+	private static List<INote> getMonophonicNotes(List<INote> notes){
 		List<INote> monophonic = new LinkedList<>();
 
 		/* For each unique tick... */
@@ -27,19 +30,5 @@ public class MonophonicMelody extends IMelody {
 			);
 		}
 		return monophonic;
-	}
-	@Override
-	List<Integer> getPitchIntervals(){
-		return null;
-	}
-
-	@Override
-	List<INote> getNotes(){
-		return this.notes;
-	}
-
-	@Override
-	int size(){
-		return 0;
 	}
 }

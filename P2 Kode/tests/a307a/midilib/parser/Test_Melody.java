@@ -10,10 +10,14 @@ import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Test_Melody{
+	File file = new File("C:\\Users\\Conrad\\IdeaProjects\\P2_\\P2 Kode\\src\\a307a\\midilib\\parser\\Mester-Jakob.mid");
+	AMidiSequenceReader msr = MidiTools.getMidiSequenceReader(file);
+
+	public Test_Melody() throws InvalidMidiDataException, IOException{
+	}
+
 	@Test
 	void test1() throws InvalidMidiDataException, IOException{
-		File file = new File("C:\\Users\\Conrad\\IdeaProjects\\P2_\\P2 Kode\\src\\a307a\\midilib\\parser\\Mester-Jakob.mid");
-		AMidiSequenceReader msr = MidiTools.getMidiSequenceReader(file);
 		List<INote> notes1 = msr.getNotesOnChannel(0);
 		IMelody melody = new MonophonicMelody(notes1);
 
@@ -73,5 +77,13 @@ public class Test_Melody{
 		reader.getNotesOnChannel(0).forEach(n ->System.err.println(n.getPitch()));
 //		IMelody melody = reader.getMelody(0);
 //		System.err.println(melody.getNotes());
+	}
+
+	@Test
+	void test4(){
+		List<INote> notes = msr.getNotesOnChannel(0);
+		IMelody melody = new MonophonicMelody(notes);
+
+		System.err.println(melody.getPitchIntervals());
 	}
 }
