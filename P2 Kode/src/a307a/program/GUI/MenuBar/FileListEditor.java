@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -22,12 +21,12 @@ import java.util.List;
 public class FileListEditor {
     //This window for removing files was added as an alternative to having a removal button next to each individual file entry.
     //The feature for having individual buttons for each file entry may be readded in the future.
-    public static void Remove(List<File> srcFiles, List<File> compFiles, BorderPane elementHolder){
+    public static void remove(List<File> srcFiles, List<File> compFiles, BorderPane elementHolder){
         Stage stage = new Stage();
         List<Integer> listOfFiles = new ArrayList<>();
         Text minFlavorText = new Text("From file number:");
         Text maxFlavorText = new Text("to");
-        Text checkboxFlavorText = new Text("Remove from:");
+        Text checkboxFlavorText = new Text("remove from:");
         ToggleGroup listSelector = new ToggleGroup();
         RadioButton src = new RadioButton("Source file list");
         src.setToggleGroup(listSelector);
@@ -38,15 +37,15 @@ public class FileListEditor {
         TextField maxFileNumber = new TextField();
         maxFileNumber.setAlignment(Pos.CENTER);
 
-        Button listCutter = new Button("Remove from list");
+        Button listCutter = new Button("remove from list");
         listCutter.setOnAction((ActionEvent event) -> {
             try{
                 if(src.isSelected()){
                     RemoveSelectedFile(minFileNumber, maxFileNumber, srcFiles);
-                    elementHolder.setCenter(FileList.ListsOfFiles(srcFiles, compFiles));
+                    elementHolder.setCenter(FileList.listsOfFiles(srcFiles, compFiles));
                 }else if(comp.isSelected()){
                     RemoveSelectedFile(minFileNumber, maxFileNumber, compFiles);
-                    elementHolder.setCenter(FileList.ListsOfFiles(srcFiles, compFiles));
+                    elementHolder.setCenter(FileList.listsOfFiles(srcFiles, compFiles));
                 }else{
                     ErrorWindow("Please select a list to remove files from.");
                 }

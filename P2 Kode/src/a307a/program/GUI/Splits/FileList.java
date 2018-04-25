@@ -17,7 +17,7 @@ import java.util.List;
 public class FileList{
 
     //This method only exists to collect the layouts made by the private methods of this class.
-    public static BorderPane ListsOfFiles(List<File> srcFiles, List<File> cmpFiles) {
+    public static BorderPane listsOfFiles(List<File> srcFiles, List<File> cmpFiles) {
         BorderPane centralLayout = new BorderPane();
         Text srcText = new Text("Source File");
         Text compText = new Text("Compare file");
@@ -28,7 +28,7 @@ public class FileList{
         return centralLayout;
     }
 
-    //All private methods below this comment exist to heighten the abstraction level of ListsOfFiles.
+    //All private methods below this comment exist to heighten the abstraction level of listsOfFiles.
     private static SplitPane SplitMaker(Node object1, Node object2){
         SplitPane splitPane = new SplitPane();
         StackPane stackPane1 = new StackPane();
