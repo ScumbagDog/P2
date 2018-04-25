@@ -48,18 +48,18 @@ public class MainGUI extends Application {
         addSrcFile.setOnAction(event -> {
             srcFileList.addAll(FileListEditor.AddFile());
             fileName.setText("File \"" + srcFileList.get(srcFileList.size() - 1).getName() + "\" has been added!");
-            elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
+            elementHolder.setCenter(splitLists.listsOfFiles(srcFileList, compFileList));
         });
         MenuItem addCompFile = new MenuItem("Add Comparison");
         addCompFile.setOnAction(event -> {
             compFileList.addAll(FileListEditor.AddFile());
             fileName.setText("File \"" + compFileList.get(compFileList.size() - 1).getName() + "\" has been added!");
-            elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
+            elementHolder.setCenter(splitLists.listsOfFiles(srcFileList, compFileList));
         });
 
-        MenuItem removeFile = new MenuItem("Remove");
+        MenuItem removeFile = new MenuItem("remove");
         removeFile.setOnAction(event -> {
-            FileListEditor.Remove(srcFileList, compFileList, elementHolder);
+            FileListEditor.remove(srcFileList, compFileList, elementHolder);
         });
         menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
 
@@ -92,7 +92,7 @@ public class MainGUI extends Application {
         elementHolder.setTop(menuBar);
         elementHolder.setLeft(algorithmStack);
         elementHolder.setBottom(fileName);
-        elementHolder.setCenter(splitLists.ListsOfFiles(srcFileList, compFileList));
+        elementHolder.setCenter(splitLists.listsOfFiles(srcFileList, compFileList));
         elementHolder.setRight(resultSplit);
 
         Scene scene = new Scene(elementHolder, windowWidth, windowHeight);
