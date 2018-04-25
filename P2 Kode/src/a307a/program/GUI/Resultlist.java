@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Resultlist {
-    public static TableView AddResultTable() {
+    public static TableView addResultTable() {
      final ObservableList<DataResult> data = FXCollections.observableArrayList(
             new DataResult("Midifile1", 0.5),
             new DataResult("Midifile2", 0.7)
