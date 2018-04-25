@@ -31,7 +31,7 @@ public class MainGUI extends Application {
         Boolean windowFullscreen;
         List<File> srcFileList = new ArrayList<>(),
                 compFileList = new ArrayList<>();
-        List<CheckBox> listOfAlgorithms = AlgorithmList.ListAlgorithm();
+        List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
         Text fileName = new Text("Awaiting action...");
 
         BorderPane elementHolder = new BorderPane();
@@ -84,8 +84,8 @@ public class MainGUI extends Application {
         SplitPane resultSplit = new SplitPane();
         resultSplit.setOrientation(Orientation.VERTICAL);
         resultSplit.setDividerPositions(0.9);
-        StackPane resultStack1 = new StackPane(Resultlist.AddResultTable());
-        StackPane resultStack2 = new StackPane(CompareButton.AddButton());
+        StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
+        StackPane resultStack2 = new StackPane(CompareButton.addButton());
         resultStack2.setMaxSize(100, 100);
         resultSplit.getItems().addAll(resultStack1, resultStack2);
 

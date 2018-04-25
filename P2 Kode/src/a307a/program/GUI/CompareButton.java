@@ -9,7 +9,7 @@ import javafx.event.ActionEvent;
 public class CompareButton {
 
 
-    public static Button AddButton() {
+    public static Button addButton() {
 
 
 

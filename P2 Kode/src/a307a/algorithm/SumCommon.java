@@ -11,7 +11,7 @@ public class SumCommon implements IAlgorithm{
 	private final String name = "Sum Common Measure Algorithm";
 	private int nGramMagnitude;
 	
-	SumCommon(int nGramMagnitude){
+	public SumCommon(int nGramMagnitude){
 		this.nGramMagnitude = nGramMagnitude;
 	}
 	

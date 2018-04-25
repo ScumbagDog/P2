@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlgorithmList extends CheckBox {
-
-    public static List<CheckBox> ListAlgorithm() {
+/* Make a list of Strings and Checkbox, and get the names from the different Algorithm */
+    public static List<CheckBox> listAlgorithm() {
         List<CheckBox> checkboxList = new ArrayList<>();
         List<String> algorithmName = new ArrayList<>();
         Ukkonen ukonnen = new Ukkonen();
