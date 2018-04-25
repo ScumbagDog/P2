@@ -7,12 +7,10 @@ import a307a.program.GUI.Splits.FileList;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,6 +31,7 @@ public class MainGUI extends Application {
         Boolean windowFullscreen;
         List<File> srcFileList = new ArrayList<>(),
                 compFileList = new ArrayList<>();
+        List<CheckBox> listOfAlgorithms = AlgorithmList.ListAlgorithm();
         Text fileName = new Text("Awaiting action...");
 
         BorderPane elementHolder = new BorderPane();
@@ -74,8 +73,13 @@ public class MainGUI extends Application {
 
         menuBar.getMenus().addAll(menuFile, menuSetting);
 
-        // Ian har ændret her
-        StackPane algorithmStack = new StackPane(AlgorithmList.ListAlgorithm());
+        Button compareMelodies = new Button();
+
+        VBox algorithms = new VBox();
+        for(int i = 0; i < listOfAlgorithms.size(); ++i){
+            algorithms.getChildren().add(listOfAlgorithms.get(i));
+        }
+        StackPane algorithmStack = new StackPane(algorithms);
 
         SplitPane resultSplit = new SplitPane();
         resultSplit.setOrientation(Orientation.VERTICAL);
