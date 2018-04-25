@@ -49,7 +49,7 @@ public class SumCommon implements IAlgorithm{
 			}
 		}
 		
-		return (nGramFrequencyCommonSum / amountOfNGrams);
+		return ((double)nGramFrequencyCommonSum / (double)amountOfNGrams);
 	}
 	
 	INGram findNGramInList(List<INGram> listWithNGram, INGram nGramToFind) {

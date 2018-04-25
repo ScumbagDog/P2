@@ -56,8 +56,9 @@ public class Ukkonen implements IAlgorithm {
 				nGramFrequencyDifferenceSum += n.getFrequency();
 			}
 		}
-		
-		return 1 - (nGramFrequencyDifferenceSum / amountOfNGrams);
+		System.err.println(nGramFrequencyDifferenceSum);
+		System.err.println(amountOfNGrams);
+		return 1 - ((double)nGramFrequencyDifferenceSum / (double)amountOfNGrams);
 	}
 	INGram findNGramInList(List<INGram> listWithNGram, INGram nGramToFind) {
 		return listWithNGram.stream()
