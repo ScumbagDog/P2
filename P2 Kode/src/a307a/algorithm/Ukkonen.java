@@ -30,7 +30,7 @@ public class Ukkonen implements IAlgorithm {
 		this.nGramMagnitude = nGramMagnitude;
 	}
 
-	public double compareTo(Melody midiMelody1, Melody midiMelody2) {
+	public double compareTo(AMelody2 midiMelody1, AMelody2 midiMelody2) {
 		INGramFactory nGramFactory = new NGramFactory();
 		List<INGram> firstMelodyNGrams = nGramFactory.getNGrams(midiMelody1.getPitchIntervals(), nGramMagnitude);
 		List<INGram> secondMelodyNGrams = nGramFactory.getNGrams(midiMelody2.getPitchIntervals(), nGramMagnitude);

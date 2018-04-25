@@ -1,10 +1,6 @@
 package a307a.midilib.parser;
 
-import org.junit.jupiter.api.Test;
-
-import javax.sound.midi.InvalidMidiDataException;
 import java.io.File;
-import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,7 +12,7 @@ public class MelodyTests {
     File file = new File("a307a/midilib/parser/Mester-Jakob.mid");
 
 
-    Melody melody = null;
+    AMelody2 melody = null;
     private static Set<Integer> CodeExecution(){
         Set<Integer> testSet = new TreeSet<>();
         testSet.add(5);
