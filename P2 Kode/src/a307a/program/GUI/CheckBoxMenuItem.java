@@ -10,7 +10,7 @@ public class CheckBoxMenuItem extends CheckBox {
 
     public VBox ListAlgorithm() {
          final int SizeOf = 5;
-         Ukkonen algo1 = new Ukkonen();
+         Ukkonen algo1 = new Ukkonen(2);
          VBox vbox = new VBox();
          vbox.setTranslateX(50);
          vbox.setTranslateY(50);

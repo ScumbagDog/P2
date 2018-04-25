@@ -12,7 +12,9 @@ public class AlgorithmList extends CheckBox {
     public static List<CheckBox> listAlgorithm() {
         List<CheckBox> checkboxList = new ArrayList<>();
         List<String> algorithmName = new ArrayList<>();
-        Ukkonen ukonnen = new Ukkonen();
+
+        //TODO: NGrams-algoritmer skal kende MAGNITUDEN af NGrams.
+        Ukkonen ukonnen = new Ukkonen(2);
         algorithmName.add(ukonnen.getName());
          for (int i = 0; i < algorithmName.size() ; i++) {
             checkboxList.add(new CheckBox(algorithmName.get(i)));
