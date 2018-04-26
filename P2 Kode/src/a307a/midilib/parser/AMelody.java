@@ -7,14 +7,15 @@ import java.util.stream.Collectors;
 /**
  * Represents a melody.
  */
-public abstract class IMelody{
+public abstract class AMelody{
 	protected List<INote> notes;
 
-	IMelody(List<INote> notes){
+	AMelody(List<INote> notes){
 		this.notes = notes.stream()
 				.map(INote::clone)
 				.collect(Collectors.toList());
 	}
+
 	/**
 	 * Creates a list of the melodic intervals in the melody.
 	 * @return List of sequential intervals.

@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * Represents a midi sequence being read. Contains methods
- * for extracting data from the sequence and creating IMelody
+ * for extracting data from the sequence and creating AMelody
  * objects.
  */
 public abstract class AMidiSequenceReader{
@@ -43,12 +43,12 @@ public abstract class AMidiSequenceReader{
 	public abstract Set<Integer> getChannels();
 
 	/**
-	 * Creates an IMelody object from notes on the given
+	 * Creates an AMelody object from notes on the given
 	 * channel.
 	 * @param channel
-	 * @return IMelody object.
+	 * @return AMelody object.
 	 */
-	public abstract IMelody getMelody(int channel);
+	public abstract AMelody getMelody(int channel);
 
 	/**
 	 * Reads the sequence and returns all notes on specified

@@ -19,7 +19,7 @@ public class Test_Melody{
 	@Test
 	void test1() throws InvalidMidiDataException, IOException{
 		List<INote> notes1 = msr.getNotesOnChannel(0);
-		IMelody melody = new MonophonicMelody(notes1);
+		AMelody melody = new MonophonicMelody(notes1);
 
 		List<Integer> intervals = melody.getPitchIntervals();
 		List<INote> notes = melody.getNotes();
@@ -75,14 +75,14 @@ public class Test_Melody{
 		AMidiSequenceReader reader = MidiTools.getMidiSequenceReader(seq);
 
 		reader.getNotesOnChannel(0).forEach(n ->System.err.println(n.getPitch()));
-//		IMelody melody = reader.getMelody(0);
+//		AMelody melody = reader.getMelody(0);
 //		System.err.println(melody.getNotes());
 	}
 
 	@Test
 	void test4(){
 		List<INote> notes = msr.getNotesOnChannel(0);
-		IMelody melody = new MonophonicMelody(notes);
+		AMelody melody = new MonophonicMelody(notes);
 
 		System.err.println(melody.getPitchIntervals());
 	}

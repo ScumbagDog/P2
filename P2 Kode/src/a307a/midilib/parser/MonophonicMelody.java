@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MonophonicMelody extends IMelody {
+public class MonophonicMelody extends AMelody{
 	MonophonicMelody(List<INote> notes){
 		super(
 				getMonophonicNotes(notes)
