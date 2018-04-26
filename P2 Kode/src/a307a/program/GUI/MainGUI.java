@@ -44,10 +44,10 @@ public class MainGUI extends Application {
     private Menu menuSetting = new Menu("Window");
     private MenuItem addSetting = new MenuItem("Settings");
     private Button compareMelodies = new Button();
-    StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
-    StackPane resultStack2 = new StackPane(compareMelodies);
+    private StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
+    private StackPane resultStack2 = new StackPane(compareMelodies);
     private SplitPane resultSplit = new SplitPane();
-    StackPane algorithmStack = new StackPane(algorithms);
+    private StackPane algorithmStack = new StackPane(algorithms);
 
     //Essentially the 'main' method of JavaFX.
     @Override
@@ -58,33 +58,11 @@ public class MainGUI extends Application {
             algorithms.getChildren().add(listOfAlgorithms.get(i));
         }
 
-        windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
-        windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
-        windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
-        addSrcFile.setOnAction(event -> { loadFile(srcFileList, srcMidiFiles); });
-
-        addCompFile.setOnAction(event -> { loadFile(compFileList, compMidiFiles); });
-        removeFile.setOnAction(event -> { new FileListEditor(srcMidiFiles, compMidiFiles, elementHolder); });
-        menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
-
-        addSetting.setOnAction(event -> {
-            String version = "???";
-            SettingsMenu.WindowSettings(version);
-        });
-        menuSetting.getItems().add(addSetting);
+        loadSettings();
+        setFileMenuItemFunctionality();
+        setSettingsMenuItemFunctionality();
         menuBar.getMenus().addAll(menuFile, menuSetting);
-
-        compareMelodies.setStyle("-fx-font-size: 10pt;");
-        compareMelodies.setText("Compare");
-        compareMelodies.setOnAction(event -> {
-            Stage confirmAction = new Stage();
-            Text confirmationText = new Text("A total of " + srcMidiFiles.size() + "source files and "
-                    + compMidiFiles.size() + "comparison files have been selected.\n" +
-                    "Do you want to begin the comparison sequence?");
-            Button startComparison = new Button();
-
-            Button cancelComparison = new Button();
-        });
+        setCompareButtonFunctionality();
 
         resultSplit.setOrientation(Orientation.VERTICAL);
         resultSplit.setDividerPositions(0.9);
@@ -127,5 +105,40 @@ public class MainGUI extends Application {
         elementHolder.setBottom(fileName);
         elementHolder.setCenter(splitLists.ListsOfFiles(srcMidiFiles, compMidiFiles));
         elementHolder.setRight(resultSplit);
+    }
+
+    private void loadSettings(){
+        windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
+        windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
+        windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
+    }
+
+    private void setFileMenuItemFunctionality(){
+        addSrcFile.setOnAction(event -> { loadFile(srcFileList, srcMidiFiles); });
+        addCompFile.setOnAction(event -> { loadFile(compFileList, compMidiFiles); });
+        removeFile.setOnAction(event -> { new FileListEditor(srcMidiFiles, compMidiFiles, elementHolder); });
+        menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
+    }
+
+    private void setSettingsMenuItemFunctionality(){
+        addSetting.setOnAction(event -> {
+            String version = "???";
+            SettingsMenu.WindowSettings(version);
+        });
+        menuSetting.getItems().add(addSetting);
+    }
+
+    private void setCompareButtonFunctionality(){
+        compareMelodies.setStyle("-fx-font-size: 10pt;");
+        compareMelodies.setText("Compare");
+        compareMelodies.setOnAction(event -> {
+            Stage confirmAction = new Stage();
+            Text confirmationText = new Text("A total of " + srcMidiFiles.size() + "source files and "
+                    + compMidiFiles.size() + "comparison files have been selected.\n" +
+                    "Do you want to begin the comparison sequence?");
+            Button startComparison = new Button();
+
+            Button cancelComparison = new Button();
+        });
     }
 }
