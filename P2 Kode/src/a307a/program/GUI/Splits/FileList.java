@@ -1,11 +1,13 @@
 package a307a.program.GUI.Splits;
 
+import a307a.program.GUI.MenuBar.MidiFile;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.File;
@@ -16,13 +18,15 @@ import java.util.List;
 //Furthermore, this class does not house any values that would be useful to have in instances of this class.
 public class FileList{
 
+
+
     //This method only exists to collect the layouts made by the private methods of this class.
-    public static BorderPane ListsOfFiles(List<File> srcFiles, List<File> cmpFiles) {
+    public static BorderPane ListsOfFiles(List<MidiFile> srcFiles, List<MidiFile> cmpFiles) {
         BorderPane centralLayout = new BorderPane();
         Text srcText = new Text("Source File");
         Text compText = new Text("Compare file");
 
-        centralLayout.setCenter(SplitMaker2(GridMaker(srcFiles), GridMaker(cmpFiles)));
+        centralLayout.setCenter(SplitMaker2(gridMaker(srcFiles), gridMaker(cmpFiles)));
         centralLayout.setTop(SplitMaker(srcText, compText));
 
         return centralLayout;
@@ -61,20 +65,28 @@ public class FileList{
     }
 
     //
-    private static GridPane GridMaker(List<File> files){
+    private static GridPane gridMaker(List<MidiFile> files){
         GridPane fileList = new GridPane();
         fileList.setGridLinesVisible(true);
         List<Text>  fileText = new ArrayList<>(),
                     fileIndex = new ArrayList<>();
         for(int count = 0; count < files.size(); ++count){
-            fileText.add(new Text(files.get(count).getName()));
-            fileList.add(fileText.get(count), 0, count);
-
+            fileList.add(createFileEntry(files, count), 0, count);
             fileIndex.add(new Text(Integer.toString(count) ));
             fileList.add(fileIndex.get(count), 1, count);
         }
 
         return fileList;
     }
+
+    private static VBox createFileEntry(List<MidiFile> files, int passedCount){
+        VBox entry = new VBox();
+        entry.getChildren().add(new Text(files.get(passedCount).getFilePath().getName()));
+        for(int count = 0; count < files.get(passedCount).getCheckBoxes().size(); ++count){
+            entry.getChildren().add(files.get(passedCount).getCheckBoxes().get(count));
+        }
+        return entry;
+    }
+
 }
 

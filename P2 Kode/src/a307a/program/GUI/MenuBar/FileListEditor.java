@@ -20,46 +20,25 @@ import java.util.List;
 //All methods are static as they only contain code for executing specific tasks.
 //Furthermore, this class does not house any values that would be useful to have in instances of this class.
 public class FileListEditor {
-    //This window for removing files was added as an alternative to having a removal button next to each individual file entry.
-    //The feature for having individual buttons for each file entry may be readded in the future.
-    public static void Remove(List<File> srcFiles, List<File> compFiles, BorderPane elementHolder){
-        Stage stage = new Stage();
-        List<Integer> listOfFiles = new ArrayList<>();
-        Text minFlavorText = new Text("From file number:");
-        Text maxFlavorText = new Text("to");
-        Text checkboxFlavorText = new Text("Remove from:");
-        ToggleGroup listSelector = new ToggleGroup();
-        RadioButton src = new RadioButton("Source file list");
+    private Stage stage = new Stage();
+    private Text minFlavorText = new Text("From file number:");
+    private Text maxFlavorText = new Text("to");
+    private Text checkboxFlavorText = new Text("Remove from:");
+    private ToggleGroup listSelector = new ToggleGroup();
+    private RadioButton src = new RadioButton("Source file list");
+    private RadioButton comp = new RadioButton("Comparison file list");
+    private TextField minFileNumber = new TextField();
+    private TextField maxFileNumber = new TextField();
+    private Button listCutter = new Button("Remove from list");
+    private GridPane gridPane = new GridPane();
+
+    public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder) {
         src.setToggleGroup(listSelector);
-        RadioButton comp = new RadioButton("Comparison file list");
         comp.setToggleGroup(listSelector);
-        TextField minFileNumber = new TextField();
         minFileNumber.setAlignment(Pos.CENTER);
-        TextField maxFileNumber = new TextField();
         maxFileNumber.setAlignment(Pos.CENTER);
+        listCutter.setOnAction(event -> {remove(srcMidiFiles, compMidiFiles, elementHolder);});
 
-        Button listCutter = new Button("Remove from list");
-        listCutter.setOnAction((ActionEvent event) -> {
-            try{
-                if(src.isSelected()){
-                    RemoveSelectedFile(minFileNumber, maxFileNumber, srcFiles);
-                    elementHolder.setCenter(FileList.ListsOfFiles(srcFiles, compFiles));
-                }else if(comp.isSelected()){
-                    RemoveSelectedFile(minFileNumber, maxFileNumber, compFiles);
-                    elementHolder.setCenter(FileList.ListsOfFiles(srcFiles, compFiles));
-                }else{
-                    ErrorWindow("Please select a list to remove files from.");
-                }
-            }catch(InvalidInputException e){ //https://mangadex.org/chapter/20209/16
-                ErrorWindow("Invalid input detcted. Please ensure that:" +
-                        "               \n* None of the fields are empty." +
-                        "               \n* No negative numbers have been inserted." +
-                        "               \n* The index number of the first file is not lower then the number of the last file." +
-                        "               \n* None of the inputs are larger than the size of the file list.");
-            }
-        });
-
-        GridPane gridPane = new GridPane();
         gridPane.setHgap(5);
         gridPane.setVgap(3);
         gridPane.add(minFlavorText, 0, 0);
@@ -76,8 +55,30 @@ public class FileListEditor {
         stage.show();
     }
 
+    //This window for removing files was added as an alternative to having a removal button next to each individual file entry.
+    //The feature for having individual buttons for each file entry may be readded in the future.
+    private void remove(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder){
+        try{
+            if(src.isSelected()){
+                RemoveSelectedFile(minFileNumber, maxFileNumber, srcMidiFiles);
+                elementHolder.setCenter(FileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
+            }else if(comp.isSelected()){
+                RemoveSelectedFile(minFileNumber, maxFileNumber, compMidiFiles);
+                elementHolder.setCenter(FileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
+            }else{
+                ErrorWindow("Please select a list to remove files from.");
+            }
+        }catch(InvalidInputException e){ //https://mangadex.org/chapter/20209/16
+            ErrorWindow("Invalid input detcted. Please ensure that:" +
+                    "               \n* None of the fields are empty." +
+                    "               \n* No negative numbers have been inserted." +
+                    "               \n* The index number of the first file is not lower then the number of the last file." +
+                    "               \n* None of the inputs are larger than the size of the file list.");
+        };
+    }
+
     //The code for removing files is placed in its own method as it's used multiple times.
-    private static void RemoveSelectedFile(TextField minFileNumber, TextField maxFileNumber, List<File> fileList) throws InvalidInputException {
+    private static void RemoveSelectedFile(TextField minFileNumber, TextField maxFileNumber, List<MidiFile> fileList) throws InvalidInputException {
         int minNumber = Integer.parseInt(minFileNumber.getText()),
             maxNumber = Integer.parseInt(maxFileNumber.getText()),
             numberOfFilesRemoved = maxNumber - minNumber;
