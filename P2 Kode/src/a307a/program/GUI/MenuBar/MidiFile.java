@@ -18,7 +18,6 @@ public class MidiFile {
     //If you ever figure out how to extract values from a set, then reinclude this shit.
     public MidiFile(File filePath) throws InvalidMidiDataException, IOException {
         this.filePath = filePath;
-        List<Integer> channelList = new ArrayList<>();
         for(int count = 0; count < 16; ++count){
             if(MidiTools.getMidiSequenceReader(this.filePath).getChannels().contains(count)){
                 this.checkBoxes.add(new CheckBox(Integer.toString(count)));

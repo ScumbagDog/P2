@@ -1,7 +1,7 @@
 package a307a.program.GUI;
 
 import a307a.algorithm.Ukkonen;
-import a307a.midilib.parser.Melody;
+//import a307a.midilib.parser.Melody;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.List;
 public class Comparison {
 
 
-    public static void Ukonnen(ArrayList<ArrayList<Double>> resultList, List<File> srcFiles, List<File> compFiles) {
-        Ukkonen ukonnen = new Ukkonen();
+    public static void ukonnen(ArrayList<ArrayList<Double>> resultList, List<File> srcFiles, List<File> compFiles) {
+        /*Ukkonen ukonnen = new Ukkonen();
         List<Melody> srcMelody = new ArrayList<>(),
                 compMelody = new ArrayList<>();
         List<Double> srcToCompResults = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Comparison {
             }
             resultList.add((ArrayList<Double>) srcToCompResults);
             srcToCompResults.clear();
-        }
+        }*/
 
     }
 

@@ -25,78 +25,73 @@ import java.util.List;
 //This class exists solely to house the 'start' method
 public class MainGUI extends Application {
     private Stage stage = new Stage();
+    VBox algorithms = new VBox();
     private int windowHeight, windowWidth;
     private Boolean windowFullscreen;
     private List<File> srcFileList = new ArrayList<>(),
             compFileList = new ArrayList<>();
-    private List<CheckBox> listOfAlgorithms = AlgorithmList.ListAlgorithm();
+    private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
     private List<MidiFile> srcMidiFiles = new ArrayList<>();
     private List<MidiFile> compMidiFiles = new ArrayList<>();
     private Text fileName = new Text("Awaiting action...");
     private BorderPane elementHolder = new BorderPane();
     private FileList splitLists = new FileList();
+    private MenuBar menuBar = new MenuBar();
+    private Menu menuFile = new Menu("Files");
+    private MenuItem addSrcFile = new MenuItem("Add Source");
+    private MenuItem removeFile = new MenuItem("Remove");
+    private MenuItem addCompFile = new MenuItem("Add Comparison");
+    private Menu menuSetting = new Menu("Window");
+    private MenuItem addSetting = new MenuItem("Settings");
+    private Button compareMelodies = new Button();
+    StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
+    StackPane resultStack2 = new StackPane(compareMelodies);
+    private SplitPane resultSplit = new SplitPane();
+    StackPane algorithmStack = new StackPane(algorithms);
 
     //Essentially the 'main' method of JavaFX.
     @Override
     public void start(Stage primaryStage) {
         stage.setTitle("Main Menu");
+
+        for(int i = 0; i < listOfAlgorithms.size(); ++i){
+            algorithms.getChildren().add(listOfAlgorithms.get(i));
+        }
+
         windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
         windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
         windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
-
-        MenuBar menuBar = new MenuBar();
-        Menu menuFile = new Menu("Files");
-        MenuItem addSrcFile = new MenuItem("Add Source");
         addSrcFile.setOnAction(event -> { loadFile(srcFileList, srcMidiFiles); });
 
-        MenuItem addCompFile = new MenuItem("Add Comparison");
         addCompFile.setOnAction(event -> { loadFile(compFileList, compMidiFiles); });
-
-        MenuItem removeFile = new MenuItem("Remove");
         removeFile.setOnAction(event -> { new FileListEditor(srcMidiFiles, compMidiFiles, elementHolder); });
         menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
 
-        Menu menuSetting = new Menu("Window");
-        MenuItem addSetting = new MenuItem("Settings");
         addSetting.setOnAction(event -> {
             String version = "???";
             SettingsMenu.WindowSettings(version);
         });
         menuSetting.getItems().add(addSetting);
-
         menuBar.getMenus().addAll(menuFile, menuSetting);
 
-        Button compareMelodies = new Button();
         compareMelodies.setStyle("-fx-font-size: 10pt;");
         compareMelodies.setText("Compare");
         compareMelodies.setOnAction(event -> {
             Stage confirmAction = new Stage();
-            Text confirmationText = new Text("A total of " + srcFileList.size() + "source files and "
-                    + compFileList.size() + "comparison files have been selected.\n" +
+            Text confirmationText = new Text("A total of " + srcMidiFiles.size() + "source files and "
+                    + compMidiFiles.size() + "comparison files have been selected.\n" +
                     "Do you want to begin the comparison sequence?");
             Button startComparison = new Button();
 
             Button cancelComparison = new Button();
         });
-        VBox algorithms = new VBox();
-        for(int i = 0; i < listOfAlgorithms.size(); ++i){
-            algorithms.getChildren().add(listOfAlgorithms.get(i));
-        }
-        StackPane algorithmStack = new StackPane(algorithms);
 
-        SplitPane resultSplit = new SplitPane();
         resultSplit.setOrientation(Orientation.VERTICAL);
         resultSplit.setDividerPositions(0.9);
-        StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
-        StackPane resultStack2 = new StackPane(compareMelodies);
         resultStack2.setMaxSize(100, 100);
         resultSplit.getItems().addAll(resultStack1, resultStack2);
 
-        elementHolder.setTop(menuBar);
-        elementHolder.setLeft(algorithmStack);
-        elementHolder.setBottom(fileName);
-        elementHolder.setCenter(splitLists.ListsOfFiles(srcMidiFiles, compMidiFiles));
-        elementHolder.setRight(resultSplit);
+        updateDisplay();
 
         Scene scene = new Scene(elementHolder, windowWidth, windowHeight);
         scene.setFill(Color.OLDLACE);
@@ -124,5 +119,13 @@ public class MainGUI extends Application {
             }
         }
         listOfFiles.clear();
+    }
+
+    private void updateDisplay(){
+        elementHolder.setTop(menuBar);
+        elementHolder.setLeft(algorithmStack);
+        elementHolder.setBottom(fileName);
+        elementHolder.setCenter(splitLists.ListsOfFiles(srcMidiFiles, compMidiFiles));
+        elementHolder.setRight(resultSplit);
     }
 }
