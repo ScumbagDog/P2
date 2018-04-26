@@ -30,7 +30,7 @@ class Test_MidiSequenceReader{
 		System.err.println("Notes on channel: "
 				+ msr.getNotesOnChannel(1).size());
 
-		IMelody melody = msr.getMelody(1);
+		AMelody melody = msr.getMelody(1);
 		System.err.println(melody.size());
 	}
 
