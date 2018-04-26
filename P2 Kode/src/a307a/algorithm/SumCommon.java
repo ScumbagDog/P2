@@ -6,22 +6,19 @@ import a307a.midilib.parser.INGram;
 import a307a.midilib.parser.INGramFactory;
 import a307a.midilib.parser.IMelody;
 import a307a.midilib.parser.NGramFactory;
-/*
- * This class is an implementation of the Ukkonen measure algorithm.
- * It measures the similarity of two melodies based on the absolute difference in frequencies of equal NGrams in two melodies
- */
-public class Ukkonen implements IAlgorithm {
-	private final String name = "Ukkonen Measure Algorithm";
+
+public class SumCommon implements IAlgorithm{
+	private final String name = "Sum Common Measure Algorithm";
 	private int nGramMagnitude;
 	
-	public Ukkonen(int nGramMagnitude){
+	public SumCommon(int nGramMagnitude){
 		this.nGramMagnitude = nGramMagnitude;
 	}
-
-	public String getName() {
+	
+	public String getName(){
 		return name;
 	}
-
+	
 	public int getNGramMagnitude() {
 		return nGramMagnitude;
 	}
@@ -29,16 +26,18 @@ public class Ukkonen implements IAlgorithm {
 	public void setNGramMagnitude(int nGramMagnitude) {
 		this.nGramMagnitude = nGramMagnitude;
 	}
-
+	
 	public double compareTo(IMelody midiMelody1, IMelody midiMelody2) {
 		INGramFactory nGramFactory = new NGramFactory();
 		List<INGram> firstMelodyNGrams = nGramFactory.getNGrams(midiMelody1.getPitchIntervals(), nGramMagnitude);
 		List<INGram> secondMelodyNGrams = nGramFactory.getNGrams(midiMelody2.getPitchIntervals(), nGramMagnitude);
-		int nGramFrequencyDifferenceSum = 0;
+		int nGramFrequencyCommonSum = 0;
 		int amountOfNGrams = 0;
+		
 		for(INGram n : firstMelodyNGrams) {
 			amountOfNGrams += n.getFrequency();
 		}
+		
 		for(INGram n : secondMelodyNGrams) {
 			amountOfNGrams += n.getFrequency();
 		}
@@ -46,18 +45,13 @@ public class Ukkonen implements IAlgorithm {
 		for (INGram n : firstMelodyNGrams) {
 			if (secondMelodyNGrams.contains(n)) {
 				INGram theNGram = this.findNGramInList(secondMelodyNGrams, n);
-				nGramFrequencyDifferenceSum += Math.abs(n.getFrequency() - theNGram.getFrequency());
-			} else {
-				nGramFrequencyDifferenceSum += n.getFrequency();
+				nGramFrequencyCommonSum += (n.getFrequency() + theNGram.getFrequency());
 			}
 		}
-		for(INGram n :secondMelodyNGrams) {
-			if(!firstMelodyNGrams.contains(n)) {
-				nGramFrequencyDifferenceSum += n.getFrequency();
-			}
-		}
-		return 1 - ((double)nGramFrequencyDifferenceSum / (double)amountOfNGrams);
+		
+		return ((double)nGramFrequencyCommonSum / (double)amountOfNGrams);
 	}
+	
 	INGram findNGramInList(List<INGram> listWithNGram, INGram nGramToFind) {
 		return listWithNGram.stream()
 		.filter(x -> x.equals(nGramToFind))

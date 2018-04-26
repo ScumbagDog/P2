@@ -87,7 +87,7 @@ public class MainGUI extends Application {
         SplitPane resultSplit = new SplitPane();
         resultSplit.setOrientation(Orientation.VERTICAL);
         resultSplit.setDividerPositions(0.9);
-        StackPane resultStack1 = new StackPane(Resultlist.AddResultTable());
+        StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
         StackPane resultStack2 = new StackPane(compareMelodies);
         resultStack2.setMaxSize(100, 100);
         resultSplit.getItems().addAll(resultStack1, resultStack2);

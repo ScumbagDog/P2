@@ -18,8 +18,6 @@ import java.util.List;
 //Furthermore, this class does not house any values that would be useful to have in instances of this class.
 public class FileList{
 
-
-
     //This method only exists to collect the layouts made by the private methods of this class.
     public static BorderPane ListsOfFiles(List<MidiFile> srcFiles, List<MidiFile> cmpFiles) {
         BorderPane centralLayout = new BorderPane();
@@ -32,7 +30,7 @@ public class FileList{
         return centralLayout;
     }
 
-    //All private methods below this comment exist to heighten the abstraction level of ListsOfFiles.
+    //All private methods below this comment exist to heighten the abstraction level of listsOfFiles.
     private static SplitPane SplitMaker(Node object1, Node object2){
         SplitPane splitPane = new SplitPane();
         StackPane stackPane1 = new StackPane();

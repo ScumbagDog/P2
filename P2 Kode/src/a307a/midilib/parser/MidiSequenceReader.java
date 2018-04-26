@@ -48,6 +48,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	@Override
 	public Set<Integer> getChannels(){
 		return bufferedEvents.stream()
+				.filter(BufferedMidiEvent::isNoteOn)
 				.map(BufferedMidiEvent::getChannel)
 				.collect(Collectors.toSet());
 	}
@@ -55,14 +56,15 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	@Override
 	public IMelody getMelody(int channel){
 		List<INote> notes = getNotesOnChannel(channel);
-		return new Melody(notes);
+		return new MonophonicMelody(notes);
 	}
 
-	/* Creates a list of notes being played on a channel. */
+	/* Creates a list of the notes being played on given channel. */
 	@Override
 	public List<INote> getNotesOnChannel(int channel){
 		return this.bufferedEvents.stream()
 				.filter(BufferedMidiEvent::isNoteOn)
+				.filter(bme -> bme.getVelocity() > 0)
 				.filter(bme -> bme.getChannel() == channel)
 				.map(Note::new)
 				.collect(Collectors.toList());
