@@ -8,6 +8,7 @@ import javafx.scene.control.CheckBox;
 
 public class CheckBoxMenuItem extends CheckBox {
 
+     /* Getting names with .getname from algorithm folder and organize it with VBox and Checkbox */
     public VBox ListAlgorithm() {
          final int SizeOf = 5;
          Ukkonen algo1 = new Ukkonen(2);

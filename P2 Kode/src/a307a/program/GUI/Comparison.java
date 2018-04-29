@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Comparison {
 
-
+ //TODO: SKal bruge et commentar, er det her Comparison knappen?
     public static void ukonnen(ArrayList<ArrayList<Double>> resultList, List<File> srcFiles, List<File> compFiles) {
         /*Ukkonen ukonnen = new Ukkonen();
         List<Melody> srcMelody = new ArrayList<>(),
