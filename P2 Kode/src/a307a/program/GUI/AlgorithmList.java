@@ -1,5 +1,6 @@
 package a307a.program.GUI;
 
+import a307a.algorithm.SumCommon;
 import a307a.algorithm.Ukkonen;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.CheckBox;
@@ -15,7 +16,9 @@ public class AlgorithmList extends CheckBox {
 
         //TODO: NGrams-algoritmer skal kende MAGNITUDEN af NGrams.
         Ukkonen ukonnen = new Ukkonen(2);
+        SumCommon sumCommon = new SumCommon(1);
         algorithmName.add(ukonnen.getName());
+        algorithmName.add(sumCommon.getName());
          for (int i = 0; i < algorithmName.size() ; i++) {
             checkboxList.add(new CheckBox(algorithmName.get(i)));
             checkboxList.get(i).setSelected(false);
