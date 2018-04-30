@@ -36,14 +36,14 @@ public class Comparison {
                 srcName = srcFiles.get(srcCount).getFileName();
                 for(int srcBoxes = 0; srcBoxes < srcFiles.get(srcCount).getCheckBoxes().size(); ++srcBoxes){
                     if(srcFiles.get(srcCount).getCheckBoxes().get(srcBoxes).isSelected()) {
-                        srcText = srcFiles.get(srcCount).getCheckBoxes().get(srcBoxes).getAccessibleText();
+                        srcText = srcFiles.get(srcCount).getCheckBoxes().get(srcBoxes).getText();
                         srcMelody = srcReader.getMelody(Integer.parseInt(srcText));
                         for(int compCount = 0; compCount < compFiles.size(); ++compCount){
                             compReader = MidiTools.getMidiSequenceReader(compFiles.get(compCount).getFilePath());
                             compName = compFiles.get(compCount).getFileName();
-                            for(int compBoxes = 0; compBoxes < compFiles.get(compCount).getCheckBoxes().size(); ++compCount){
+                            for(int compBoxes = 0; compBoxes < compFiles.get(compCount).getCheckBoxes().size(); ++compBoxes){
                                 if(compFiles.get(compCount).getCheckBoxes().get(compBoxes).isSelected()){
-                                    compText = compFiles.get(compCount).getCheckBoxes().get(compBoxes).getAccessibleText();
+                                    compText = compFiles.get(compCount).getCheckBoxes().get(compBoxes).getText();
                                     compMelody = compReader.getMelody(Integer.parseInt(compText));
                                     resultlist.addTableEntry(srcName + " Channel" + srcText + " to " + compName + " Channel" + compText,
                                             ukkonen.compareTo(srcMelody, compMelody));

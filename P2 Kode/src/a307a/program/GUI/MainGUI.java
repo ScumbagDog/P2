@@ -49,6 +49,7 @@ public class MainGUI extends Application {
     private StackPane resultStack2 = new StackPane(compareMelodies);
     private SplitPane resultSplit = new SplitPane();
     private StackPane algorithmStack = new StackPane(algorithms);
+    private Comparison comparison = new Comparison();
 
     //Essentially the 'main' method of JavaFX.
     @Override
@@ -134,12 +135,19 @@ public class MainGUI extends Application {
         compareMelodies.setText("Compare");
         compareMelodies.setOnAction(event -> {
             Stage confirmAction = new Stage();
-            Text confirmationText = new Text("A total of " + srcMidiFiles.size() + "source files and "
-                    + compMidiFiles.size() + "comparison files have been selected.\n" +
+            Text confirmationText = new Text("A total of " + srcMidiFiles.size() + " source files and "
+                    + compMidiFiles.size() + " comparison files have been selected.\n" +
                     "Do you want to begin the comparison sequence?");
-            Button startComparison = new Button();
-
-            Button cancelComparison = new Button();
+            Button startComparison = new Button("Start");
+            startComparison.setOnAction(event2 -> {comparison.useUkonnen(resultlist, srcMidiFiles, compMidiFiles);});
+            Button cancelComparison = new Button("Cancel");
+            cancelComparison.setOnAction(event3 -> {confirmAction.close();});
+            BorderPane content = new BorderPane();
+            content.setTop(confirmationText);
+            content.setLeft(startComparison);
+            content.setRight(cancelComparison);
+            confirmAction.setScene(new Scene(content));
+            confirmAction.show();
         });
     }
 }
