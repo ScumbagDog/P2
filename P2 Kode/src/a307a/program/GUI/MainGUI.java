@@ -25,7 +25,7 @@ import java.util.List;
 //This class exists solely to house the 'start' method
 public class MainGUI extends Application {
     private Stage stage = new Stage();
-    VBox algorithms = new VBox();
+    private VBox algorithms = new VBox();
     private int windowHeight, windowWidth;
     private Boolean windowFullscreen;
     private List<File> srcFileList = new ArrayList<>(),
@@ -44,7 +44,8 @@ public class MainGUI extends Application {
     private Menu menuSetting = new Menu("Window");
     private MenuItem addSetting = new MenuItem("Settings");
     private Button compareMelodies = new Button();
-    private StackPane resultStack1 = new StackPane(Resultlist.addResultTable());
+    private Resultlist resultlist = new Resultlist();
+    private StackPane resultStack1 = new StackPane(resultlist.getTable());
     private StackPane resultStack2 = new StackPane(compareMelodies);
     private SplitPane resultSplit = new SplitPane();
     private StackPane algorithmStack = new StackPane(algorithms);

@@ -30,6 +30,8 @@ public class MidiFile {
         return this.filePath;
     }
 
+    public String getFileName(){return this.filePath.getName();}
+
     public List<CheckBox> getCheckBoxes(){
         return this.checkBoxes;
     }
