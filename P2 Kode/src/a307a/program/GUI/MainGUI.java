@@ -65,11 +65,7 @@ public class MainGUI extends Application {
         setSettingsMenuItemFunctionality();
         menuBar.getMenus().addAll(menuFile, menuSetting);
         setCompareButtonFunctionality();
-
-        resultSplit.setOrientation(Orientation.VERTICAL);
-        resultSplit.setDividerPositions(0.9);
-        resultStack2.setMaxSize(100, 100);
-        resultSplit.getItems().addAll(resultStack1, resultStack2);
+        initiateResultList();
 
         updateDisplay();
 
@@ -79,6 +75,19 @@ public class MainGUI extends Application {
         stage.setScene(scene);
         stage.setFullScreen(windowFullscreen);
         stage.show();
+    }
+
+    private void loadSettings(){
+        windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
+        windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
+        windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
+    }
+
+    private void setFileMenuItemFunctionality(){
+        addSrcFile.setOnAction(event -> { loadFile(srcFileList, srcMidiFiles); });
+        addCompFile.setOnAction(event -> { loadFile(compFileList, compMidiFiles); });
+        removeFile.setOnAction(event -> { new FileListEditor(srcMidiFiles, compMidiFiles, elementHolder); });
+        menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
     }
 
     private void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis){
@@ -99,27 +108,6 @@ public class MainGUI extends Application {
             }
         }
         listOfFiles.clear();
-    }
-
-    private void updateDisplay(){
-        elementHolder.setTop(menuBar);
-        elementHolder.setLeft(algorithmStack);
-        elementHolder.setBottom(fileName);
-        elementHolder.setCenter(splitLists.ListsOfFiles(srcMidiFiles, compMidiFiles));
-        elementHolder.setRight(resultSplit);
-    }
-
-    private void loadSettings(){
-        windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
-        windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
-        windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
-    }
-
-    private void setFileMenuItemFunctionality(){
-        addSrcFile.setOnAction(event -> { loadFile(srcFileList, srcMidiFiles); });
-        addCompFile.setOnAction(event -> { loadFile(compFileList, compMidiFiles); });
-        removeFile.setOnAction(event -> { new FileListEditor(srcMidiFiles, compMidiFiles, elementHolder); });
-        menuFile.getItems().addAll(addSrcFile, addCompFile, removeFile);
     }
 
     private void setSettingsMenuItemFunctionality(){
@@ -149,5 +137,20 @@ public class MainGUI extends Application {
             confirmAction.setScene(new Scene(content));
             confirmAction.show();
         });
+    }
+
+    private void initiateResultList(){
+        resultSplit.setOrientation(Orientation.VERTICAL);
+        resultSplit.setDividerPositions(0.9);
+        resultStack2.setMaxSize(100, 100);
+        resultSplit.getItems().addAll(resultStack1, resultStack2);
+    }
+
+    private void updateDisplay(){
+        elementHolder.setTop(menuBar);
+        elementHolder.setLeft(algorithmStack);
+        elementHolder.setBottom(fileName);
+        elementHolder.setCenter(splitLists.ListsOfFiles(srcMidiFiles, compMidiFiles));
+        elementHolder.setRight(resultSplit);
     }
 }

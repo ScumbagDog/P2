@@ -15,7 +15,7 @@ public class Resultlist {
 
     public Resultlist() {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        table.setMaxWidth(150);
+        table.setPrefWidth(150);
 
         fileName1.setCellValueFactory(
                 new PropertyValueFactory<DataResult, String>("fileName"));
