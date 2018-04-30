@@ -7,6 +7,12 @@ import java.util.List;
  * NGramFactory creates NGrams from a list of intervals.
  */
 public class NGramFactory implements INGramFactory {
+
+	@Override
+	public List<INGram> getNGrams(AMelody melody, int nGramMagnitude){
+		return getNGrams(melody.getPitchIntervals(), nGramMagnitude);
+	}
+
 	public List<INGram> getNGrams(List<Integer> intervalList, int nGramMagnitude) {
 		List<INGram> returnList = new ArrayList<>();
 		int i = 0;
@@ -25,6 +31,7 @@ public class NGramFactory implements INGramFactory {
 		}
 		return returnList;
 	}
+
 
 	private INGram createNGram(List<Integer> intervalList, Integer currentIndex, int nGramMagnitude) {
 		INGram returnNGram;
