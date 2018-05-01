@@ -50,6 +50,7 @@ public class MainGUI extends Application {
     private SplitPane resultSplit = new SplitPane();
     private StackPane algorithmStack = new StackPane(algorithms);
     private Comparison comparison = new Comparison();
+    SettingsFile settings = new SettingsFile();
 
     //Essentially the 'main' method of JavaFX.
     @Override
@@ -78,9 +79,9 @@ public class MainGUI extends Application {
     }
 
     private void loadSettings(){
-        windowWidth = Integer.parseInt(SettingsFile.AccessSettings("width"));
-        windowHeight = Integer.parseInt(SettingsFile.AccessSettings("height"));
-        windowFullscreen = Boolean.parseBoolean(SettingsFile.AccessSettings("fullscreen"));
+        windowWidth = Integer.parseInt(settings.AccessSettings("width"));
+        windowHeight = Integer.parseInt(settings.AccessSettings("height"));
+        windowFullscreen = Boolean.parseBoolean(settings.AccessSettings("fullscreen"));
     }
 
     private void setFileMenuItemFunctionality(){
