@@ -17,21 +17,17 @@ import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
 public class SettingsFile {
-    Document settingsDoc;
-    Element eElement;
-    TransformerFactory transformerFactory;
-    Transformer transformer;
-    DOMSource source;
-    StreamResult result;
-    NodeList nList;
-    Node nNode;
+    private Element eElement;
+    private Transformer transformer;
+    private DOMSource source;
+    private StreamResult result;
 
     public SettingsFile() {
-        settingsDoc = SettingsFile.ReadFile();
-        nList = settingsDoc.getElementsByTagName("window");
-        nNode = nList.item(0);
+        Document settingsDoc = SettingsFile.ReadFile();
+        NodeList nList = settingsDoc.getElementsByTagName("window");
+        Node nNode = nList.item(0);
         eElement = SettingsFile.getInformation(nNode);
-        transformerFactory = TransformerFactory.newInstance();
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
         try{transformer = transformerFactory.newTransformer();}catch(Exception e){e.printStackTrace();}
         source = new DOMSource(settingsDoc);
         result = new StreamResult(new File("options.xml"));
