@@ -8,8 +8,8 @@ public class WindowSettings{
 	private Boolean windowFullscreen;
 
 	public WindowSettings(SettingsFile settings){
-		windowWidth = settings.getWidth();
-		windowHeight = settings.getHeight();
+		windowWidth = settings.getWindowWidth();
+		windowHeight = settings.getWindowHeight();
 		windowFullscreen = settings.getIsWindowFullscreen();
 	}
 

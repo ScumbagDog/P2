@@ -49,7 +49,7 @@ public class MainGUI extends Application{
 		scene.setFill(Color.OLDLACE);
 
 		stage.setScene(scene);
-		stage.setFullScreen(settings.getWindowFullscreen());
+		stage.setFullScreen(settings.getIsWindowFullscreen());
 		stage.show();
 	}
 

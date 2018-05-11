@@ -19,7 +19,7 @@ class Test_MidiSequenceReader{
 	AMidiSequenceReader msr;
 	@BeforeAll
 	void beforeAll() throws InvalidMidiDataException, IOException{
-		this.file = new File("C:\\Users\\Conrad\\Desktop\\MIDI\\March i G.mid");
+		this.file = new File("March-i-G.mid");
 		this.sequence = MidiSystem.getSequence(file);
 		this.msr = MidiTools.getMidiSequenceReader(file);
 	}

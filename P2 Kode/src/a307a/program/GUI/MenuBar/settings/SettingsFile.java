@@ -85,7 +85,7 @@ public class SettingsFile{
 		return windowWidth;
 	}
 
-	public Boolean getWindowFullscreen(){
+	public Boolean getIsWindowFullscreen(){
 		return windowFullscreen;
 	}
 }
