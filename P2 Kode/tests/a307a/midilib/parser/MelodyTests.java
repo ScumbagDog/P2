@@ -4,11 +4,9 @@ import java.io.File;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class MelodyTests {
 	File file = new File("a307a/midilib/parser/Mester-Jakob.mid");
-  AMelody2 melody = null;
+  AMelody melody = null;
 
   private static Set<Integer> CodeExecution(){
     Set<Integer> testSet = new TreeSet<>();
