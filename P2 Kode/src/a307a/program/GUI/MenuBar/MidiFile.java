@@ -10,29 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+public class MidiFile{
+	private File filePath;
+	private List<CheckBox> checkBoxes = new ArrayList<>();
 
-public class MidiFile {
-    private File filePath;
-    private List<CheckBox> checkBoxes = new ArrayList<>();
+	//If you ever figure out how to extract values from a set, then reinclude this shit.
+	public MidiFile(File filePath) throws InvalidMidiDataException, IOException{
+		this.filePath = filePath;
+		for(int count = 0; count < 16; ++count){
+			if(MidiTools.getMidiSequenceReader(this.filePath)
+					.getChannels()
+					.contains(count))
+			{
+				this.checkBoxes.add(new CheckBox(Integer.toString(count)));
+			}
+		}
 
-    //If you ever figure out how to extract values from a set, then reinclude this shit.
-    public MidiFile(File filePath) throws InvalidMidiDataException, IOException {
-        this.filePath = filePath;
-        for(int count = 0; count < 16; ++count){
-            if(MidiTools.getMidiSequenceReader(this.filePath).getChannels().contains(count)){
-                this.checkBoxes.add(new CheckBox(Integer.toString(count)));
-            }
-        }
+	}
 
-    }
+	public File getFilePath(){
+		return this.filePath;
+	}
 
-    public File getFilePath(){
-        return this.filePath;
-    }
+	public String getFileName(){
+		return this.filePath.getName();
+	}
 
-    public String getFileName(){return this.filePath.getName();}
-
-    public List<CheckBox> getCheckBoxes(){
-        return this.checkBoxes;
-    }
+	public List<CheckBox> getCheckBoxes(){
+		return this.checkBoxes;
+	}
 }

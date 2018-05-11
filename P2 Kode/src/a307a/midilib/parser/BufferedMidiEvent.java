@@ -10,8 +10,10 @@ class BufferedMidiEvent{
 	private final long tick;
 
 	BufferedMidiEvent(MidiEvent event){
-		this.status = event.getMessage().getStatus();
-		this.message = event.getMessage().getMessage();
+		this.status = event.getMessage()
+				.getStatus();
+		this.message = event.getMessage()
+				.getMessage();
 		this.tick = event.getTick();
 	}
 
@@ -31,7 +33,7 @@ class BufferedMidiEvent{
 	}
 
 	/* Returns the pitch of the MIDI note-on message. (Assuming the message
-	* is a note-on. message.) */
+	 * is a note-on. message.) */
 	public int getPitch(){
 		return this.message[1] & 0xff;
 	}
