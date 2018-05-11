@@ -14,27 +14,27 @@ public class NGramFactory implements INGramFactory {
 	}
 
 	public List<INGram> getNGrams(List<Integer> intervalList, int nGramMagnitude) {
-		List<NGram> nGramList = new ArrayList<>();
+		List<INGram> returnList = new ArrayList<>();
 		int i = 0;
+
 		if (nGramMagnitude > 0) {
 			while (intervalList.size() >= (nGramMagnitude + i)) {
-				NGram newNGram = this.createNGram(intervalList, i, nGramMagnitude);
-				if (nGramList.contains(newNGram)) {
-					this.incrementNGram(nGramList, newNGram);
+				INGram newNGram = this.createNGram(intervalList, i, nGramMagnitude);
+				if (returnList.contains(newNGram)) {
+					this.incrementNGram(returnList, newNGram);
 				}
 				else {
-					nGramList.add(newNGram);
+					returnList.add(newNGram);
 				}
 				i++;
 			}
 		}
-		List <INGram> returnList = new ArrayList<>(nGramList);
 		return returnList;
 	}
 
 
-	private NGram createNGram(List<Integer> intervalList, Integer currentIndex, int nGramMagnitude) {
-		NGram returnNGram;
+	private INGram createNGram(List<Integer> intervalList, Integer currentIndex, int nGramMagnitude) {
+		INGram returnNGram;
 		List<Integer> nGramIntervals = new ArrayList<>();
 		for (int i = 0; i < nGramMagnitude; i++) {
 			nGramIntervals.add(intervalList.get(currentIndex + i));
@@ -42,9 +42,9 @@ public class NGramFactory implements INGramFactory {
 		returnNGram = new NGram(nGramIntervals);
 		return returnNGram;
 	}
-	private void incrementNGram(List<NGram> nGramList, NGram nGramToIncrement) {
-		for (Iterator<NGram> it = nGramList.iterator(); it.hasNext();) {
-			NGram n = it.next();
+	private void incrementNGram(List<INGram> nGramList, INGram nGramToIncrement) {
+		for (Iterator<INGram> it = nGramList.iterator(); it.hasNext();) {
+			INGram n = it.next();
 			if (n.equals(nGramToIncrement)) {
 				n.incrementFrequency();
 				break;
