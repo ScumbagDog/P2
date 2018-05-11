@@ -46,7 +46,7 @@ public class NGramFactory implements INGramFactory {
 		for (Iterator<INGram> it = nGramList.iterator(); it.hasNext();) {
 			INGram n = it.next();
 			if (n.equals(nGramToIncrement)) {
-				n.incrementFrequency();
+				((NGram) n).incrementFrequency();
 				break;
 			}
 		}
