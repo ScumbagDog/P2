@@ -7,14 +7,14 @@ import java.util.Objects;
  * An NGram is a sorted list of intervals.
  * This class also handles the frequency of its exact NGram in the melody it was created from
  */
-public class NGram implements INGram {
+public class NGram<T extends Number> implements INGram<T> {
 	private int frequency;
-	private List<Integer> intervals;
+	private List<T> intervals;
 
-	NGram(List<Integer> intervals) {
+	NGram(List<T> intervals) {
 		super();
 		this.frequency = 1;
-		this.intervals = new ArrayList<Integer>(intervals);
+		this.intervals = new ArrayList<T>(intervals);
 	}
 
 	@Override
@@ -44,11 +44,11 @@ public class NGram implements INGram {
 		return frequency;
 	}
 
-	public List<Integer> getIntervals() {
+	public List<T> getIntervals() {
 		return intervals;
 	}
 
-	public void incrementFrequency() {
+	protected void incrementFrequency() {
 		frequency++;
 	}
 }

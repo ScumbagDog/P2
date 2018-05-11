@@ -27,7 +27,7 @@ class NGramFactoryTest {
 		nGrams = nGramFactory.getNGrams(intervals, 1);
 		intervals.clear();
 
-		INGram newNGram;
+		NGram newNGram;
 		intervals.add(2);
 		newNGram = new NGram(intervals);
 		newNGram.incrementFrequency();
@@ -45,11 +45,12 @@ class NGramFactoryTest {
 		intervals.add(0);
 		newNGram = new NGram(intervals);
 		expectedNGrams.add(newNGram);
+		List<INGram> expectedINGrams = new ArrayList<>(expectedNGrams);
 
-		assertEquals(expectedNGrams, nGrams);
+		assertEquals(expectedINGrams, nGrams);
 		for(INGram n : nGrams)
 		{
-			for(INGram k : expectedNGrams)
+			for(INGram k : expectedINGrams)
 			{
 				if (n.equals(k)) {
 					assertEquals(k.getFrequency(), n.getFrequency());
@@ -75,7 +76,7 @@ class NGramFactoryTest {
 		nGrams = nGramFactory.getNGrams(intervals, 2);
 		intervals.clear();
 
-		INGram newNGram;
+		NGram newNGram;
 		intervals.add(2);
 		intervals.add(2);
 		newNGram = new NGram(intervals);
@@ -100,11 +101,12 @@ class NGramFactoryTest {
 		intervals.add(2);
 		newNGram = new NGram(intervals);
 		expectedNGrams.add(newNGram);
+		List<INGram> expectedINGrams = new ArrayList<>(expectedNGrams);
 
-		assertEquals(expectedNGrams, nGrams);
+		assertEquals(expectedINGrams, nGrams);
 		for(INGram n : nGrams)
 		{
-			for(INGram k : expectedNGrams)
+			for(INGram k : expectedINGrams)
 			{
 				if (n.equals(k)) {
 					assertEquals(k.getFrequency(), n.getFrequency());
@@ -130,7 +132,7 @@ class NGramFactoryTest {
 		nGrams = nGramFactory.getNGrams(intervals, 3);
 		intervals.clear();
 
-		INGram newNGram;
+		NGram newNGram;
 		intervals.add(2);
 		intervals.add(2);
 		intervals.add(-4);
@@ -158,11 +160,12 @@ class NGramFactoryTest {
 		intervals.add(2);
 		newNGram = new NGram(intervals);
 		expectedNGrams.add(newNGram);
+		List<INGram> expectedINGrams = new ArrayList<>(expectedNGrams);
 
-		assertEquals(expectedNGrams, nGrams);
+		assertEquals(expectedINGrams, nGrams);
 		for(INGram n : nGrams)
 		{
-			for(INGram k : expectedNGrams)
+			for(INGram k : expectedINGrams)
 			{
 				if (n.equals(k)) {
 					assertEquals(k.getFrequency(), n.getFrequency());
