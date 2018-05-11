@@ -1,8 +1,6 @@
 package a307a.midilib.parser;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequence;
+import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +19,7 @@ public abstract class AMidiSequenceReader{
 
 	/**
 	 * Constructs a reader from the given MIDI sequence.
+	 *
 	 * @param sequence
 	 */
 	public AMidiSequenceReader(Sequence sequence){
@@ -29,22 +28,24 @@ public abstract class AMidiSequenceReader{
 
 	/**
 	 * Constructs a reader from the given MIDI file.
+	 *
 	 * @param midiFile
 	 */
-	public AMidiSequenceReader(File midiFile)
-			throws InvalidMidiDataException, IOException{
+	public AMidiSequenceReader(File midiFile) throws InvalidMidiDataException, IOException{
 		this.sequence = MidiSystem.getSequence(midiFile);
 	}
 
 	/* Communicates that subclasses should not have a parameterless
 	 * constructor. */
-	private AMidiSequenceReader(){}
+	private AMidiSequenceReader(){
+	}
 
 	public abstract Set<Integer> getChannels();
 
 	/**
 	 * Creates an AMelody object from notes on the given
 	 * channel.
+	 *
 	 * @param channel
 	 * @return AMelody object.
 	 */
@@ -53,6 +54,7 @@ public abstract class AMidiSequenceReader{
 	/**
 	 * Reads the sequence and returns all notes on specified
 	 * channel.
+	 *
 	 * @param channel
 	 * @return notes on channel.
 	 */
@@ -61,6 +63,7 @@ public abstract class AMidiSequenceReader{
 	/**
 	 * Returns number of channels being played in the sequ-
 	 * ence.
+	 *
 	 * @return channels
 	 */
 	public abstract int getNumberOfPlayedChannels();

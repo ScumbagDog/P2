@@ -3,6 +3,16 @@ package a307a.program.GUI.guiComponents;
 import a307a.program.GUI.MenuBar.settings.SettingsFile;
 
 public class WindowSettings{
+	private int windowHeight;
+	private int windowWidth;
+	private Boolean windowFullscreen;
+
+	public WindowSettings(SettingsFile settings){
+		windowWidth = settings.getWidth();
+		windowHeight = settings.getHeight();
+		windowFullscreen = settings.getIsWindowFullscreen();
+	}
+
 	public int getWindowHeight(){
 		return windowHeight;
 	}
@@ -13,15 +23,5 @@ public class WindowSettings{
 
 	public Boolean getWindowFullscreen(){
 		return windowFullscreen;
-	}
-
-	private int windowHeight;
-	private int windowWidth;
-	private Boolean windowFullscreen;
-
-	public WindowSettings(SettingsFile settings){
-			windowWidth = settings.getWidth();
-			windowHeight = settings.getHeight();
-			windowFullscreen = settings.getIsWindowFullscreen();
 	}
 }

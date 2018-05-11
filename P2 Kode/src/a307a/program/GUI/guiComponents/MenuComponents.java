@@ -6,10 +6,7 @@ import a307a.program.GUI.MenuBar.FileListEditor;
 import a307a.program.GUI.MenuBar.MidiFile;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
 import a307a.program.GUI.Splits.FileList;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -28,6 +25,18 @@ public class MenuComponents implements IStatusBar{
 	private MenuItem settingsButton = new MenuItem("Settings");
 
 	private Text statusBar;
+
+	public MenuComponents(
+			FileCollectionComponents fileCollectionComponents,
+			Text statusBar
+	){
+		this.statusBar = statusBar;
+		this.fileCollectionComponents = fileCollectionComponents;
+		setFileMenuButtonFunctionality();
+		menuWindowsButtons.getItems()
+				.add(settingsButton);
+	}
+
 	public Menu getMenuFileButton(){
 		return menuFileButton;
 	}
@@ -61,16 +70,11 @@ public class MenuComponents implements IStatusBar{
 		statusBar.setText(status);
 	}
 
-	public MenuComponents(FileCollectionComponents fileCollectionComponents, Text statusBar){
-		this.statusBar = statusBar;
-		this.fileCollectionComponents = fileCollectionComponents;
-		setFileMenuButtonFunctionality();
-		menuWindowsButtons.getItems().add(settingsButton);
-	}
-
 	private void setFileMenuButtonFunctionality(){
-		menuBar.getMenus().addAll(menuFileButton, menuWindowsButtons);
-		menuFileButton.getItems().addAll(addSrcFileButton, addCompFileButton, removeFileButton);
+		menuBar.getMenus()
+				.addAll(menuFileButton, menuWindowsButtons);
+		menuFileButton.getItems()
+				.addAll(addSrcFileButton, addCompFileButton, removeFileButton);
 		settingsButton.setOnAction(event->SettingsMenu.WindowSettings("???"));
 
 		setAddSrcFileButtonOnAction();
@@ -78,23 +82,22 @@ public class MenuComponents implements IStatusBar{
 	}
 
 	public void setAddSrcFileButtonOnAction(){
-		fileCollectionComponents.getElementPlaceHolder().setCenter(FileList.ListsOfFiles(
-				fileCollectionComponents.getSrcMidiFiles(),
-				fileCollectionComponents.getCompMidiFiles()
-		));
-		addSrcFileButton.setOnAction(event -> loadFile(
-				fileCollectionComponents.getSrcFiles(),
+		fileCollectionComponents.getElementPlaceHolder()
+				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+						fileCollectionComponents.getCompMidiFiles()
+				));
+		addSrcFileButton.setOnAction(event->loadFile(fileCollectionComponents.getSrcFiles(),
 				fileCollectionComponents.getSrcMidiFiles()
 		));
 	}
 
 	public void setAddCompFileButtonOnAction(){
-		fileCollectionComponents.getElementPlaceHolder().setCenter(FileList.ListsOfFiles(
-				fileCollectionComponents.getSrcMidiFiles(),
-				fileCollectionComponents.getCompMidiFiles()
-		));
-		addCompFileButton.setOnAction(event -> loadFile(
-				fileCollectionComponents.getCompFiles(),
+		fileCollectionComponents.getElementPlaceHolder()
+				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+						fileCollectionComponents.getCompMidiFiles()
+				));
+		addCompFileButton.setOnAction(event->loadFile(fileCollectionComponents
+						.getCompFiles(),
 				fileCollectionComponents.getCompMidiFiles()
 		));
 	}
@@ -102,10 +105,13 @@ public class MenuComponents implements IStatusBar{
 	private void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis){
 		listOfFiles.addAll(FileListEditor.AddFile());
 		initiateMidiFileList(listOfFiles, listOfMidis);
-		setStatus("File \"" + listOfMidis.get(listOfMidis.size() - 1).getFilePath().getName() + "\" has been added!");
-		fileCollectionComponents.getElementPlaceHolder().setCenter(FileList.ListsOfFiles(
-				fileCollectionComponents.getSrcMidiFiles(),
-				fileCollectionComponents.getCompMidiFiles()));
+		setStatus("File \"" + listOfMidis.get(listOfMidis.size() - 1)
+				.getFilePath()
+				.getName() + "\" has been added!");
+		fileCollectionComponents.getElementPlaceHolder()
+				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+						fileCollectionComponents.getCompMidiFiles()
+				));
 	}
 
 

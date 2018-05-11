@@ -19,7 +19,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 
 	private List<MidiEvent> getEventsFromTracks(Track[] tracks){
 		List<MidiEvent> events = new ArrayList<>();
-		for(Track t: this.tracks)
+		for(Track t : this.tracks)
 			events.addAll(getEventsFromTrack(t));
 
 		/* Sort the list according to when events occur (tick). */
@@ -64,8 +64,8 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	public List<INote> getNotesOnChannel(int channel){
 		return this.bufferedEvents.stream()
 				.filter(BufferedMidiEvent::isNoteOn)
-				.filter(bme -> bme.getVelocity() > 0)
-				.filter(bme -> bme.getChannel() == channel)
+				.filter(bme->bme.getVelocity() > 0)
+				.filter(bme->bme.getChannel() == channel)
 				.map(Note::new)
 				.collect(Collectors.toList());
 	}

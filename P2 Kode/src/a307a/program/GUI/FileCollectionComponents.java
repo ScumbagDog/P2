@@ -9,6 +9,16 @@ import java.util.List;
 
 public class FileCollectionComponents{
 
+	private final BorderPane elementPlaceHolder;
+	private List<File> srcFiles = new ArrayList<>();
+	private List<File> compFiles = new ArrayList<>();
+	private List<MidiFile> srcMidiFiles = new ArrayList<>();
+	private List<MidiFile> compMidiFiles = new ArrayList<>();
+
+	public FileCollectionComponents(BorderPane elementPlaceHolder){
+		this.elementPlaceHolder = elementPlaceHolder;
+	}
+
 	public BorderPane getElementPlaceHolder(){
 		return elementPlaceHolder;
 	}
@@ -27,15 +37,5 @@ public class FileCollectionComponents{
 
 	public List<MidiFile> getCompMidiFiles(){
 		return compMidiFiles;
-	}
-
-	private final BorderPane elementPlaceHolder;
-	private List<File> srcFiles = new ArrayList<>();
-	private List<File> compFiles = new ArrayList<>();
-	private List<MidiFile> srcMidiFiles = new ArrayList<>();
-	private List<MidiFile> compMidiFiles = new ArrayList<>();
-
-	public FileCollectionComponents(BorderPane elementPlaceHolder){
-		this.elementPlaceHolder = elementPlaceHolder;
 	}
 }
