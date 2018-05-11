@@ -9,5 +9,6 @@ public interface INGram {
 	public int getFrequency();
 
 	public void incrementFrequency();
-	
+
+	public int getMagnitude();
 }

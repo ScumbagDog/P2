@@ -8,6 +8,7 @@ import java.util.Objects;
  * This class also handles the frequency of its exact NGram in the melody it was created from
  */
 public class NGram implements INGram {
+
 	private int frequency;
 	private List<Integer> intervals;
 
@@ -50,5 +51,10 @@ public class NGram implements INGram {
 
 	public void incrementFrequency() {
 		frequency++;
+	}
+
+	@Override
+	public int getMagnitude(){
+		return this.intervals.size();
 	}
 }
