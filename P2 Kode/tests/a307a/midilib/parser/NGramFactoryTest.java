@@ -13,8 +13,8 @@ class NGramFactoryTest {
 	@Test
 	void oneGramTest() {
 		List<Integer> intervals = new ArrayList<>();
-		List<INGram> nGrams = new ArrayList<>();
-		List<INGram> expectedNGrams = new ArrayList<>();
+		List<INGram<Integer>> nGrams = new ArrayList<>();
+		List<INGram<Integer>> expectedNGrams = new ArrayList<>();
 		// To takter af Mester Jakob
 		intervals.add(2);
 		intervals.add(2);
