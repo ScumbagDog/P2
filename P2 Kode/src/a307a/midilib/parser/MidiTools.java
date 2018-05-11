@@ -3,6 +3,7 @@ package a307a.midilib.parser;
 import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Contains tools used to extract data from
@@ -33,5 +34,10 @@ public class MidiTools{
 
 	public static AMidiSequenceReader getMidiSequenceReader(Sequence sequence){
 		return new MidiSequenceReader(sequence);
+	}
+
+	public static List<INGram> getNGrams(AMelody m1, int magnitude){
+		NGramFactory nFact = new NGramFactory();
+		return nFact.getNGrams(m1, magnitude);
 	}
 }

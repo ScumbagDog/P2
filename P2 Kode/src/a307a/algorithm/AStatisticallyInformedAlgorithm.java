@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class AStatisticallyInformedAlgorithm implements IAlgorithm{
-	private final List<List<INGram>> listOfNGramLists;
+	final List<List<INGram>> nGramLists;
+	final int magnitude;
 
 	public AStatisticallyInformedAlgorithm(List<AMelody> sourceMelodies, int magnitude){
-		this.listOfNGramLists = getListOfNGramLists(sourceMelodies, magnitude);
+		this.magnitude = magnitude;
+		this.nGramLists = getListOfNGramLists(sourceMelodies, magnitude);
 	}
 
 	protected double getTermFrequency(AMelody melody, INGram melodicTerm){
@@ -20,10 +22,10 @@ public abstract class AStatisticallyInformedAlgorithm implements IAlgorithm{
 				.sum();
 	}
 
-	protected double getInvertedDocumentFrequency(INGram meloditcTerm){
-		int numberOfMelodies = listOfNGramLists.size();
-		int numberOfMelodiesWithMelodicTerm
-				= getNumberOfMelodiesWithMelodicTerm(meloditcTerm);
+	protected double getInvertedDocumentFrequency(INGram melodicTerm){
+		int numberOfMelodies = nGramLists.size();
+		int numberOfMelodiesWithMelodicTerm = getNumberOfMelodiesWithMelodicTerm
+				(melodicTerm);
 		double invertedDocumentFrequency = Math.log(numberOfMelodies
 				/ numberOfMelodiesWithMelodicTerm);
 		return invertedDocumentFrequency;
@@ -34,7 +36,7 @@ public abstract class AStatisticallyInformedAlgorithm implements IAlgorithm{
 	private int getNumberOfMelodiesWithMelodicTerm(INGram melodicTerm){
 		int nGramMagnitude = melodicTerm.getMagnitude();
 
-		return this.listOfNGramLists.stream()
+		return this.nGramLists.stream()
 				.filter(nGramList->nGramList.stream()
 						.anyMatch(melodicTerm::equals))
 				.collect(Collectors.toList())

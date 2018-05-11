@@ -25,6 +25,7 @@ class Test_MidiSequenceReader{
 		assertEquals(3 ,msr.getNumberOfPlayedChannels());
 		//		System.err.println("Notes on channel: "
 		//				+ msr.getNotesOnChannel(1).size());
+
 		//
 		AMelody melody = msr.getMelody(1);
 		//		System.err.println(melody.size());
