@@ -21,6 +21,8 @@ public class SettingsFile {
     private Transformer transformer;
     private DOMSource source;
     private StreamResult result;
+    private int windowHeight, windowWidth;
+    private Boolean windowFullscreen;
 
     public SettingsFile() {
         Document settingsDoc = SettingsFile.ReadFile();
@@ -31,6 +33,7 @@ public class SettingsFile {
         try{transformer = transformerFactory.newTransformer();}catch(Exception e){e.printStackTrace();}
         source = new DOMSource(settingsDoc);
         result = new StreamResult(new File("options.xml"));
+        loadSettings();
     }
 
     //The code for editing the settings was made into its own method due to it being used multiple times.
@@ -67,9 +70,21 @@ public class SettingsFile {
         return null;
     }
 
+    private void loadSettings(){
+        windowWidth = Integer.parseInt(AccessSettings("width"));
+        windowHeight = Integer.parseInt(AccessSettings("height"));
+        windowFullscreen = Boolean.parseBoolean(AccessSettings("fullscreen"));
+    }
 
+    public int getWindowHeight() {
+        return windowHeight;
+    }
 
+    public int getWindowWidth() {
+        return windowWidth;
+    }
 
-
-
+    public Boolean getWindowFullscreen() {
+        return windowFullscreen;
+    }
 }
