@@ -6,9 +6,5 @@ public interface INGram{
 
 	public List<Integer> getIntervals();
 
-	public int getFrequency();
-
-	public void incrementFrequency();
-
-	public int getMagnitude();
+	public int getFrequency();	
 }
