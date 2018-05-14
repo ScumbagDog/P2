@@ -21,7 +21,7 @@ public class MainGUI extends Application{
 	private SettingsFile settings = new SettingsFile();
 	private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
 	private AccessBar accessBar = new AccessBar();
-	GraphicsManager graphicsManager = new GraphicsManager(accessBar);
+	private GraphicsManager graphicsManager = new GraphicsManager(accessBar);
 	private Button compareMelodies = new Button();
 	private Resultlist resultlist = new Resultlist();
 	private StackPane resultStack1 = new StackPane(resultlist.getTable());

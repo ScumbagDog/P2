@@ -37,34 +37,6 @@ public class MenuComponents implements IStatusBar{
 				.add(settingsButton);
 	}
 
-	public Menu getMenuFileButton(){
-		return menuFileButton;
-	}
-
-	public MenuBar getMenuBar(){
-		return menuBar;
-	}
-
-	public MenuItem getAddSrcFileButton(){
-		return addSrcFileButton;
-	}
-
-	public MenuItem getRemoveFileButton(){
-		return removeFileButton;
-	}
-
-	public MenuItem getAddCompFileButton(){
-		return addCompFileButton;
-	}
-
-	public Menu getMenuWindowsButtons(){
-		return menuWindowsButtons;
-	}
-
-	public MenuItem getSettingsButton(){
-		return settingsButton;
-	}
-
 	@Override
 	public void setStatus(String status){
 		statusBar.setText(status);
@@ -124,4 +96,33 @@ public class MenuComponents implements IStatusBar{
 			}
 		listOfFiles.clear();
 	}
+
+	public Menu getMenuFileButton(){
+		return menuFileButton;
+	}
+
+	public MenuBar getMenuBar(){
+		return menuBar;
+	}
+
+	public MenuItem getAddSrcFileButton(){
+		return addSrcFileButton;
+	}
+
+	public MenuItem getRemoveFileButton(){
+		return removeFileButton;
+	}
+
+	public MenuItem getAddCompFileButton(){
+		return addCompFileButton;
+	}
+
+	public Menu getMenuWindowsButtons(){
+		return menuWindowsButtons;
+	}
+
+	public MenuItem getSettingsButton(){
+		return settingsButton;
+	}
+
 }

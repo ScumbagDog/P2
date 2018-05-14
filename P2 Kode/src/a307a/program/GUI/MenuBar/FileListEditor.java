@@ -14,9 +14,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.List;
 
-//All methods are static as they only contain code for executing specific tasks.
-//Furthermore, this class does not house any values that would be useful to have in
-// instances of this class.
+/*
+This class was made to allow users to remove any files
+they have chosen.
+ */
 public class FileListEditor{
 	private Stage stage = new Stage();
 	private Text minFlavorText = new Text("From file number:");
@@ -60,14 +61,14 @@ public class FileListEditor{
 	}
 
 	//The code for removing files is placed in its own method as it's used multiple times.
-	private static void RemoveSelectedFile(
+	private void RemoveSelectedFile(
 			TextField minFileNumber,
 			TextField maxFileNumber,
 			List<MidiFile> fileList
 	) throws InvalidInputException{
 		int minNumber = Integer.parseInt(minFileNumber.getText()), maxNumber
-				= Integer.parseInt(maxFileNumber.getText()), numberOfFilesRemoved = maxNumber
-				- minNumber;
+				= Integer.parseInt(maxFileNumber.getText()),
+				numberOfFilesRemoved = maxNumber - minNumber;
 
 		if(maxNumber == 0){
 			maxNumber = minNumber;
@@ -87,7 +88,13 @@ public class FileListEditor{
 
 	}
 
-	//AddFile was made to reduce instances of code in MainGUI
+	/*
+	This method was made static due to it not
+	using any of the objects instantiated in
+	this class, as well as because it needs to
+	be called in contexts that don't require the
+	the use of the file removal window.
+	 */
 	public static List<File> AddFile(){
 		Stage srcFile = new Stage();
 
