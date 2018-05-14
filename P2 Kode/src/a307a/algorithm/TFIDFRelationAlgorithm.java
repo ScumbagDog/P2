@@ -2,12 +2,13 @@ package a307a.algorithm;
 
 import a307a.midilib.parser.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.BiFunction;
 
 public class TFIDFRelationAlgorithm extends AStatisticallyInformedAlgorithm{
 	public TFIDFRelationAlgorithm(
-			List<AMelody> sourceMelodies, int magnitude
+			Collection<AMelody> sourceMelodies, int magnitude
 	){
 		super(sourceMelodies, magnitude);
 	}
@@ -43,6 +44,6 @@ public class TFIDFRelationAlgorithm extends AStatisticallyInformedAlgorithm{
 	public double compareTo(
 			AMelody midiMelody1, AMelody midiMelody2
 	){
-		return 0;
+		return sumUnion(midiMelody1, midiMelody2, (d1, d2)->d1 * d2);
 	}
 }
