@@ -1,17 +1,10 @@
 package a307a.program.GUI;
 
-import a307a.program.GUI.MenuBar.AccessBar;
 import a307a.program.GUI.MenuBar.settings.SettingsFile;
-import a307a.program.GUI.Splits.FileList;
 import javafx.application.Application;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -22,11 +15,8 @@ public class MainGUI extends Application{
 	private SettingsFile settings = new SettingsFile();
 	private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
 	private GraphicsManager graphicsManager = new GraphicsManager();
-	private Button compareMelodies = new Button();
-	private Resultlist resultlist = new Resultlist();
-	private StackPane resultStack1 = new StackPane(resultlist.getTable());
-	private StackPane resultStack2 = new StackPane(compareMelodies);
-	private Comparison comparison = new Comparison();
+	private Resultlist resultlist = new Resultlist(graphicsManager);
+
 
 	//Essentially the 'main' method of JavaFX.
 	@Override
@@ -37,8 +27,7 @@ public class MainGUI extends Application{
 				graphicsManager.getSelectedFiles(),
 				graphicsManager
 		);
-		setCompareButtonFunctionality();
-		initiateResultList();
+		resultlist.setCompareButtonFunctionality(graphicsManager);
 
 		graphicsManager.updateDisplay();
 		Scene scene = new Scene(
@@ -51,53 +40,5 @@ public class MainGUI extends Application{
 		stage.setScene(scene);
 		stage.setFullScreen(settings.getIsWindowFullscreen());
 		stage.show();
-	}
-
-	private void setCompareButtonFunctionality(){
-		compareMelodies.setStyle("-fx-font-size: 10pt;");
-		compareMelodies.setText("Compare");
-		compareMelodies.setOnAction(event->{
-			Stage confirmAction = new Stage();
-			Text confirmationText = new Text("A total of "
-					+ graphicsManager.getSelectedFiles()
-					.getSrcMidiFiles()
-					.size()
-					+ " source files and "
-					+ graphicsManager.getSelectedFiles()
-					.getCompMidiFiles()
-					.size()
-					+ " comparison files have been selected.\n"
-					+ "Do you want to begin the comparison sequence?");
-			Button startComparison = new Button("Start");
-			startComparison.setOnAction(event2->{
-				comparison.useUkonnen(resultlist,
-						graphicsManager.getSelectedFiles()
-								.getSrcMidiFiles(),
-						graphicsManager.getSelectedFiles()
-								.getCompMidiFiles()
-				);
-			});
-			Button cancelComparison = new Button("Cancel");
-			cancelComparison.setOnAction(event3->{
-				confirmAction.close();
-			});
-			BorderPane content = new BorderPane();
-			content.setTop(confirmationText);
-			content.setLeft(startComparison);
-			content.setRight(cancelComparison);
-			confirmAction.setScene(new Scene(content));
-			confirmAction.show();
-		});
-	}
-
-	private void initiateResultList(){
-		graphicsManager.getResultSplit()
-				.setOrientation(Orientation.VERTICAL);
-		graphicsManager.getResultSplit()
-				.setDividerPositions(0.9);
-		resultStack2.setMaxSize(100, 100);
-		graphicsManager.getResultSplit()
-				.getItems()
-				.addAll(resultStack1, resultStack2);
 	}
 }
