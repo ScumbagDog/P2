@@ -32,10 +32,8 @@ public class FileListEditor {
     private GridPane gridPane = new GridPane();
 
     public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder) {
-        src.setToggleGroup(listSelector);
-        comp.setToggleGroup(listSelector);
+        initializeRadioButtons();
         listCutter.setOnAction(event -> {remove(srcMidiFiles, compMidiFiles, elementHolder);});
-
         setElementPositions();
         createWindow();
     }
@@ -53,7 +51,7 @@ public class FileListEditor {
             }else{
                 ErrorWindow("Please select a list to remove files from.");
             }
-        }catch(InvalidInputException e){ //https://mangadex.org/chapter/20209/16
+        }catch(InvalidInputException e){
             ErrorWindow("Invalid input detected. Please ensure that:" +
                     "               \n* None of the fields are empty." +
                     "               \n* No negative numbers have been inserted." +
@@ -99,7 +97,7 @@ public class FileListEditor {
     }
 
     //An error window to tell the user when they fuck up in the removal process.
-    private static void ErrorWindow(String errorMessage){
+    private void ErrorWindow(String errorMessage){
         Stage stage = new Stage();
         BorderPane pane = new BorderPane();
         Text message = new Text(errorMessage);
@@ -108,6 +106,11 @@ public class FileListEditor {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void initializeRadioButtons(){
+        src.setToggleGroup(listSelector);
+        comp.setToggleGroup(listSelector);
     }
 
     private void setElementPositions(){
