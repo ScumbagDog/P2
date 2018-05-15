@@ -1,12 +1,8 @@
 package a307a.midilib.parser;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequence;
+import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,7 +15,7 @@ class Test_MidiSequenceReader{
 	AMidiSequenceReader msr;
 	@BeforeAll
 	void beforeAll() throws InvalidMidiDataException, IOException{
-		this.file = new File("C:\\Users\\Conrad\\Desktop\\MIDI\\March i G.mid");
+		this.file = new File("March-i-G.mid");
 		this.sequence = MidiSystem.getSequence(file);
 		this.msr = MidiTools.getMidiSequenceReader(file);
 	}
@@ -27,11 +23,12 @@ class Test_MidiSequenceReader{
 	void test1() throws InvalidMidiDataException, IOException{
 //		System.err.println(msr.getChannels());
 		assertEquals(3 ,msr.getNumberOfPlayedChannels());
-		System.err.println("Notes on channel: "
-				+ msr.getNotesOnChannel(1).size());
+		//		System.err.println("Notes on channel: "
+		//				+ msr.getNotesOnChannel(1).size());
 
+		//
 		AMelody melody = msr.getMelody(1);
-		System.err.println(melody.size());
+		//		System.err.println(melody.size());
 	}
 
 	@Test

@@ -17,19 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 //All methods are static as they only contain code for executing specific tasks.
-//Furthermore, this class does not house any values that would be useful to have in instances of this class.
-public class FileListEditor {
-    private Stage stage = new Stage();
-    private Text minFlavorText = new Text("From file number:");
-    private Text maxFlavorText = new Text("to");
-    private Text checkboxFlavorText = new Text("Remove from:");
-    private ToggleGroup listSelector = new ToggleGroup();
-    private RadioButton src = new RadioButton("Source file list");
-    private RadioButton comp = new RadioButton("Comparison file list");
-    private TextField minFileNumber = new TextField();
-    private TextField maxFileNumber = new TextField();
-    private Button listCutter = new Button("Remove from list");
-    private GridPane gridPane = new GridPane();
+//Furthermore, this class does not house any values that would be useful to have in
+// instances of this class.
+public class FileListEditor{
+	private Stage stage = new Stage();
+	private Text minFlavorText = new Text("From file number:");
+	private Text maxFlavorText = new Text("to");
+	private Text checkboxFlavorText = new Text("Remove from:");
+	private ToggleGroup listSelector = new ToggleGroup();
+	private RadioButton src = new RadioButton("Source file list");
+	private RadioButton comp = new RadioButton("Comparison file list");
+	private TextField minFileNumber = new TextField();
+	private TextField maxFileNumber = new TextField();
+	private Button listCutter = new Button("Remove from list");
+	private GridPane gridPane = new GridPane();
 
     public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder) {
         initializeRadioButtons();
@@ -66,35 +67,41 @@ public class FileListEditor {
             maxNumber = Integer.parseInt(maxFileNumber.getText()),
             numberOfFilesRemoved = maxNumber - minNumber;
 
-        if(maxNumber == 0){
-            maxNumber = minNumber;
-        }
-        if((minNumber < 0)||(maxNumber < 0)){
-            throw new InvalidInputException();
-        }else if(minNumber > maxNumber){
-            throw new InvalidInputException();
-        }else if((minNumber > fileList.size()) || maxNumber > fileList.size()){
-            throw new InvalidInputException();
-        }
-        for(int x = maxNumber; x >= minNumber; --x){
-            fileList.remove(x);
-        }
+		if(maxNumber == 0){
+			maxNumber = minNumber;
+		}
+		if((minNumber < 0) || (maxNumber < 0)){
+			throw new InvalidInputException();
+		}
+		else if(minNumber > maxNumber){
+			throw new InvalidInputException();
+		}
+		else if((minNumber > fileList.size()) || maxNumber > fileList.size()){
+			throw new InvalidInputException();
+		}
+		for(int x = maxNumber; x >= minNumber; --x){
+			fileList.remove(x);
+		}
 
-    }
+	}
 
-    //AddFile was made to reduce instances of code in MainGUI
-    public static List<File> AddFile(){
-        Stage srcFile = new Stage();
+	//AddFile was made to reduce instances of code in MainGUI
+	public static List<File> AddFile(){
+		Stage srcFile = new Stage();
 
-        FileChooser browseSourceFile = new FileChooser();
-        browseSourceFile.setTitle("Select a file to be added");
+		FileChooser browseSourceFile = new FileChooser();
+		browseSourceFile.setTitle("Select a file to be added");
 
-        //Stopper folk fra at vælge filer vi ikke kan arbejde med.
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("MIDI (*.mid)", "*.mid");
-        browseSourceFile.getExtensionFilters().add(filter);
+		//Stopper folk fra at vælge filer vi ikke kan arbejde med.
+		FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter(
+				"MIDI (*.mid)",
+				"*.mid"
+		);
+		browseSourceFile.getExtensionFilters()
+				.add(filter);
 
-        return browseSourceFile.showOpenMultipleDialog(srcFile);
-    }
+		return browseSourceFile.showOpenMultipleDialog(srcFile);
+	}
 
     //An error window to tell the user when they fuck up in the removal process.
     private void ErrorWindow(String errorMessage){

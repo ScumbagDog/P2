@@ -1,15 +1,11 @@
 package a307a.midilib.parser;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MonophonicMelody extends AMelody{
 	MonophonicMelody(List<INote> notes){
-		super(
-				getMonophonicNotes(notes)
-		);
+		super(getMonophonicNotes(notes));
 	}
 
 	/* Returns a monophonic list of note (only one note at
@@ -18,16 +14,15 @@ public class MonophonicMelody extends AMelody{
 		List<INote> monophonic = new LinkedList<>();
 
 		/* For each unique tick... */
-		for(Long tick: notes.stream()
+		for(Long tick : notes.stream()
 				.map(INote::getTick)
 				.distinct()
 				.collect(Collectors.toList())){
 			/* ...add the note with the highest pitch. */
 			monophonic.add(notes.stream()
-					.filter(n -> n.getTick() == tick)
+					.filter(n->n.getTick() == tick)
 					.max(Comparator.comparingInt(INote::getPitch))
-					.get()
-			);
+					.get());
 		}
 		return monophonic;
 	}

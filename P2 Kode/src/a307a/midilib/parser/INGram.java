@@ -2,12 +2,10 @@ package a307a.midilib.parser;
 
 import java.util.List;
 
-public interface INGram {
+public interface INGram{
+	List<Integer> getIntervals();
 
-	public List<Integer> getIntervals();
+	int getFrequency();
 
-	public int getFrequency();
-
-	public void incrementFrequency();
-	
+	int getMagnitude();
 }
