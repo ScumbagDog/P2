@@ -34,24 +34,10 @@ public class FileListEditor {
     public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder) {
         src.setToggleGroup(listSelector);
         comp.setToggleGroup(listSelector);
-        minFileNumber.setAlignment(Pos.CENTER);
-        maxFileNumber.setAlignment(Pos.CENTER);
         listCutter.setOnAction(event -> {remove(srcMidiFiles, compMidiFiles, elementHolder);});
 
-        gridPane.setHgap(5);
-        gridPane.setVgap(3);
-        gridPane.add(minFlavorText, 0, 0);
-        gridPane.add(minFileNumber, 1, 0);
-        gridPane.add(maxFlavorText, 2, 0);
-        gridPane.add(maxFileNumber, 3, 0);
-        gridPane.add(listCutter, 4, 0);
-        gridPane.add(checkboxFlavorText, 0, 1);
-        gridPane.add(src, 1, 1);
-        gridPane.add(comp, 3, 1);
-
-        Scene scene = new Scene(gridPane);
-        stage.setScene(scene);
-        stage.show();
+        setElementPositions();
+        createWindow();
     }
 
     //This window for removing files was added as an alternative to having a removal button next to each individual file entry.
@@ -68,7 +54,7 @@ public class FileListEditor {
                 ErrorWindow("Please select a list to remove files from.");
             }
         }catch(InvalidInputException e){ //https://mangadex.org/chapter/20209/16
-            ErrorWindow("Invalid input detcted. Please ensure that:" +
+            ErrorWindow("Invalid input detected. Please ensure that:" +
                     "               \n* None of the fields are empty." +
                     "               \n* No negative numbers have been inserted." +
                     "               \n* The index number of the first file is not lower then the number of the last file." +
@@ -120,6 +106,27 @@ public class FileListEditor {
         pane.setCenter(message);
 
         Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void setElementPositions(){
+        minFileNumber.setAlignment(Pos.CENTER);
+        maxFileNumber.setAlignment(Pos.CENTER);
+        gridPane.setHgap(5);
+        gridPane.setVgap(3);
+        gridPane.add(minFlavorText, 0, 0);
+        gridPane.add(minFileNumber, 1, 0);
+        gridPane.add(maxFlavorText, 2, 0);
+        gridPane.add(maxFileNumber, 3, 0);
+        gridPane.add(listCutter, 4, 0);
+        gridPane.add(checkboxFlavorText, 0, 1);
+        gridPane.add(src, 1, 1);
+        gridPane.add(comp, 3, 1);
+    }
+
+    private void createWindow(){
+        Scene scene = new Scene(gridPane);
         stage.setScene(scene);
         stage.show();
     }
