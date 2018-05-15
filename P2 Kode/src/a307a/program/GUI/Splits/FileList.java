@@ -1,7 +1,9 @@
 package a307a.program.GUI.Splits;
 
+import a307a.program.GUI.GraphicsManager;
 import a307a.program.GUI.MenuBar.MidiFile;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
@@ -14,10 +16,11 @@ import java.util.List;
 //Furthermore, this class does not house any values that would be useful to have in
 // instances of this class.
 public class FileList{
+	GraphicsManager graphicsManager;
 
 	//This method only exists to collect the layouts made by the private methods of this
 	// class.
-	public static BorderPane ListsOfFiles(List<MidiFile> srcFiles, List<MidiFile>
+	public BorderPane ListsOfFiles(List<MidiFile> srcFiles, List<MidiFile>
 			cmpFiles){
 		BorderPane centralLayout = new BorderPane();
 		Text srcText = new Text("Source File");
@@ -31,7 +34,7 @@ public class FileList{
 
 	//All private methods below this comment exist to heighten the abstraction level of
 	// listsOfFiles.
-	private static SplitPane SplitMaker(Node object1, Node object2){
+	private SplitPane SplitMaker(Node object1, Node object2){
 		SplitPane splitPane = new SplitPane();
 		StackPane stackPane1 = new StackPane();
 		StackPane stackPane2 = new StackPane();
@@ -52,7 +55,7 @@ public class FileList{
 		return splitPane;
 	}
 
-	private static SplitPane SplitMaker2(Node object1, Node object2){
+	private SplitPane SplitMaker2(Node object1, Node object2){
 		SplitPane splitPane2 = new SplitPane();
 		ScrollPane scrollPane1 = new ScrollPane();
 		ScrollPane scrollPane2 = new ScrollPane();
@@ -75,20 +78,21 @@ public class FileList{
 	}
 
 	//
-	private static GridPane gridMaker(List<MidiFile> files){
+	private GridPane gridMaker(List<MidiFile> files){
 		GridPane fileList = new GridPane();
 		fileList.setGridLinesVisible(true);
-		List<Text> fileText = new ArrayList<>(), fileIndex = new ArrayList<>();
+		List<Text> fileIndex = new ArrayList<>();
 		for(int count = 0; count < files.size(); ++count){
 			fileList.add(createFileEntry(files, count), 0, count);
 			fileIndex.add(new Text(Integer.toString(count)));
 			fileList.add(fileIndex.get(count), 1, count);
+			fileList.add(deleteFileEntryButton(count, files), 2, count);
 		}
 
 		return fileList;
 	}
 
-	private static VBox createFileEntry(List<MidiFile> files, int passedCount){
+	private VBox createFileEntry(List<MidiFile> files, int passedCount){
 		VBox entry = new VBox();
 		entry.getChildren()
 				.add(new Text(files.get(passedCount)
@@ -108,5 +112,17 @@ public class FileList{
 		return entry;
 	}
 
+	private Button deleteFileEntryButton(int entry, List<MidiFile> files){
+		Button button = new Button("Remove");
+		button.setOnAction(event -> {
+			files.remove(entry);
+			graphicsManager.updateDisplay();
+		});
+		return button;
+	}
+
+	public FileList(GraphicsManager graphicsManager) {
+		this.graphicsManager = graphicsManager;
+	}
 }
 

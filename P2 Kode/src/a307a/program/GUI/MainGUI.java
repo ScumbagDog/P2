@@ -2,6 +2,7 @@ package a307a.program.GUI;
 
 import a307a.program.GUI.MenuBar.AccessBar;
 import a307a.program.GUI.MenuBar.settings.SettingsFile;
+import a307a.program.GUI.Splits.FileList;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
@@ -20,8 +21,7 @@ public class MainGUI extends Application{
 	private Stage stage = new Stage();
 	private SettingsFile settings = new SettingsFile();
 	private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
-	private AccessBar accessBar = new AccessBar();
-	private GraphicsManager graphicsManager = new GraphicsManager(accessBar);
+	private GraphicsManager graphicsManager = new GraphicsManager();
 	private Button compareMelodies = new Button();
 	private Resultlist resultlist = new Resultlist();
 	private StackPane resultStack1 = new StackPane(resultlist.getTable());
@@ -33,7 +33,7 @@ public class MainGUI extends Application{
 	public void start(Stage primaryStage){
 		stage.setTitle("Main Menu");
 		graphicsManager.loadAlgorithms(listOfAlgorithms);
-		accessBar.setFileMenuItemFunctionality(
+		graphicsManager.getAccessBar().setFileMenuItemFunctionality(
 				graphicsManager.getSelectedFiles(),
 				graphicsManager
 		);

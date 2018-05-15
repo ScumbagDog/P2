@@ -3,6 +3,7 @@ package a307a.program.GUI.MenuBar;
 import a307a.program.GUI.FileStorage;
 import a307a.program.GUI.GraphicsManager;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
+import a307a.program.GUI.Splits.FileList;
 import javafx.scene.control.*;
 
 public class AccessBar{
@@ -13,9 +14,10 @@ public class AccessBar{
 	private MenuItem addCompFile;
 	private Menu menuSetting;
 	private MenuItem addSetting;
+	private FileList fileList;
 
 
-	public AccessBar(){
+	public AccessBar(FileList fileList){
 		menuBar = new MenuBar();
 		menuFile = new Menu("Files");
 		addSrcFile = new MenuItem("Add Source");
@@ -23,6 +25,7 @@ public class AccessBar{
 		addCompFile = new MenuItem("Add Comparison");
 		menuSetting = new Menu("Window");
 		addSetting = new MenuItem("Settings");
+		this.fileList = fileList;
 		menuBar.getMenus()
 				.addAll(menuFile, menuSetting);
 		setSettingsMenuItemFunctionality();
@@ -47,7 +50,8 @@ public class AccessBar{
 		removeFile.setOnAction(event->{
 			new FileListEditor(selectedFiles.getSrcMidiFiles(),
 					selectedFiles.getCompMidiFiles(),
-					graphicsManager.getElementHolder()
+					graphicsManager.getElementHolder(),
+					graphicsManager.getSplitLists()
 			);
 		});
 		menuFile.getItems()

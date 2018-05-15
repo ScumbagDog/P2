@@ -13,22 +13,22 @@ import java.util.List;
 public class GraphicsManager{
 	private BorderPane elementHolder;
 	private VBox algorithms;
-	private AccessBar accessBar;
 	private StackPane algorithmStack;
 	private Text fileName;
 	private FileList splitLists;
 	private FileStorage selectedFiles;
 	private SplitPane resultSplit;
+	private AccessBar accessBar;
 
-	public GraphicsManager(AccessBar accessBar){
+	public GraphicsManager(){
 		elementHolder = new BorderPane();
 		algorithms = new VBox();
-		this.accessBar = accessBar;
 		algorithmStack = new StackPane(algorithms);
 		fileName = new Text("Awaiting action...");
-		splitLists = new FileList();
+		splitLists = new FileList(this);
 		selectedFiles = new FileStorage();
 		resultSplit = new SplitPane();
+		accessBar = new AccessBar(splitLists);
 	}
 
 	public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis){
@@ -71,5 +71,13 @@ public class GraphicsManager{
 
 	public SplitPane getResultSplit(){
 		return resultSplit;
+	}
+
+	public AccessBar getAccessBar() {
+		return accessBar;
+	}
+
+	public FileList getSplitLists() {
+		return splitLists;
 	}
 }

@@ -23,13 +23,16 @@ public class MenuComponents implements IStatusBar{
 	private MenuItem addCompFileButton = new MenuItem("Add Comparison");
 	private Menu menuWindowsButtons = new Menu("Window");
 	private MenuItem settingsButton = new MenuItem("Settings");
+	private FileList fileList;
 
 	private Text statusBar;
 
 	public MenuComponents(
 			FileCollectionComponents fileCollectionComponents,
-			Text statusBar
+			Text statusBar,
+			FileList fileList
 	){
+		this.fileList = fileList;
 		this.statusBar = statusBar;
 		this.fileCollectionComponents = fileCollectionComponents;
 		setFileMenuButtonFunctionality();
@@ -55,7 +58,7 @@ public class MenuComponents implements IStatusBar{
 
 	public void setAddSrcFileButtonOnAction(){
 		fileCollectionComponents.getElementPlaceHolder()
-				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+				.setCenter(fileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
 						fileCollectionComponents.getCompMidiFiles()
 				));
 		addSrcFileButton.setOnAction(event->loadFile(fileCollectionComponents.getSrcFiles(),
@@ -65,7 +68,7 @@ public class MenuComponents implements IStatusBar{
 
 	public void setAddCompFileButtonOnAction(){
 		fileCollectionComponents.getElementPlaceHolder()
-				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+				.setCenter(fileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
 						fileCollectionComponents.getCompMidiFiles()
 				));
 		addCompFileButton.setOnAction(event->loadFile(fileCollectionComponents
@@ -81,7 +84,7 @@ public class MenuComponents implements IStatusBar{
 				.getFilePath()
 				.getName() + "\" has been added!");
 		fileCollectionComponents.getElementPlaceHolder()
-				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+				.setCenter(fileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
 						fileCollectionComponents.getCompMidiFiles()
 				));
 	}

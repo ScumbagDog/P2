@@ -44,6 +44,11 @@ public class NGram implements INGram {
 		return frequency;
 	}
 
+	@Override
+	public int getMagnitude() {
+		return 0;
+	}
+
 	public List<Integer> getIntervals() {
 		return intervals;
 	}

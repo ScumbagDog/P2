@@ -31,8 +31,10 @@ public class FileListEditor{
 	private TextField maxFileNumber = new TextField();
 	private Button listCutter = new Button("Remove from list");
 	private GridPane gridPane = new GridPane();
+	private FileList fileList;
 
-    public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder) {
+    public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder, FileList fileList) {
+        this.fileList = fileList;
         initializeRadioButtons();
         listCutter.setOnAction(event -> {remove(srcMidiFiles, compMidiFiles, elementHolder);});
         setElementPositions();
@@ -45,10 +47,10 @@ public class FileListEditor{
         try{
             if(src.isSelected()){
                 RemoveSelectedFile(minFileNumber, maxFileNumber, srcMidiFiles);
-                elementHolder.setCenter(FileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
+                elementHolder.setCenter(fileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
             }else if(comp.isSelected()){
                 RemoveSelectedFile(minFileNumber, maxFileNumber, compMidiFiles);
-                elementHolder.setCenter(FileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
+                elementHolder.setCenter(fileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
             }else{
                 ErrorWindow("Please select a list to remove files from.");
             }
