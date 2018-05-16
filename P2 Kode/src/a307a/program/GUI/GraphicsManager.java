@@ -15,7 +15,7 @@ public class GraphicsManager{
 	private VBox algorithms;
 	private StackPane algorithmStack;
 	private Text fileName;
-	private FileList splitLists;
+	private FileList fileList;
 	private FileStorage selectedFiles;
 	private SplitPane resultSplit;
 	private AccessBar accessBar;
@@ -25,10 +25,10 @@ public class GraphicsManager{
 		algorithms = new VBox();
 		algorithmStack = new StackPane(algorithms);
 		fileName = new Text("Awaiting action...");
-		splitLists = new FileList(this);
+		fileList = new FileList(this);
 		selectedFiles = new FileStorage();
 		resultSplit = new SplitPane();
-		accessBar = new AccessBar(splitLists);
+		accessBar = new AccessBar(fileList);
 	}
 
 	public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis){
@@ -37,7 +37,7 @@ public class GraphicsManager{
 		fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
 				.getFilePath()
 				.getName() + "\" has been added!");
-		elementHolder.setCenter(splitLists.ListsOfFiles(
+		elementHolder.setCenter(fileList.ListsOfFiles(
 				selectedFiles.getSrcMidiFiles(),
 				selectedFiles.getCompMidiFiles()
 		));
@@ -47,7 +47,7 @@ public class GraphicsManager{
 		elementHolder.setTop(accessBar.getMenuBar());
 		elementHolder.setLeft(algorithmStack);
 		elementHolder.setBottom(fileName);
-		elementHolder.setCenter(splitLists.ListsOfFiles(
+		elementHolder.setCenter(fileList.ListsOfFiles(
 				selectedFiles.getSrcMidiFiles(),
 				selectedFiles.getCompMidiFiles()
 		));
@@ -77,7 +77,7 @@ public class GraphicsManager{
 		return accessBar;
 	}
 
-	public FileList getSplitLists() {
-		return splitLists;
+	public FileList getFileList() {
+		return fileList;
 	}
 }

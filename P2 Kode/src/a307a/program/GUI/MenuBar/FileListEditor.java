@@ -1,6 +1,7 @@
 package a307a.program.GUI.MenuBar;
 
 import a307a.Exceptions.InvalidInputException;
+import a307a.program.GUI.GraphicsManager;
 import a307a.program.GUI.Splits.FileList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -33,10 +34,10 @@ public class FileListEditor{
 	private GridPane gridPane = new GridPane();
 	private FileList fileList;
 
-    public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder, FileList fileList) {
-        this.fileList = fileList;
+    public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, GraphicsManager graphicsManager) {
+        this.fileList = graphicsManager.getFileList();
         initializeRadioButtons();
-        listCutter.setOnAction(event -> {remove(srcMidiFiles, compMidiFiles, elementHolder);});
+        listCutter.setOnAction(event -> {remove(srcMidiFiles, compMidiFiles, graphicsManager.getElementHolder());});
         setElementPositions();
         createWindow();
     }
@@ -69,10 +70,13 @@ public class FileListEditor{
             maxNumber = Integer.parseInt(maxFileNumber.getText()),
             numberOfFilesRemoved = maxNumber - minNumber;
 
-		if(maxNumber == 0){
+		if(maxFileNumber.getText().trim().isEmpty()){
 			maxNumber = minNumber;
 		}
-		if((minNumber < 0) || (maxNumber < 0)){
+		if(minFileNumber.getText().trim().isEmpty()){
+		    throw new InvalidInputException();
+        }
+        else if((minNumber < 0) || (maxNumber < 0)){
 			throw new InvalidInputException();
 		}
 		else if(minNumber > maxNumber){

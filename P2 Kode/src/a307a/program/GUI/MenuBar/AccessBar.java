@@ -50,8 +50,7 @@ public class AccessBar{
 		removeFile.setOnAction(event->{
 			new FileListEditor(selectedFiles.getSrcMidiFiles(),
 					selectedFiles.getCompMidiFiles(),
-					graphicsManager.getElementHolder(),
-					graphicsManager.getSplitLists()
+					graphicsManager
 			);
 		});
 		menuFile.getItems()
