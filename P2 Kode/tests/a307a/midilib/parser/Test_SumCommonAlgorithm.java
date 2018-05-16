@@ -10,48 +10,48 @@ import java.io.File;
 import java.io.IOException;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class Test_SumCommonAlgorithm{
-	File file1 = new File("C:\\Users\\Conrad\\IdeaProjects\\P2_\\P2 Kode\\src\\a307a\\midilib\\parser\\Mester-Jakob.mid");
-	File file2 = new File("C:\\Users\\Conrad\\Desktop\\MIDI\\March i G.mid");
-	AMidiSequenceReader msr1 = MidiTools.getMidiSequenceReader(file1);
-	AMidiSequenceReader msr2 = MidiTools.getMidiSequenceReader(file2);
+public class Test_SumCommonAlgorithm {
+    File file1 = new File("C:\\Users\\Conrad\\IdeaProjects\\P2_\\P2 Kode\\src\\a307a\\midilib\\parser\\Mester-Jakob.mid");
+    File file2 = new File("C:\\Users\\Conrad\\Desktop\\MIDI\\March i G.mid");
+    AMidiSequenceReader msr1 = MidiTools.getMidiSequenceReader(file1);
+    AMidiSequenceReader msr2 = MidiTools.getMidiSequenceReader(file2);
 
-	IAlgorithm sumC = new SumCommon(2);
+    IAlgorithm sumC = new SumCommon(2);
 
-	public Test_SumCommonAlgorithm() throws InvalidMidiDataException, IOException{
-	}
+    public Test_SumCommonAlgorithm() throws InvalidMidiDataException, IOException {
+    }
 
-	/* Test to see if two identical songs give the value 1. */
-	@Test
-	void test1(){
-		AMelody mel1 = msr1.getMelody(0);
-		AMelody mel2 = msr1.getMelody(0);
-		double compRes = sumC.compareTo(mel1, mel2);
-		System.err.println(compRes);
-	}
+    /* Test to see if two identical songs give the value 1. */
+    @Test
+    void test1() {
+        AMelody mel1 = msr1.getMelody(0);
+        AMelody mel2 = msr1.getMelody(0);
+        double compRes = sumC.compareTo(mel1, mel2);
+        System.err.println(compRes);
+    }
 
-	/* Test with very different melody. */
-	@Test
-	void test2(){
-		AMelody mel1 = msr1.getMelody(0);
-		AMelody mel2 = msr2.getMelody(0);
-		double compRes = sumC.compareTo(mel1, mel2);
-		System.err.println(compRes);
-	}
+    /* Test with very different melody. */
+    @Test
+    void test2() {
+        AMelody mel1 = msr1.getMelody(0);
+        AMelody mel2 = msr2.getMelody(0);
+        double compRes = sumC.compareTo(mel1, mel2);
+        System.err.println(compRes);
+    }
 
-	@Test
-	void test3(){
-		AMelody mel1 = msr2.getMelody(0);
-		AMelody mel2 = msr2.getMelody(1);
-		double compRes = sumC.compareTo(mel1, mel2);
-		System.err.println(compRes);
-	}
+    @Test
+    void test3() {
+        AMelody mel1 = msr2.getMelody(0);
+        AMelody mel2 = msr2.getMelody(1);
+        double compRes = sumC.compareTo(mel1, mel2);
+        System.err.println(compRes);
+    }
 
-	@Test
-	void test4(){
-		AMelody mel1 = msr2.getMelody(1);
-		AMelody mel2 = msr2.getMelody(2);
-		double compRes = sumC.compareTo(mel1, mel2);
-		System.err.println(compRes);
-	}
+    @Test
+    void test4() {
+        AMelody mel1 = msr2.getMelody(1);
+        AMelody mel2 = msr2.getMelody(2);
+        double compRes = sumC.compareTo(mel1, mel2);
+        System.err.println(compRes);
+    }
 }

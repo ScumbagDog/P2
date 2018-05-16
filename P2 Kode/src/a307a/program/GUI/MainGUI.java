@@ -10,35 +10,35 @@ import javafx.stage.Stage;
 import java.util.List;
 
 //This class exists solely to house the 'start' method
-public class MainGUI extends Application{
-	private Stage stage = new Stage();
-	private SettingsFile settings = new SettingsFile();
-	private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
-	private GraphicsManager graphicsManager = new GraphicsManager();
-	private Resultlist resultlist = new Resultlist(graphicsManager);
+public class MainGUI extends Application {
+    private Stage stage = new Stage();
+    private SettingsFile settings = new SettingsFile();
+    private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
+    private GraphicsManager graphicsManager = new GraphicsManager();
+    private Resultlist resultlist = new Resultlist(graphicsManager);
 
 
-	//Essentially the 'main' method of JavaFX.
-	@Override
-	public void start(Stage primaryStage){
-		stage.setTitle("Main Menu");
-		graphicsManager.loadAlgorithms(listOfAlgorithms);
-		graphicsManager.getAccessBar().setFileMenuItemFunctionality(
-				graphicsManager.getSelectedFiles(),
-				graphicsManager
-		);
-		resultlist.setCompareButtonFunctionality(graphicsManager);
+    //Essentially the 'main' method of JavaFX.
+    @Override
+    public void start(Stage primaryStage) {
+        stage.setTitle("Main Menu");
+        graphicsManager.loadAlgorithms(listOfAlgorithms);
+        graphicsManager.getAccessBar().setFileMenuItemFunctionality(
+                graphicsManager.getSelectedFiles(),
+                graphicsManager
+        );
+        resultlist.setCompareButtonFunctionality(graphicsManager);
 
-		graphicsManager.updateDisplay();
-		Scene scene = new Scene(
-				graphicsManager.getElementHolder(),
-				settings.getWindowWidth(),
-				settings.getWindowHeight()
-		);
-		scene.setFill(Color.OLDLACE);
+        graphicsManager.updateDisplay();
+        Scene scene = new Scene(
+                graphicsManager.getElementHolder(),
+                settings.getWindowWidth(),
+                settings.getWindowHeight()
+        );
+        scene.setFill(Color.OLDLACE);
 
-		stage.setScene(scene);
-		stage.setFullScreen(settings.getIsWindowFullscreen());
-		stage.show();
-	}
+        stage.setScene(scene);
+        stage.setFullScreen(settings.getIsWindowFullscreen());
+        stage.show();
+    }
 }

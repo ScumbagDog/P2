@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class Test_TFIDF{
+public class Test_TFIDF {
 
-	@Test
-	void test1(){
+    @Test
+    void test1() {
 
-	}
+    }
 }
