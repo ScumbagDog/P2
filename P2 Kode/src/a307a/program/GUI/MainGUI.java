@@ -27,7 +27,6 @@ public class MainGUI extends Application {
                 graphicsManager.getSelectedFiles(),
                 graphicsManager
         );
-        resultlist.setCompareButtonFunctionality(graphicsManager);
 
         graphicsManager.updateDisplay();
         Scene scene = new Scene(
