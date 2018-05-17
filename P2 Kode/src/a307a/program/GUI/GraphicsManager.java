@@ -10,66 +10,74 @@ import javafx.scene.text.Text;
 import java.io.File;
 import java.util.List;
 
-public class GraphicsManager{
-	private BorderPane elementHolder;
-	private VBox algorithms;
-	private AccessBar accessBar;
-	private StackPane algorithmStack;
-	private Text fileName;
-	private FileList splitLists;
-	private FileStorage selectedFiles;
-	private SplitPane resultSplit;
+public class GraphicsManager {
+    private BorderPane elementHolder;
+    private VBox algorithms;
+    private StackPane algorithmStack;
+    private Text fileName;
+    private FileList fileList;
+    private FileStorage selectedFiles;
+    private SplitPane resultSplit;
+    private AccessBar accessBar;
 
-	public GraphicsManager(AccessBar accessBar){
-		elementHolder = new BorderPane();
-		algorithms = new VBox();
-		this.accessBar = accessBar;
-		algorithmStack = new StackPane(algorithms);
-		fileName = new Text("Awaiting action...");
-		splitLists = new FileList();
-		selectedFiles = new FileStorage();
-		resultSplit = new SplitPane();
-	}
+    public GraphicsManager() {
+        elementHolder = new BorderPane();
+        algorithms = new VBox();
+        algorithmStack = new StackPane(algorithms);
+        fileName = new Text("Awaiting action...");
+        fileList = new FileList(this);
+        selectedFiles = new FileStorage();
+        resultSplit = new SplitPane();
+        accessBar = new AccessBar(fileList);
+    }
 
-	public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis){
-		listOfFiles.addAll(FileListEditor.AddFile());
-		selectedFiles.initiateMidiFileList(listOfFiles, listOfMidis);
-		fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
-				.getFilePath()
-				.getName() + "\" has been added!");
-		elementHolder.setCenter(splitLists.ListsOfFiles(
-				selectedFiles.getSrcMidiFiles(),
-				selectedFiles.getCompMidiFiles()
-		));
-	}
+    public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis) {
+        listOfFiles.addAll(FileListEditor.AddFile());
+        selectedFiles.initiateMidiFileList(listOfFiles, listOfMidis);
+        fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
+                .getFilePath()
+                .getName() + "\" has been added!");
+        elementHolder.setCenter(fileList.ListsOfFiles(
+                selectedFiles.getSrcMidiFiles(),
+                selectedFiles.getCompMidiFiles()
+        ));
+    }
 
-	public void updateDisplay(){
-		elementHolder.setTop(accessBar.getMenuBar());
-		elementHolder.setLeft(algorithmStack);
-		elementHolder.setBottom(fileName);
-		elementHolder.setCenter(splitLists.ListsOfFiles(
-				selectedFiles.getSrcMidiFiles(),
-				selectedFiles.getCompMidiFiles()
-		));
-		elementHolder.setRight(resultSplit);
-	}
+    public void updateDisplay() {
+        elementHolder.setTop(accessBar.getMenuBar());
+        elementHolder.setLeft(algorithmStack);
+        elementHolder.setBottom(fileName);
+        elementHolder.setCenter(fileList.ListsOfFiles(
+                selectedFiles.getSrcMidiFiles(),
+                selectedFiles.getCompMidiFiles()
+        ));
+        elementHolder.setRight(resultSplit);
+    }
 
-	public void loadAlgorithms(List<CheckBox> listOfAlgorithms){
-		for(int i = 0; i < listOfAlgorithms.size(); ++i){
-			algorithms.getChildren()
-					.add(listOfAlgorithms.get(i));
-		}
-	}
+    public void loadAlgorithms(List<CheckBox> listOfAlgorithms) {
+        for (int i = 0; i < listOfAlgorithms.size(); ++i) {
+            algorithms.getChildren()
+                    .add(listOfAlgorithms.get(i));
+        }
+    }
 
-	public BorderPane getElementHolder(){
-		return elementHolder;
-	}
+    public BorderPane getElementHolder() {
+        return elementHolder;
+    }
 
-	public FileStorage getSelectedFiles(){
-		return selectedFiles;
-	}
+    public FileStorage getSelectedFiles() {
+        return selectedFiles;
+    }
 
-	public SplitPane getResultSplit(){
-		return resultSplit;
-	}
+    public SplitPane getResultSplit() {
+        return resultSplit;
+    }
+
+    public AccessBar getAccessBar() {
+        return accessBar;
+    }
+
+    public FileList getFileList() {
+        return fileList;
+    }
 }

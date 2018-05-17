@@ -14,114 +14,118 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class MenuComponents implements IStatusBar{
-	private FileCollectionComponents fileCollectionComponents;
-	private MenuBar menuBar = new MenuBar();
-	private Menu menuFileButton = new Menu("Files");
-	private MenuItem addSrcFileButton = new MenuItem("Add Source");
-	private MenuItem removeFileButton = new MenuItem("Remove");
-	private MenuItem addCompFileButton = new MenuItem("Add Comparison");
-	private Menu menuWindowsButtons = new Menu("Window");
-	private MenuItem settingsButton = new MenuItem("Settings");
+public class MenuComponents implements IStatusBar {
+    private FileCollectionComponents fileCollectionComponents;
+    private MenuBar menuBar = new MenuBar();
+    private Menu menuFileButton = new Menu("Files");
+    private MenuItem addSrcFileButton = new MenuItem("Add Source");
+    private MenuItem removeFileButton = new MenuItem("Remove");
+    private MenuItem addCompFileButton = new MenuItem("Add Comparison");
+    private Menu menuWindowsButtons = new Menu("Window");
+    private MenuItem settingsButton = new MenuItem("Settings");
+    private FileList fileList;
 
-	private Text statusBar;
+    private Text statusBar;
 
-	public MenuComponents(
-			FileCollectionComponents fileCollectionComponents,
-			Text statusBar
-	){
-		this.statusBar = statusBar;
-		this.fileCollectionComponents = fileCollectionComponents;
-		setFileMenuButtonFunctionality();
-		menuWindowsButtons.getItems()
-				.add(settingsButton);
-	}
+    public MenuComponents(
+            FileCollectionComponents fileCollectionComponents,
+            Text statusBar,
+            FileList fileList
+    ) {
+        this.fileList = fileList;
+        this.statusBar = statusBar;
+        this.fileCollectionComponents = fileCollectionComponents;
+        setFileMenuButtonFunctionality();
+        menuWindowsButtons.getItems()
+                .add(settingsButton);
+    }
 
-	public Menu getMenuFileButton(){
-		return menuFileButton;
-	}
+    @Override
+    public void setStatus(String status) {
+        statusBar.setText(status);
+    }
 
-	public MenuBar getMenuBar(){
-		return menuBar;
-	}
+    private void setFileMenuButtonFunctionality() {
+        menuBar.getMenus()
+                .addAll(menuFileButton, menuWindowsButtons);
+        menuFileButton.getItems()
+                .addAll(addSrcFileButton, addCompFileButton, removeFileButton);
+        settingsButton.setOnAction(event -> SettingsMenu.WindowSettings("???"));
 
-	public MenuItem getAddSrcFileButton(){
-		return addSrcFileButton;
-	}
+        setAddSrcFileButtonOnAction();
+        setAddCompFileButtonOnAction();
+    }
 
-	public MenuItem getRemoveFileButton(){
-		return removeFileButton;
-	}
+    public void setAddSrcFileButtonOnAction() {
+        fileCollectionComponents.getElementPlaceHolder()
+                .setCenter(fileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+                        fileCollectionComponents.getCompMidiFiles()
+                ));
+        addSrcFileButton.setOnAction(event -> loadFile(fileCollectionComponents.getSrcFiles(),
+                fileCollectionComponents.getSrcMidiFiles()
+        ));
+    }
 
-	public MenuItem getAddCompFileButton(){
-		return addCompFileButton;
-	}
+    public void setAddCompFileButtonOnAction() {
+        fileCollectionComponents.getElementPlaceHolder()
+                .setCenter(fileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+                        fileCollectionComponents.getCompMidiFiles()
+                ));
+        addCompFileButton.setOnAction(event -> loadFile(fileCollectionComponents
+                        .getCompFiles(),
+                fileCollectionComponents.getCompMidiFiles()
+        ));
+    }
 
-	public Menu getMenuWindowsButtons(){
-		return menuWindowsButtons;
-	}
-
-	public MenuItem getSettingsButton(){
-		return settingsButton;
-	}
-
-	@Override
-	public void setStatus(String status){
-		statusBar.setText(status);
-	}
-
-	private void setFileMenuButtonFunctionality(){
-		menuBar.getMenus()
-				.addAll(menuFileButton, menuWindowsButtons);
-		menuFileButton.getItems()
-				.addAll(addSrcFileButton, addCompFileButton, removeFileButton);
-		settingsButton.setOnAction(event->SettingsMenu.WindowSettings("???"));
-
-		setAddSrcFileButtonOnAction();
-		setAddCompFileButtonOnAction();
-	}
-
-	public void setAddSrcFileButtonOnAction(){
-		fileCollectionComponents.getElementPlaceHolder()
-				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
-						fileCollectionComponents.getCompMidiFiles()
-				));
-		addSrcFileButton.setOnAction(event->loadFile(fileCollectionComponents.getSrcFiles(),
-				fileCollectionComponents.getSrcMidiFiles()
-		));
-	}
-
-	public void setAddCompFileButtonOnAction(){
-		fileCollectionComponents.getElementPlaceHolder()
-				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
-						fileCollectionComponents.getCompMidiFiles()
-				));
-		addCompFileButton.setOnAction(event->loadFile(fileCollectionComponents
-						.getCompFiles(),
-				fileCollectionComponents.getCompMidiFiles()
-		));
-	}
-
-	private void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis){
-		listOfFiles.addAll(FileListEditor.AddFile());
-		initiateMidiFileList(listOfFiles, listOfMidis);
-		setStatus("File \"" + listOfMidis.get(listOfMidis.size() - 1)
-				.getFilePath()
-				.getName() + "\" has been added!");
-		fileCollectionComponents.getElementPlaceHolder()
-				.setCenter(FileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
-						fileCollectionComponents.getCompMidiFiles()
-				));
-	}
+    private void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis) {
+        listOfFiles.addAll(FileListEditor.AddFile());
+        initiateMidiFileList(listOfFiles, listOfMidis);
+        setStatus("File \"" + listOfMidis.get(listOfMidis.size() - 1)
+                .getFilePath()
+                .getName() + "\" has been added!");
+        fileCollectionComponents.getElementPlaceHolder()
+                .setCenter(fileList.ListsOfFiles(fileCollectionComponents.getSrcMidiFiles(),
+                        fileCollectionComponents.getCompMidiFiles()
+                ));
+    }
 
 
-	private void initiateMidiFileList(List<File> listOfFiles, List<MidiFile> listOfMidis){
-		for(File file : listOfFiles)
-			try{
-				listOfMidis.add(new MidiFile(file));
-			}catch(InvalidMidiDataException | IOException e){
-				e.printStackTrace();
-			}
-		listOfFiles.clear();
-	}
+    private void initiateMidiFileList(List<File> listOfFiles, List<MidiFile> listOfMidis) {
+        for (File file : listOfFiles)
+            try {
+                listOfMidis.add(new MidiFile(file));
+            } catch (InvalidMidiDataException | IOException e) {
+                e.printStackTrace();
+            }
+        listOfFiles.clear();
+    }
+
+    public Menu getMenuFileButton() {
+        return menuFileButton;
+    }
+
+    public MenuBar getMenuBar() {
+        return menuBar;
+    }
+
+    public MenuItem getAddSrcFileButton() {
+        return addSrcFileButton;
+    }
+
+    public MenuItem getRemoveFileButton() {
+        return removeFileButton;
+    }
+
+    public MenuItem getAddCompFileButton() {
+        return addCompFileButton;
+    }
+
+    public Menu getMenuWindowsButtons() {
+        return menuWindowsButtons;
+    }
+
+    public MenuItem getSettingsButton() {
+        return settingsButton;
+    }
+
 }
