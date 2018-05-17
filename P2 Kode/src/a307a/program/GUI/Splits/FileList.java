@@ -9,32 +9,31 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //All methods are static as they only contain code for executing specific tasks.
 //Furthermore, this class does not house any values that would be useful to have in
 // instances of this class.
 public class FileList {
-    GraphicsManager graphicsManager;
+    private GraphicsManager graphicsManager;
 
     //This method only exists to collect the layouts made by the private methods of this
     // class.
-    public BorderPane ListsOfFiles(List<MidiFile> srcFiles, List<MidiFile>
+    public BorderPane listsOfFiles(List<MidiFile> srcFiles, List<MidiFile>
             cmpFiles) {
         BorderPane centralLayout = new BorderPane();
         Text srcText = new Text("Source File");
         Text compText = new Text("Compare file");
 
-        centralLayout.setCenter(SplitMaker2(gridMaker(srcFiles), gridMaker(cmpFiles)));
-        centralLayout.setTop(SplitMaker(srcText, compText));
+        centralLayout.setCenter(arrangeLists(gridMaker(srcFiles), gridMaker(cmpFiles)));
+        centralLayout.setTop(listDenoter(srcText, compText));
 
         return centralLayout;
     }
 
     //All private methods below this comment exist to heighten the abstraction level of
     // listsOfFiles.
-    private SplitPane SplitMaker(Node object1, Node object2) {
+    private SplitPane listDenoter(Node object1, Node object2) {
         SplitPane splitPane = new SplitPane();
         StackPane stackPane1 = new StackPane();
         StackPane stackPane2 = new StackPane();
@@ -55,7 +54,7 @@ public class FileList {
         return splitPane;
     }
 
-    private SplitPane SplitMaker2(Node object1, Node object2) {
+    private SplitPane arrangeLists(Node object1, Node object2) {
         SplitPane splitPane2 = new SplitPane();
         ScrollPane scrollPane1 = new ScrollPane();
         ScrollPane scrollPane2 = new ScrollPane();
@@ -81,12 +80,10 @@ public class FileList {
     private GridPane gridMaker(List<MidiFile> files) {
         GridPane fileList = new GridPane();
         fileList.setGridLinesVisible(true);
-        List<Text> fileIndex = new ArrayList<>();
         for (int count = 0; count < files.size(); ++count) {
             fileList.add(createFileEntry(files, count), 0, count);
-            fileIndex.add(new Text(Integer.toString(count)));
-            fileList.add(fileIndex.get(count), 1, count);
-            fileList.add(deleteFileEntryButton(count, files), 2, count);
+            fileList.add(new Text(Integer.toString(count)), 1, count);
+            fileList.add(buttonDeleteFileEntry(count, files), 2, count);
         }
 
         return fileList;
@@ -112,7 +109,7 @@ public class FileList {
         return entry;
     }
 
-    private Button deleteFileEntryButton(int entry, List<MidiFile> files) {
+    private Button buttonDeleteFileEntry(int entry, List<MidiFile> files) {
         Button button = new Button("Remove");
         button.setOnAction(event -> {
             files.remove(entry);
