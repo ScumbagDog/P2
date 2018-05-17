@@ -9,7 +9,7 @@ class MidiSequenceReader extends AMidiSequenceReader{
 	private final Set<Integer> channels;
 	private final List<BufferedMidiEvent> bufferedEvents;
 
-	public MidiSequenceReader(Sequence sequence){
+	MidiSequenceReader(Sequence sequence){
 		super(sequence);
 		this.tracks = sequence.getTracks();
 		List<MidiEvent> events = this.getEventsFromTracks(this.tracks);
