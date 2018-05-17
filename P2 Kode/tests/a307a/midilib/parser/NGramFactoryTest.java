@@ -1,9 +1,9 @@
 package a307a.midilib.parser;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,8 +13,8 @@ class NGramFactoryTest {
     @Test
     void oneGramTest() {
         List<Integer> intervals = new ArrayList<>();
-        List<INGram<Integer>> nGrams = new ArrayList<>();
-        List<INGram<Integer>> expectedNGrams = new ArrayList<>();
+	    List<INGram> nGrams = new ArrayList<>();
+	    List<INGram> expectedNGrams = new ArrayList<>();
         // To takter af Mester Jakob
         intervals.add(2);
         intervals.add(2);
