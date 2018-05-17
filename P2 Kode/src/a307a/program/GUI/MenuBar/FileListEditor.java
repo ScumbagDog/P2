@@ -3,7 +3,6 @@ package a307a.program.GUI.MenuBar;
 import a307a.Exceptions.InvalidInputException;
 import a307a.program.GUI.GraphicsManager;
 import a307a.program.GUI.Splits.FileList;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,13 +13,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 //All methods are static as they only contain code for executing specific tasks.
 //Furthermore, this class does not house any values that would be useful to have in
 // instances of this class.
 public class FileListEditor {
+    private GraphicsManager graphicsManager;
     private Stage stage = new Stage();
     private Text minFlavorText = new Text("From file number:");
     private Text maxFlavorText = new Text("to");
@@ -30,15 +29,16 @@ public class FileListEditor {
     private RadioButton comp = new RadioButton("Comparison file list");
     private TextField minFileNumber = new TextField();
     private TextField maxFileNumber = new TextField();
-    private Button listCutter = new Button("Remove from list");
+    private Button buttonFileRemover = new Button("Remove from list");
     private GridPane gridPane = new GridPane();
     private FileList fileList;
 
     public FileListEditor(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, GraphicsManager graphicsManager) {
+        this.graphicsManager = graphicsManager;
         this.fileList = graphicsManager.getFileList();
         initializeRadioButtons();
-        listCutter.setOnAction(event -> {
-            remove(srcMidiFiles, compMidiFiles, graphicsManager.getElementHolder());
+        buttonFileRemover.setOnAction(event -> {
+            remove(srcMidiFiles, compMidiFiles);
         });
         setElementPositions();
         createWindow();
@@ -46,14 +46,14 @@ public class FileListEditor {
 
     //This window for removing files was added as an alternative to having a removal button next to each individual file entry.
     //The feature for having individual buttons for each file entry may be readded in the future.
-    private void remove(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles, BorderPane elementHolder) {
+    private void remove(List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles) {
         try {
             if (src.isSelected()) {
-                RemoveSelectedFile(minFileNumber, maxFileNumber, srcMidiFiles);
-                elementHolder.setCenter(fileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
+                removeSelectedFile(minFileNumber, maxFileNumber, srcMidiFiles);
+                graphicsManager.updateDisplay();
             } else if (comp.isSelected()) {
-                RemoveSelectedFile(minFileNumber, maxFileNumber, compMidiFiles);
-                elementHolder.setCenter(fileList.ListsOfFiles(srcMidiFiles, compMidiFiles));
+                removeSelectedFile(minFileNumber, maxFileNumber, compMidiFiles);
+                graphicsManager.updateDisplay();
             } else {
                 ErrorWindow("Please select a list to remove files from.");
             }
@@ -68,10 +68,9 @@ public class FileListEditor {
     }
 
     //The code for removing files is placed in its own method as it's used multiple times.
-    private static void RemoveSelectedFile(TextField minFileNumber, TextField maxFileNumber, List<MidiFile> fileList) throws InvalidInputException {
+    private static void removeSelectedFile(TextField minFileNumber, TextField maxFileNumber, List<MidiFile> fileList) throws InvalidInputException {
         int minNumber = Integer.parseInt(minFileNumber.getText()),
-                maxNumber = Integer.parseInt(maxFileNumber.getText()),
-                numberOfFilesRemoved = maxNumber - minNumber;
+                maxNumber = Integer.parseInt(maxFileNumber.getText());
 
         if (maxFileNumber.getText().trim().isEmpty()) {
             maxNumber = minNumber;
@@ -135,7 +134,7 @@ public class FileListEditor {
         gridPane.add(minFileNumber, 1, 0);
         gridPane.add(maxFlavorText, 2, 0);
         gridPane.add(maxFileNumber, 3, 0);
-        gridPane.add(listCutter, 4, 0);
+        gridPane.add(buttonFileRemover, 4, 0);
         gridPane.add(checkboxFlavorText, 0, 1);
         gridPane.add(src, 1, 1);
         gridPane.add(comp, 3, 1);
