@@ -1,7 +1,7 @@
 package a307a.Exceptions;
 
-public class InvalidInputException extends Exception {
-    public InvalidInputException() {
-        super();
-    }
+public class InvalidInputException extends Exception{
+	public InvalidInputException(){
+		super();
+	}
 }

@@ -5,30 +5,30 @@ import a307a.algorithm.Ukkonen;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
-public class CheckBoxMenuItem extends CheckBox {
+public class CheckBoxMenuItem extends CheckBox{
 
-    /* Getting names with .getname from algorithm folder and organize it with VBox and
-    Checkbox */
-    public VBox ListAlgorithm() {
-        final int SizeOf = 5;
-        Ukkonen algo1 = new Ukkonen(2);
-        VBox vbox = new VBox();
-        vbox.setTranslateX(50);
-        vbox.setTranslateY(50);
-        String findAlgorithm = algo1.getName();
+	/* Getting names with .getname from algorithm folder and organize it with VBox and
+	Checkbox */
+	public VBox ListAlgorithm(){
+		final int SizeOf = 5;
+		Ukkonen algo1 = new Ukkonen(2);
+		VBox vbox = new VBox();
+		vbox.setTranslateX(50);
+		vbox.setTranslateY(50);
+		String findAlgorithm = algo1.getName();
          /*for (int i = 0; i <= SizeOf ; i++) {
 
          } */
-        CheckBox cb1 = new CheckBox(findAlgorithm);
-        cb1.setSelected(false);
-        cb1.setIndeterminate(false);
-        vbox.getChildren()
-                .addAll(cb1);
+		CheckBox cb1 = new CheckBox(findAlgorithm);
+		cb1.setSelected(false);
+		cb1.setIndeterminate(false);
+		vbox.getChildren()
+				.addAll(cb1);
 
-        return vbox;
-    }
+		return vbox;
+	}
 
-    /* TODO dette er et midlertidigt løsning */
+	/* TODO dette er et midlertidigt løsning */
    /* VBox vbox = new VBox();
     vbox.setTranslateX(50);
     vbox.setTranslateY(50);
