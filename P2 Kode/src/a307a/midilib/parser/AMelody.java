@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Represents a melody.
+ * @see INote
  */
 public abstract class AMelody{
 	protected List<INote> notes;

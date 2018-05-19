@@ -3,7 +3,7 @@ package a307a.midilib.parser;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MonophonicMelody extends AMelody{
+class MonophonicMelody extends AMelody{
 	MonophonicMelody(List<INote> notes){
 		super(getMonophonicNotes(notes));
 	}
