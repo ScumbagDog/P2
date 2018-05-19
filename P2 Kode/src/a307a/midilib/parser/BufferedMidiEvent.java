@@ -2,8 +2,7 @@ package a307a.midilib.parser;
 
 import javax.sound.midi.MidiEvent;
 
-/* Represent a MIDI event with added methods for accessing
- * the. */
+/* Represent a MIDI event with methods for accessing details. */
 class BufferedMidiEvent{
 	private final int status;
 	private final byte[] message;

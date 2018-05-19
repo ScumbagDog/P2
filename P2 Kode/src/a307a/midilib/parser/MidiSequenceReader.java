@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 class MidiSequenceReader extends AMidiSequenceReader{
 	private final Track[] tracks;
 	private final Set<Integer> channels;
-	private final List<BufferedMidiEvent> bufferedEvents;
+	private final Collection<BufferedMidiEvent> bufferedEvents;
 
 	MidiSequenceReader(Sequence sequence){
 		super(sequence);
@@ -37,7 +37,8 @@ class MidiSequenceReader extends AMidiSequenceReader{
 
 	/* Returns a list of BufferedMidiEvent objects from the list of
 	 * events in the MIDI sequence. */
-	private List<BufferedMidiEvent> getBufferedEvents(List<MidiEvent> events){
+	private Collection<BufferedMidiEvent> getBufferedEvents
+	(Collection<MidiEvent> events){
 		return events.stream()
 				.map(BufferedMidiEvent::new)
 				.collect(Collectors.toList());
