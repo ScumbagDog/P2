@@ -1,8 +1,6 @@
 package a307a.midilib.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /*
  * An NGram is a sorted list of intervals.
@@ -46,7 +44,7 @@ public class NGram implements INGram {
 
     @Override
     public int getMagnitude() {
-        return 0;
+        return intervals.size();
     }
 
     public List<Integer> getIntervals() {
