@@ -37,7 +37,7 @@ public class GraphicsManager {
         fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
                 .getFilePath()
                 .getName() + "\" has been added!");
-        elementHolder.setCenter(fileList.ListsOfFiles(
+        elementHolder.setCenter(fileList.listsOfFiles(
                 selectedFiles.getSrcMidiFiles(),
                 selectedFiles.getCompMidiFiles()
         ));
@@ -47,7 +47,7 @@ public class GraphicsManager {
         elementHolder.setTop(accessBar.getMenuBar());
         elementHolder.setLeft(algorithmStack);
         elementHolder.setBottom(fileName);
-        elementHolder.setCenter(fileList.ListsOfFiles(
+        elementHolder.setCenter(fileList.listsOfFiles(
                 selectedFiles.getSrcMidiFiles(),
                 selectedFiles.getCompMidiFiles()
         ));
