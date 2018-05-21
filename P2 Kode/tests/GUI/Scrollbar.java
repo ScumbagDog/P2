@@ -12,8 +12,9 @@ import javafx.stage.Stage;
 public class Scrollbar extends Application {
 
 
-
-    public static void main(String[] args) { launch(args); }
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -37,7 +38,6 @@ public class Scrollbar extends Application {
         scrollbar.setOrientation(Orientation.VERTICAL);
         scrollbar.setPrefHeight(180);
         scrollbar.setMax(360);
-
 
 
         //her sættes scrollbaren i centervinduet

@@ -2,23 +2,29 @@ package a307a.program.GUI;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class DataResult{
+import java.util.List;
 
-	public final SimpleStringProperty fileName;
-	public final double resultValue;
+public class DataResult {
 
-	public DataResult(String fileName, double resultValue){
-		this.fileName = new SimpleStringProperty(fileName);
-		this.resultValue = resultValue;
+    public final String fileName;
+    public final double resultValue;
 
-	}
+    public DataResult(String fileName, double resultValue) {
+        this.fileName = fileName;
+        this.resultValue = resultValue;
 
-	public String getFileName(){
-		return fileName.get();
-	}
+    }
 
-	public double getResultValue(){
-		return resultValue;
-	}
+    public String getFileName() {
+        return fileName;
+    }
+
+    public double getResultValue() {
+        return resultValue;
+    }
+
+    public String getEntry(){
+        return fileName + ": " + Double.toString(resultValue);
+    }
 
 }
