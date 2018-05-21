@@ -58,7 +58,6 @@ public class Test_TFIDF{
 				"P2 " + "Kode/March-i-G.mid"));
 		AMelody m1 = msr.getMelody(0);
 		AMelody m2 = msr.getMelody(0);
-		//LOL MARTION NOOOOB faggot
 
 		double res = tfidf.compareTo(m1, m2);
 
