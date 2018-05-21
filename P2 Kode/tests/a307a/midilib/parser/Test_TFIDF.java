@@ -58,12 +58,18 @@ public class Test_TFIDF{
 				"P2 " + "Kode/March-i-G.mid"));
 		AMelody m1 = msr.getMelody(0);
 		AMelody m2 = msr.getMelody(0);
-
-		double res = tfidf.compareTo(m1, m2);
+		double result = tfidf.compareTo(m1, m2);
 
 		/* Assert comparison with same melody returns 1.0*/
-		assertEquals(1.0, res);
-		System.out.println("Comp res: " + res);
+		assertEquals(1.0, result);
+
+		m2 = msr.getMelody(1);
+		result = tfidf.compareTo(m1, m2);
+		assertTrue(result < 1.0);
+
+		m2 = msr.getMelody(2);
+		result = tfidf.compareTo(m1, m2);
+		assertTrue(result < 1.0);
 	}
 
 	@Test
@@ -91,7 +97,7 @@ public class Test_TFIDF{
 				"P2 " + "Kode/tests/Mester-Jakob.mid"));
 		AMelody veryDifferent = msr.getMelody(0);
 
-		/* Assert that the very different melody returns a smaller value. */
+		/* Assert that the very different melody return a smaller value. */
 		double resultVeryDifferent = tfidf.compareTo(melody1Almost,
 				veryDifferent);
 		assertTrue(resultAlmostSame > resultVeryDifferent);

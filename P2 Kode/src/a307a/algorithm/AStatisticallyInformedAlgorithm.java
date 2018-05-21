@@ -19,7 +19,6 @@ public abstract class AStatisticallyInformedAlgorithm implements
 	}
 
 	protected double getTermFrequency(AMelody melody, INGram melodicTerm){
-		System.out.println("NGram magnitude: " + melodicTerm.getMagnitude());
 		INGramFactory nFact = new NGramFactory();
 		List<INGram> terms = nFact.getNGrams(melody,
 				melodicTerm.getMagnitude());
@@ -28,14 +27,11 @@ public abstract class AStatisticallyInformedAlgorithm implements
 				.filter(melodicTerm::equals)
 				.count();
 		double res = (double) frequency / (double) terms.size();
-		System.out.println("Frequency: " + frequency);
-		System.out.println("TF: " + res);
 		return res;
 	}
 
 	protected double getInvertedDocumentFrequency(INGram melodicTerm){
 		double numberOfMelodies = nGramLists.size();
-		System.out.println("Melodies in collection: " + numberOfMelodies);
 
 		double melodiesWithMelodicTerm = getNumberOfMelodiesWithMelodicTerm(
 				melodicTerm);

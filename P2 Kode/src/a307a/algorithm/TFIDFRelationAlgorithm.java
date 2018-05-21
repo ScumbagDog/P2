@@ -20,12 +20,7 @@ public class TFIDFRelationAlgorithm extends
 			BiFunction<Double, Double, Double> operator
 	){
 		double idf = getInvertedDocumentFrequency(term);
-		System.out.println("IDF: " + idf);
-
-
 		double res = operator.apply(getTermFrequency(melody, term), idf);
-
-		System.out.println("TFIDF: " + res);
 		return res;
 	}
 
@@ -56,7 +51,7 @@ public class TFIDFRelationAlgorithm extends
 
 		double result = (dividend1 * dividend2) / Math.sqrt(
 				divisor1 * divisor2);
-		return 1 / result;
+		return result;
 	}
 
 	@Override
@@ -68,6 +63,10 @@ public class TFIDFRelationAlgorithm extends
 	public double compareTo(
 			AMelody midiMelody1, AMelody midiMelody2
 	){
-		return sumUnion(midiMelody1, midiMelody2, (d1, d2)->d1 * d2);
+		double result = sumUnion(midiMelody1, midiMelody2, (d1, d2)->d1 * d2);
+
+		double normalized = 1 / result;
+		System.out.println("Res: " + normalized);
+		return normalized;
 	}
 }
