@@ -29,7 +29,7 @@ public class TFIDFRelationAlgorithm extends
 		List<INGram> terms1 = MidiTools.getNGrams(m1, magnitude);
 		List<INGram> terms2 = MidiTools.getNGrams(m2, magnitude);
 
-		return terms1.stream()
+		double result = terms1.stream()
 				.flatMap(t->terms2.stream())
 				.mapToDouble(t->TFIDF(m1, t, operator) * TFIDF(m2, t, operator))
 				.sum() / Math.sqrt(terms1.stream()
@@ -38,6 +38,8 @@ public class TFIDFRelationAlgorithm extends
 						TFIDF(m1, t, operator),
 						2))
 				.sum());
+		System.out.println(result);
+		return result;
 	}
 
 	@Override
