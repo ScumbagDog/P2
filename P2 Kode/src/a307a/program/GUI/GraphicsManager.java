@@ -26,7 +26,9 @@ public class GraphicsManager{
 		this.accessBar = accessBar;
 		algorithmStack = new StackPane(algorithms);
 		fileName = new Text("Awaiting action...");
-		splitLists = new FileList();
+
+		//TODO: Fix nedenstående.
+		//		splitLists = new FileList();
 		selectedFiles = new FileStorage();
 		resultSplit = new SplitPane();
 	}
@@ -37,20 +39,22 @@ public class GraphicsManager{
 		fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
 				.getFilePath()
 				.getName() + "\" has been added!");
-		elementHolder.setCenter(splitLists.ListsOfFiles(
-				selectedFiles.getSrcMidiFiles(),
-				selectedFiles.getCompMidiFiles()
-		));
+		//TODO: Fix
+		//		elementHolder.setCenter(splitLists.ListsOfFiles(
+		//				selectedFiles.getSrcMidiFiles(),
+		//				selectedFiles.getCompMidiFiles()
+		//		));
 	}
 
 	public void updateDisplay(){
 		elementHolder.setTop(accessBar.getMenuBar());
 		elementHolder.setLeft(algorithmStack);
 		elementHolder.setBottom(fileName);
-		elementHolder.setCenter(splitLists.ListsOfFiles(
-				selectedFiles.getSrcMidiFiles(),
-				selectedFiles.getCompMidiFiles()
-		));
+		//TODO: Fix
+		//		elementHolder.setCenter(splitLists.ListsOfFiles(
+		//				selectedFiles.getSrcMidiFiles(),
+		//				selectedFiles.getCompMidiFiles()
+		//		));
 		elementHolder.setRight(resultSplit);
 	}
 

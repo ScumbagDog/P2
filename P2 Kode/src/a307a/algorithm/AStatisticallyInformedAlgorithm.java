@@ -22,27 +22,27 @@ public abstract class AStatisticallyInformedAlgorithm implements
 		INGramFactory nFact = new NGramFactory();
 		List<INGram> terms = nFact.getNGrams(melody,
 				melodicTerm.getMagnitude());
-		return melodicTerm.getFrequency() / terms.stream()
-				.mapToInt(INGram::getFrequency)
-				.sum();
+
+		long frequency = terms.stream()
+				.filter(melodicTerm::equals)
+				.count();
+		return (double) frequency / (double) terms.size();
 	}
 
 	protected double getInvertedDocumentFrequency(INGram melodicTerm){
 		int numberOfMelodies = nGramLists.size();
-		int
-				numberOfMelodiesWithMelodicTerm
-				= getNumberOfMelodiesWithMelodicTerm(melodicTerm);
-		return Math.log(numberOfMelodies / numberOfMelodiesWithMelodicTerm);
+		return Math.log(
+				numberOfMelodies / (double) getNumberOfMelodiesWithMelodicTerm(
+						melodicTerm));
 	}
 
 	/* Returns the number of melodies in source collection a term (NGram)
 	 * appears in at least once . */
-	private int getNumberOfMelodiesWithMelodicTerm(INGram melodicTerm){
+	private long getNumberOfMelodiesWithMelodicTerm(INGram melodicTerm){
 		return this.nGramLists.stream()
 				.filter(nGramList->nGramList.stream()
 						.anyMatch(melodicTerm::equals))
-				.collect(Collectors.toList())
-				.size();
+				.count();
 	}
 
 	private Collection<List<INGram>> getNGramLists(
