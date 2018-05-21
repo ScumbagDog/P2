@@ -1,5 +1,6 @@
 package a307a.program.GUI;
 
+import a307a.program.GUI.MenuBar.settings.SettingsFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
@@ -33,6 +34,7 @@ public class ResultList {
     private StackPane resultStack2 = new StackPane(buttons);
     private Comparison comparison = new Comparison();
     private GraphicsManager graphicsManager;
+    private SettingsFile settings;
 
     public void addTableEntry(String compInformation, double result) {
         data.add(new DataResult(compInformation, result));
@@ -63,9 +65,10 @@ public class ResultList {
         });
     }
 
-    public ResultList(GraphicsManager graphicsManager) {
+    public ResultList(GraphicsManager graphicsManager, SettingsFile settings) {
+        this.settings = settings;
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        table.setPrefWidth(150);
+        table.setPrefWidth(settings.getWindowWidth() / 3);
 
         fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
                 ("fileName"));
@@ -134,8 +137,8 @@ public class ResultList {
         ZonedDateTime date = ZonedDateTime.now();
         String dash = "-";
         return Integer.toString(date.getHour())
-                + Integer.toString(date.getMinute())
-                + Integer.toString(date.getDayOfMonth())
+                + dash + Integer.toString(date.getMinute())
+                + dash + Integer.toString(date.getDayOfMonth())
                 + dash + Integer.toString(date.getMonthValue())
                 + dash + Integer.toString(date.getYear());
     }

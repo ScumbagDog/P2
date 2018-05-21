@@ -15,7 +15,7 @@ public class MainGUI extends Application {
     private SettingsFile settings = new SettingsFile();
     private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
     private GraphicsManager graphicsManager = new GraphicsManager();
-    private ResultList resultList = new ResultList(graphicsManager);
+    private ResultList resultList = new ResultList(graphicsManager, settings);
 
 
     //Essentially the 'main' method of JavaFX.
