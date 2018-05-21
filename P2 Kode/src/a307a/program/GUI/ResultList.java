@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.stream.Collectors;
 
-public class Resultlist {
+public class ResultList {
     private ObservableList<DataResult> data = FXCollections.observableArrayList();
     private TableView table = new TableView();
     private TableColumn fileName1 = new TableColumn("Files");
@@ -34,43 +34,9 @@ public class Resultlist {
     private Comparison comparison = new Comparison();
     private GraphicsManager graphicsManager;
 
-
-    public Resultlist(GraphicsManager graphicsManager) {
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        table.setPrefWidth(150);
-
-        fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
-                ("fileName"));
-        result.setCellValueFactory(new PropertyValueFactory<DataResult, String>
-                ("resultValue"));
-
-        table.getColumns()
-                .addAll(fileName1, result);
-
-        this.graphicsManager = graphicsManager;
-        initiateResultList();
-        setCompareButtonFunctionality();
-        saveResultsToFile();
-    }
-
-    public TableView getTable() {
-        return table;
-    }
-
     public void addTableEntry(String compInformation, double result) {
         data.add(new DataResult(compInformation, result));
         table.setItems(data);
-    }
-
-    private void initiateResultList() {
-        graphicsManager.getResultSplit()
-                .setOrientation(Orientation.VERTICAL);
-        graphicsManager.getResultSplit()
-                .setDividerPositions(0.9);
-        //resultStack2.setMaxSize(100, 100);
-        graphicsManager.getResultSplit()
-                .getItems()
-                .addAll(resultStack1, resultStack2);
     }
 
     public void saveResultsToFile(){
@@ -89,22 +55,54 @@ public class Resultlist {
             } });
     }
 
-    private String getDate(){
-        ZonedDateTime date = ZonedDateTime.now();
-        String dash = "-";
-        return Integer.toString(date.getHour())
-                + Integer.toString(date.getMinute())
-                + Integer.toString(date.getDayOfMonth())
-                + dash + Integer.toString(date.getMonthValue())
-                + dash + Integer.toString(date.getYear());
-    }
-
     public void setCompareButtonFunctionality() {
         compareMelodies.setStyle("-fx-font-size: 10pt;");
         compareMelodies.setText("Compare");
         compareMelodies.setOnAction(event -> {
             openConfirmationWindow();
         });
+    }
+
+    public ResultList(GraphicsManager graphicsManager) {
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setPrefWidth(150);
+
+        fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
+                ("fileName"));
+        result.setCellValueFactory(new PropertyValueFactory<DataResult, String>
+                ("resultValue"));
+
+        table.getColumns()
+                .addAll(fileName1, result);
+
+        this.graphicsManager = graphicsManager;
+        initiateResultList();
+        setCompareButtonFunctionality();
+        saveResultsToFile();
+    }
+
+    private void initiateResultList() {
+        graphicsManager.getResultSplit()
+                .setOrientation(Orientation.VERTICAL);
+        graphicsManager.getResultSplit()
+                .setDividerPositions(0.9);
+        //resultStack2.setMaxSize(100, 100);
+        graphicsManager.getResultSplit()
+                .getItems()
+                .addAll(resultStack1, resultStack2);
+    }
+
+    private String setConfirmationText(){
+        return "A total of "
+                + graphicsManager.getSelectedFiles()
+                .getSrcMidiFiles()
+                .size()
+                + " source files and "
+                + graphicsManager.getSelectedFiles()
+                .getCompMidiFiles()
+                .size()
+                + " comparison files have been selected.\n"
+                + "Do you want to begin the comparison sequence?";
     }
 
     private void openConfirmationWindow(){
@@ -132,16 +130,19 @@ public class Resultlist {
         confirmAction.show();
     }
 
-    private String setConfirmationText(){
-        return "A total of "
-                + graphicsManager.getSelectedFiles()
-                .getSrcMidiFiles()
-                .size()
-                + " source files and "
-                + graphicsManager.getSelectedFiles()
-                .getCompMidiFiles()
-                .size()
-                + " comparison files have been selected.\n"
-                + "Do you want to begin the comparison sequence?";
+    private String getDate(){
+        ZonedDateTime date = ZonedDateTime.now();
+        String dash = "-";
+        return Integer.toString(date.getHour())
+                + Integer.toString(date.getMinute())
+                + Integer.toString(date.getDayOfMonth())
+                + dash + Integer.toString(date.getMonthValue())
+                + dash + Integer.toString(date.getYear());
     }
+
+    public TableView getTable() {
+        return table;
+    }
+
 }
+

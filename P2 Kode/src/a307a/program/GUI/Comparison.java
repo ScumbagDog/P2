@@ -26,7 +26,7 @@ public class Comparison {
 
     //
     public void useUkonnen(
-            Resultlist resultlist,
+            ResultList resultList,
             List<MidiFile> srcFiles,
             List<MidiFile> compFiles
     ) {
@@ -62,7 +62,7 @@ public class Comparison {
                                             .get(compBoxes)
                                             .getText();
                                     compMelody = compReader.getMelody(Integer.parseInt(compText));
-                                    resultlist.addTableEntry(srcName
+                                    resultList.addTableEntry(srcName
                                             + " Channel"
                                             + srcText
                                             + " to "
