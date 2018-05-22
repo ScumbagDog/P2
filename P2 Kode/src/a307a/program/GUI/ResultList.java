@@ -19,8 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
-import java.util.stream.Collectors;
 
 public class ResultList {
     private ObservableList<DataResult> data = FXCollections.observableArrayList();
@@ -32,37 +30,12 @@ public class ResultList {
     private HBox buttons = new HBox(compareMelodies, saveResults);
     private StackPane resultStack1 = new StackPane(this.getTable());
     private StackPane resultStack2 = new StackPane(buttons);
-    private Comparison comparison = new Comparison();
     private GraphicsManager graphicsManager;
     private SettingsFile settings;
 
     public void addTableEntry(String compInformation, double result) {
         data.add(new DataResult(compInformation, result));
         table.setItems(data);
-    }
-
-    public void saveResultsToFile(){
-        saveResults.setText("Save Results");
-        saveResults.setOnAction(event -> {
-            try{
-                PrintWriter writer = new PrintWriter(getDate() + ".txt", "UTF-8");
-                data.stream().forEach(dataResult -> writer.println(dataResult.getEntry()));
-                writer.close();
-            }
-            catch(FileNotFoundException e){
-                System.out.println("The file you made does not exist");
-            }
-            catch(UnsupportedEncodingException e){
-                System.out.println("Invalid encoding, fix it.");
-            } });
-    }
-
-    public void setCompareButtonFunctionality() {
-        compareMelodies.setStyle("-fx-font-size: 10pt;");
-        compareMelodies.setText("Compare");
-        compareMelodies.setOnAction(event -> {
-            openConfirmationWindow();
-        });
     }
 
     public ResultList(GraphicsManager graphicsManager, SettingsFile settings) {
@@ -79,12 +52,12 @@ public class ResultList {
                 .addAll(fileName1, result);
 
         this.graphicsManager = graphicsManager;
-        initiateResultList();
+        initiateRightPane();
         setCompareButtonFunctionality();
         saveResultsToFile();
     }
 
-    private void initiateResultList() {
+    private void initiateRightPane() {
         graphicsManager.getResultSplit()
                 .setOrientation(Orientation.VERTICAL);
         graphicsManager.getResultSplit()
@@ -93,6 +66,14 @@ public class ResultList {
         graphicsManager.getResultSplit()
                 .getItems()
                 .addAll(resultStack1, resultStack2);
+    }
+
+    private void setCompareButtonFunctionality() {
+        compareMelodies.setStyle("-fx-font-size: 10pt;");
+        compareMelodies.setText("Compare");
+        compareMelodies.setOnAction(event -> {
+            openConfirmationWindow();
+        });
     }
 
     private String setConfirmationText(){
@@ -112,25 +93,44 @@ public class ResultList {
         Stage confirmAction = new Stage();
         Text confirmationText = new Text(setConfirmationText());
         Button startComparison = new Button("Start");
+        Comparison comparison = new Comparison(this,
+                graphicsManager.getSelectedFiles()
+                        .getSrcMidiFiles(),
+                graphicsManager.getSelectedFiles()
+                        .getCompMidiFiles());
+
         startComparison.setOnAction(event2 -> {
-            comparison.useUkonnen(this,
-                    graphicsManager.getSelectedFiles()
-                            .getSrcMidiFiles(),
-                    graphicsManager.getSelectedFiles()
-                            .getCompMidiFiles()
-            );
+            comparison.useUkkonen();
             confirmAction.close();
         });
+
         Button cancelComparison = new Button("Cancel");
         cancelComparison.setOnAction(event3 -> {
             confirmAction.close();
         });
+
         BorderPane content = new BorderPane();
         content.setTop(confirmationText);
         content.setLeft(startComparison);
         content.setRight(cancelComparison);
         confirmAction.setScene(new Scene(content));
         confirmAction.show();
+    }
+
+    private void saveResultsToFile(){
+        saveResults.setText("Save Results");
+        saveResults.setOnAction(event -> {
+            try{
+                PrintWriter writer = new PrintWriter(getDate() + ".txt", "UTF-8");
+                data.stream().forEach(dataResult -> writer.println(dataResult.getEntry()));
+                writer.close();
+            }
+            catch(FileNotFoundException e){
+                System.out.println("The file you made does not exist");
+            }
+            catch(UnsupportedEncodingException e){
+                System.out.println("Invalid encoding, fix it.");
+            } });
     }
 
     private String getDate(){

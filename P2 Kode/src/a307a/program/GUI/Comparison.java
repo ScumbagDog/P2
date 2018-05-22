@@ -23,52 +23,29 @@ public class Comparison {
     private String srcName;
     private String compText;
     private String compName;
+    private ResultList resultList;
+    private List<MidiFile> srcFiles;
+    private List<MidiFile> compFiles;
+    private Ukkonen ukkonen = new Ukkonen(2);
 
-    //
-    public void useUkonnen(
-            ResultList resultList,
-            List<MidiFile> srcFiles,
-            List<MidiFile> compFiles
+    public void useUkkonen(
     ) {
         try {
-            Ukkonen ukkonen = new Ukkonen(2);
             for (MidiFile srcFile : srcFiles) {
-                srcReader = MidiTools.getMidiSequenceReader(srcFile.getFilePath());
-                srcName = srcFile.getFileName();
+                prepareSrcReader(srcFile);
                 for (int srcBoxes = 0;
-                     srcBoxes < srcFile.getCheckBoxes()
-                             .size();
-                     ++srcBoxes
-                        ) {
-                    if (srcFile.getCheckBoxes()
-                            .get(srcBoxes)
-                            .isSelected()) {
-                        srcText = srcFile.getCheckBoxes()
-                                .get(srcBoxes)
-                                .getText();
-                        srcMelody = srcReader.getMelody(Integer.parseInt(srcText));
+                     srcBoxes < srcFile.getCheckBoxes().size();
+                     ++srcBoxes) {
+                    if (srcFile.getCheckBoxes().get(srcBoxes).isSelected()) {
+                        prepareSrcMelody(srcFile, srcBoxes);
                         for (MidiFile compFile : compFiles) {
-                            compReader = MidiTools.getMidiSequenceReader(compFile.getFilePath());
-                            compName = compFile.getFileName();
+                            prepareCompReader(compFile);
                             for (int compBoxes = 0;
-                                 compBoxes < compFile.getCheckBoxes()
-                                         .size();
-                                 ++compBoxes
-                                    ) {
-                                if (compFile.getCheckBoxes()
-                                        .get(compBoxes)
-                                        .isSelected()) {
-                                    compText = compFile.getCheckBoxes()
-                                            .get(compBoxes)
-                                            .getText();
-                                    compMelody = compReader.getMelody(Integer.parseInt(compText));
-                                    resultList.addTableEntry(srcName
-                                            + " Channel"
-                                            + srcText
-                                            + " to "
-                                            + compName
-                                            + " Channel"
-                                            + compText, ukkonen.compareTo(srcMelody, compMelody));
+                                 compBoxes < compFile.getCheckBoxes().size();
+                                 ++compBoxes) {
+                                if (compFile.getCheckBoxes().get(compBoxes).isSelected()) {
+                                    prepareCompMelody(compFile, compBoxes);
+                                    ukkonenFinalProcedure();
                                 }
                             }
                         }
@@ -89,4 +66,37 @@ public class Comparison {
         }
     }
 
+
+
+    public Comparison(ResultList resultList, List<MidiFile> srcFiles, List<MidiFile> compFiles) {
+        this.resultList = resultList;
+        this.srcFiles = srcFiles;
+        this.compFiles = compFiles;
+    }
+
+    private void ukkonenFinalProcedure(){
+        resultList.addTableEntry(srcName + " Channel"
+                + srcText + " to " + compName + " Channel"
+                + compText, ukkonen.compareTo(srcMelody, compMelody));
+    }
+
+    private void prepareSrcReader(MidiFile file) throws InvalidMidiDataException, IOException {
+        srcReader = MidiTools.getMidiSequenceReader(file.getFilePath());
+        srcName = file.getFileName();
+    }
+
+    private void prepareCompReader(MidiFile file) throws InvalidMidiDataException, IOException {
+        compReader = MidiTools.getMidiSequenceReader(file.getFilePath());
+        compName = file.getFileName();
+    }
+
+    private void prepareSrcMelody(MidiFile file, int boxes){
+        srcText = file.getCheckBoxes().get(boxes).getText();
+        srcMelody = srcReader.getMelody(Integer.parseInt(srcText));
+    }
+
+    private void prepareCompMelody(MidiFile file, int boxes){
+        compText = file.getCheckBoxes().get(boxes).getText();
+        compMelody = compReader.getMelody(Integer.parseInt(compText));
+    }
 }
