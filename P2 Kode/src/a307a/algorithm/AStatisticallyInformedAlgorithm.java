@@ -22,27 +22,31 @@ public abstract class AStatisticallyInformedAlgorithm implements
 		INGramFactory nFact = new NGramFactory();
 		List<INGram> terms = nFact.getNGrams(melody,
 				melodicTerm.getMagnitude());
-		return melodicTerm.getFrequency() / terms.stream()
-				.mapToInt(INGram::getFrequency)
-				.sum();
+
+		long frequency = terms.stream()
+				.filter(melodicTerm::equals)
+				.count();
+		double res = (double) frequency / (double) terms.size();
+		return res;
 	}
 
 	protected double getInvertedDocumentFrequency(INGram melodicTerm){
-		int numberOfMelodies = nGramLists.size();
-		int
-				numberOfMelodiesWithMelodicTerm
-				= getNumberOfMelodiesWithMelodicTerm(melodicTerm);
-		return Math.log(numberOfMelodies / numberOfMelodiesWithMelodicTerm);
+		double numberOfMelodies = nGramLists.size();
+
+		double melodiesWithMelodicTerm = getNumberOfMelodiesWithMelodicTerm(
+				melodicTerm);
+
+		return melodiesWithMelodicTerm == 0.0 ? 0.0 : Math.log(
+				numberOfMelodies / melodiesWithMelodicTerm);
 	}
 
 	/* Returns the number of melodies in source collection a term (NGram)
 	 * appears in at least once . */
-	private int getNumberOfMelodiesWithMelodicTerm(INGram melodicTerm){
-		return this.nGramLists.stream()
+	private long getNumberOfMelodiesWithMelodicTerm(INGram melodicTerm){
+		return nGramLists.stream()
 				.filter(nGramList->nGramList.stream()
 						.anyMatch(melodicTerm::equals))
-				.collect(Collectors.toList())
-				.size();
+				.count();
 	}
 
 	private Collection<List<INGram>> getNGramLists(

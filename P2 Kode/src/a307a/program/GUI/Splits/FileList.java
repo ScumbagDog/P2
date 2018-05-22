@@ -3,9 +3,7 @@ package a307a.program.GUI.Splits;
 import a307a.program.GUI.GraphicsManager;
 import a307a.program.GUI.MenuBar.MidiFile;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
@@ -120,6 +118,14 @@ public class FileList {
 
     public FileList(GraphicsManager graphicsManager) {
         this.graphicsManager = graphicsManager;
+    }
+
+    //TODO: Ehm, du kalder denne metode, men den findes ikke!
+    @Deprecated
+    public static Node ListsOfFiles(
+        List<MidiFile> srcMidiFiles, List<MidiFile> compMidiFiles
+    ){
+        return null; // YIKES! D:
     }
 }
 
