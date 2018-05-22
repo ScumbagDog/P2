@@ -28,8 +28,7 @@ public class Comparison {
     private List<MidiFile> compFiles;
     private Ukkonen ukkonen = new Ukkonen(2);
 
-    public void useUkkonen(
-    ) {
+    public void useUkkonen() {
         try {
             for (MidiFile srcFile : srcFiles) {
                 prepareSrcReader(srcFile);
@@ -45,7 +44,7 @@ public class Comparison {
                                  ++compBoxes) {
                                 if (compFile.getCheckBoxes().get(compBoxes).isSelected()) {
                                     prepareCompMelody(compFile, compBoxes);
-                                    ukkonenFinalProcedure();
+                                    executeUkkonen();
                                 }
                             }
                         }
@@ -66,15 +65,13 @@ public class Comparison {
         }
     }
 
-
-
     public Comparison(ResultList resultList, List<MidiFile> srcFiles, List<MidiFile> compFiles) {
         this.resultList = resultList;
         this.srcFiles = srcFiles;
         this.compFiles = compFiles;
     }
 
-    private void ukkonenFinalProcedure(){
+    private void executeUkkonen(){
         resultList.addTableEntry(srcName + " Channel"
                 + srcText + " to " + compName + " Channel"
                 + compText, ukkonen.compareTo(srcMelody, compMelody));
