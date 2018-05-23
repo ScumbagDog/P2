@@ -38,10 +38,13 @@ public class ResultList {
         table.setItems(data);
     }
 
-    public ResultList(GraphicsManager graphicsManager, SettingsFile settings) {
+    public void adjustListWidth(double windowWidth){
+        table.setPrefWidth(windowWidth / 3);
+    }
+
+    public ResultList(GraphicsManager graphicsManager, double windowWidth) {
         this.settings = settings;
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        table.setPrefWidth(settings.getWindowWidth() / 3);
 
         fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
                 ("fileName"));

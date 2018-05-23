@@ -1,18 +1,13 @@
 package a307a.program.GUI;
 
-import javafx.beans.property.SimpleStringProperty;
-
-import java.util.List;
-
 public class DataResult {
 
-    public final String fileName;
-    public final double resultValue;
+    private final String fileName;
+    private final double resultValue;
 
     public DataResult(String fileName, double resultValue) {
         this.fileName = fileName;
         this.resultValue = resultValue;
-
     }
 
     public String getFileName() {
@@ -26,5 +21,4 @@ public class DataResult {
     public String getEntry(){
         return fileName + ": " + Double.toString(resultValue);
     }
-
 }

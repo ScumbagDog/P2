@@ -15,7 +15,7 @@ public class MainGUI extends Application {
     private SettingsFile settings = new SettingsFile();
     private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
     private GraphicsManager graphicsManager = new GraphicsManager();
-    private ResultList resultList = new ResultList(graphicsManager, settings);
+    private ResultList resultList = new ResultList(graphicsManager, settings.getWindowWidth());
 
 
     //Essentially the 'main' method of JavaFX.
@@ -38,6 +38,9 @@ public class MainGUI extends Application {
 
         stage.setScene(scene);
         stage.setFullScreen(settings.getIsWindowFullscreen());
+        stage.widthProperty().addListener(((observable, oldValue, newValue) -> {
+            resultList.adjustListWidth((Double) newValue);
+        }));
         stage.show();
     }
 }
