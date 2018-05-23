@@ -1,7 +1,7 @@
 package a307a.midilib.parser;
 
 import a307a.algorithm.AStatisticallyInformedAlgorithm;
-import a307a.algorithm.TFIDFRelationAlgorithm;
+import a307a.algorithm.TFIDFSumUnion;
 import org.junit.jupiter.api.*;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Test_TFIDF{
@@ -23,7 +22,7 @@ public class Test_TFIDF{
 	void beforeall(){
 		melodyCollection = new HashSet<>();
 		File folder = new File(collectionPath);
-		assert folder != null;
+		assertTrue(folder.isDirectory());
 
 		File[] files = folder.listFiles();
 
@@ -45,13 +44,14 @@ public class Test_TFIDF{
 						.stream()
 						.map(msr::getMelody))
 				.collect(Collectors.toSet());
-		assert melodyCollection != null;
-		assert !melodyCollection.isEmpty();
+
+		assertNotEquals(null, melodyCollection);
+		assertTrue(!melodyCollection.isEmpty());
 	}
 
 	@Test
 	void test1() throws InvalidMidiDataException, IOException{
-		AStatisticallyInformedAlgorithm tfidf = new TFIDFRelationAlgorithm(
+		AStatisticallyInformedAlgorithm tfidf = new TFIDFSumUnion(
 				melodyCollection,
 				2);
 		AMidiSequenceReader msr = MidiTools.getMidiSequenceReader(new File(
@@ -74,7 +74,7 @@ public class Test_TFIDF{
 
 	@Test
 	void test2() throws InvalidMidiDataException, IOException{
-		AStatisticallyInformedAlgorithm tfidf = new TFIDFRelationAlgorithm(
+		AStatisticallyInformedAlgorithm tfidf = new TFIDFSumUnion(
 				melodyCollection,
 				2);
 		AMidiSequenceReader msr = MidiTools.getMidiSequenceReader(new File(
