@@ -90,8 +90,8 @@ public class FileListEditor {
 
     }
 
-    //addFile was made to reduce instances of code in MainGUI
-    public static List<File> addFile() {
+	//AddFile was made to reduce instances of code in MainGUI
+	public static List<File> AddFile(){
         Stage srcFile = new Stage();
 
         FileChooser browseSourceFile = new FileChooser();

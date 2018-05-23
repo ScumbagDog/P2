@@ -1,8 +1,6 @@
 package a307a.program.GUI;
 
-import a307a.algorithm.IAlgorithm;
 import a307a.algorithm.SumCommon;
-import a307a.algorithm.TFIDFSumUnion;
 import a307a.algorithm.Ukkonen;
 import javafx.scene.control.CheckBox;
 
@@ -10,16 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlgorithmList extends CheckBox {
-    /* This class exists to allow the user to select which algorithms
-     * they want to compare with. */
-    public static List<SelectableAlgorithm> listAlgorithm() {
-        //TODO: NGrams-algoritmer skal kende MAGNITUDEN af NGrams.
-        List<SelectableAlgorithm> algorithmList = new ArrayList<>();
-        algorithmList.add(new SelectableAlgorithm("Ukkonen Measure Algorithm", new Ukkonen()));
-        algorithmList.add(new SelectableAlgorithm("Sum Common Measure Algorithm", new SumCommon()));
-        algorithmList.add(new SelectableAlgorithm("TFIDF Sum Union Algorithm", new TFIDFSumUnion()));
+	/* Make a list of Strings and Checkbox, and get the names from the
+	different
+	Algorithm */
+	public static List<CheckBox> listAlgorithm(){
+		List<CheckBox> checkboxList = new ArrayList<>();
+		List<String> algorithmName = new ArrayList<>();
 
-        return algorithmList;
+        //TODO: NGrams-algoritmer skal kende MAGNITUDEN af NGrams.
+		Ukkonen ukonnen = new Ukkonen(2);
+		SumCommon sumCommon = new SumCommon(1);
+		algorithmName.add(ukonnen.getName());
+		algorithmName.add(sumCommon.getName());
+		for(int i = 0; i < algorithmName.size(); i++){
+			checkboxList.add(new CheckBox(algorithmName.get(i)));
+			checkboxList.get(i)
+					.setSelected(false);
+			checkboxList.get(i)
+					.setIndeterminate(false);
+		}
+
+		return checkboxList;
     }
 }
 /* TODO dette er et midlertidigt løsning */

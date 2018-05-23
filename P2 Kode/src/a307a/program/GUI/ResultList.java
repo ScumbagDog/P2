@@ -1,32 +1,17 @@
 package a307a.program.GUI;
 
-import a307a.algorithm.*;
-import a307a.midilib.parser.AMelody;
-import a307a.midilib.parser.AMidiSequenceReader;
-import a307a.midilib.parser.MidiTools;
-import a307a.program.GUI.MenuBar.FileListEditor;
-import a307a.program.GUI.MenuBar.MidiFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.sound.midi.InvalidMidiDataException;
 import java.io.*;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ResultList {
     private ObservableList<DataResult> data = FXCollections.observableArrayList();
@@ -39,21 +24,14 @@ public class ResultList {
     private StackPane resultStack1 = new StackPane(this.getTable());
     private StackPane resultStack2 = new StackPane(buttons);
     private GraphicsManager graphicsManager;
-    private List<SelectableAlgorithm> listOfAlgorithms;
-    private FileStorage fileStorage = new FileStorage();
 
     public void addTableEntry(String compInformation, double result) {
         data.add(new DataResult(compInformation, result));
         table.setItems(data);
     }
 
-    public void adjustListWidth(double windowWidth) {
-        table.setPrefWidth(windowWidth / 3);
-    }
-
-    public ResultList(GraphicsManager graphicsManager, List<SelectableAlgorithm> listOfAlgorithms) {
+	public ResultList(GraphicsManager graphicsManager){
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        this.listOfAlgorithms = listOfAlgorithms;
 
         fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
                 ("fileName"));
@@ -69,12 +47,16 @@ public class ResultList {
         saveResultsToFile();
     }
 
+	public void adjustListWidth(double windowWidth){
+		table.setPrefWidth(windowWidth / 3);
+	}
+
     private void initiateRightPane() {
         graphicsManager.getResultSplit()
                 .setOrientation(Orientation.VERTICAL);
         graphicsManager.getResultSplit()
                 .setDividerPositions(0.9);
-        resultStack2.setMaxSize(100, 100);
+	    //resultStack2.setMaxSize(100, 100);
         graphicsManager.getResultSplit()
                 .getItems()
                 .addAll(resultStack1, resultStack2);
@@ -88,7 +70,7 @@ public class ResultList {
         });
     }
 
-    private String setConfirmationText() {
+	private String setConfirmationText(){
         return "A total of "
                 + graphicsManager.getSelectedFiles()
                 .getSrcMidiFiles()
@@ -101,14 +83,18 @@ public class ResultList {
                 + "Do you want to begin the comparison sequence?";
     }
 
-    private void openConfirmationWindow() {
+	private void openConfirmationWindow(){
         Stage confirmAction = new Stage();
         Text confirmationText = new Text(setConfirmationText());
         Button startComparison = new Button("Start");
-
+		Comparison comparison = new Comparison(this,
+				graphicsManager.getSelectedFiles()
+						.getSrcMidiFiles(),
+				graphicsManager.getSelectedFiles()
+						.getCompMidiFiles());
 
         startComparison.setOnAction(event2 -> {
-            executeAlgorithms();
+	        comparison.useUkkonen();
             confirmAction.close();
         });
 
@@ -125,57 +111,22 @@ public class ResultList {
         confirmAction.show();
     }
 
-    private void executeAlgorithms() {
-        Comparison comparison = new Comparison(this,
-                graphicsManager.getSelectedFiles()
-                        .getSrcMidiFiles(),
-                graphicsManager.getSelectedFiles()
-                        .getCompMidiFiles());
-
-        for (SelectableAlgorithm algorithm : listOfAlgorithms) {
-            if (algorithm.getBox().isSelected()) {
-                if (algorithm.getAlgorithm() instanceof AStatisticallyInformedAlgorithm) {
-                    AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm = (AStatisticallyInformedAlgorithm) algorithm.getAlgorithm();
-                    try{setCollection(statisticallyInformedAlgorithm, Integer.parseInt(algorithm.getTextField().getText()));}
-                    catch(InvalidMidiDataException | IOException e){ System.out.println("Invalid file loaded into the sequence reader");}
-                }
-                algorithm.getAlgorithm().setNGramMagnitude(Integer.parseInt(algorithm.getTextField().getText()));
-                comparison.useAlgorithm(algorithm.getAlgorithm());
-            }
-        }
-    }
-
-    private void setCollection(AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm, int magnitude) throws InvalidMidiDataException, IOException {
-        List<MidiFile> referenceFiles = new ArrayList<>();
-        List<File> preprocessedFiles = new ArrayList<>(FileListEditor.addFile());
-        fileStorage.initiateMidiFileList(preprocessedFiles, referenceFiles);
-        AMidiSequenceReader reader;
-        List<AMelody> melodies = new ArrayList<>();
-        for(MidiFile referenceFile : referenceFiles){
-            reader = MidiTools.getMidiSequenceReader(referenceFile.getFilePath());
-            for(int count = 0; count < referenceFile.getCheckBoxes().size(); ++count) {
-                melodies.add(reader.getMelody(count));
-            }
-        }
-        statisticallyInformedAlgorithm.setMelodyCollection(melodies, magnitude);
-    }
-
-    private void saveResultsToFile() {
+	private void saveResultsToFile(){
         saveResults.setText("Save Results");
         saveResults.setOnAction(event -> {
-            try {
+	        try{
                 PrintWriter writer = new PrintWriter(getDate() + ".txt", "UTF-8");
                 data.stream().forEach(dataResult -> writer.println(dataResult.getEntry()));
                 writer.close();
-            } catch (FileNotFoundException e) {
+	        }catch(FileNotFoundException e){
                 System.out.println("The file you made does not exist");
-            } catch (UnsupportedEncodingException e) {
+	        }catch(UnsupportedEncodingException e){
                 System.out.println("Invalid encoding, fix it.");
-            }
+	        }
         });
     }
 
-    private String getDate() {
+	private String getDate(){
         ZonedDateTime date = ZonedDateTime.now();
         String dash = "-";
         return Integer.toString(date.getHour())
