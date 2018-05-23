@@ -136,7 +136,7 @@ public class ResultList {
             if (algorithm.getBox().isSelected()) {
                 if (algorithm.getAlgorithm() instanceof AStatisticallyInformedAlgorithm) {
                     AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm = (AStatisticallyInformedAlgorithm) algorithm.getAlgorithm();
-                    try{setCollection(statisticallyInformedAlgorithm, Integer.parseInt(algorithm.getTextField().getText()));}
+                    try{setCollection(statisticallyInformedAlgorithm);}
                     catch(InvalidMidiDataException | IOException e){ System.out.println("Invalid file loaded into the sequence reader");}
                 }
                 algorithm.getAlgorithm().setNGramMagnitude(Integer.parseInt(algorithm.getTextField().getText()));
@@ -145,7 +145,7 @@ public class ResultList {
         }
     }
 
-    private void setCollection(AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm, int magnitude) throws InvalidMidiDataException, IOException {
+    private void setCollection(AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm) throws InvalidMidiDataException, IOException {
         List<MidiFile> referenceFiles = new ArrayList<>();
         List<File> preprocessedFiles = new ArrayList<>(FileListEditor.addFile());
         fileStorage.initiateMidiFileList(preprocessedFiles, referenceFiles);
@@ -157,7 +157,7 @@ public class ResultList {
                 melodies.add(reader.getMelody(count));
             }
         }
-        statisticallyInformedAlgorithm.setMelodyCollection(melodies, magnitude);
+        statisticallyInformedAlgorithm.setMelodyCollection(melodies);
     }
 
     private void saveResultsToFile() {
