@@ -1,6 +1,5 @@
 package a307a.program.GUI;
 
-import a307a.algorithm.IAlgorithm;
 import a307a.algorithm.SumCommon;
 import a307a.algorithm.TFIDFSumUnion;
 import a307a.algorithm.Ukkonen;

@@ -13,7 +13,7 @@ public class GraphicsManager {
     private BorderPane elementHolder;
     private VBox algorithmVBox;
     private StackPane algorithmStack;
-    private Text fileName;
+    private Text infoText;
     private FileList fileList;
     private FileStorage selectedFiles;
     private SplitPane resultSplit;
@@ -23,7 +23,7 @@ public class GraphicsManager {
         elementHolder = new BorderPane();
         algorithmVBox = new VBox();
         algorithmStack = new StackPane(algorithmVBox);
-        fileName = new Text("Awaiting action...");
+        infoText = new Text("Awaiting action...");
         fileList = new FileList(this);
         selectedFiles = new FileStorage();
         resultSplit = new SplitPane();
@@ -33,7 +33,7 @@ public class GraphicsManager {
     public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis) {
         listOfFiles.addAll(FileListEditor.addFile());
         selectedFiles.initiateMidiFileList(listOfFiles, listOfMidis);
-        fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
+        infoText.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
                 .getFilePath()
                 .getName() + "\" has been added!");
         elementHolder.setCenter(fileList.listsOfFiles(
@@ -45,7 +45,7 @@ public class GraphicsManager {
     public void updateDisplay() {
         elementHolder.setTop(accessBar.getMenuBar());
         elementHolder.setLeft(algorithmStack);
-        elementHolder.setBottom(fileName);
+        elementHolder.setBottom(infoText);
         elementHolder.setCenter(fileList.listsOfFiles(
                 selectedFiles.getSrcMidiFiles(),
                 selectedFiles.getCompMidiFiles()
@@ -55,9 +55,11 @@ public class GraphicsManager {
 
     public void loadAlgorithms(List<SelectableAlgorithm> listOfAlgorithms) {
         for (SelectableAlgorithm listOfAlgorithm : listOfAlgorithms) {
-            HBox algorithmHBox = new HBox();
-            algorithmHBox.getChildren().addAll(listOfAlgorithm.getBox(), listOfAlgorithm.getTextField());
-            algorithmVBox.getChildren().add(algorithmHBox);
+            BorderPane algorithmBP = new BorderPane();
+            algorithmBP.setLeft(listOfAlgorithm.getBox());
+            algorithmBP.setRight(listOfAlgorithm.getTextField());
+
+            algorithmVBox.getChildren().add(algorithmBP);
         }
     }
 

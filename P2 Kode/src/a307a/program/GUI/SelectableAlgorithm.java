@@ -14,6 +14,8 @@ public class SelectableAlgorithm {
         this.name = name;
         box = new CheckBox(name);
         textField = new TextField();
+        textField.setPromptText("Enter Magnitude");
+        textField.setMaxSize(105, 10);
         box.setSelected(false);
         box.setIndeterminate(false);
         this.algorithm = algorithm;

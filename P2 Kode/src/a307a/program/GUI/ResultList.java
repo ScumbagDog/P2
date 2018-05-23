@@ -9,7 +9,9 @@ import a307a.program.GUI.MenuBar.MidiFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,21 +49,16 @@ public class ResultList {
         table.setItems(data);
     }
 
-    public void adjustListWidth(double windowWidth) {
-        table.setPrefWidth(windowWidth / 3);
-    }
+    public void adjustListWidth(double windowWidth) { table.setPrefWidth(windowWidth / 3); }
 
     public ResultList(GraphicsManager graphicsManager, List<SelectableAlgorithm> listOfAlgorithms) {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.listOfAlgorithms = listOfAlgorithms;
 
-        fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
-                ("fileName"));
-        result.setCellValueFactory(new PropertyValueFactory<DataResult, String>
-                ("resultValue"));
+        fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>("fileName"));
+        result.setCellValueFactory(new PropertyValueFactory<DataResult, String>("resultValue"));
 
-        table.getColumns()
-                .addAll(fileName1, result);
+        table.getColumns().addAll(fileName1, result);
 
         this.graphicsManager = graphicsManager;
         initiateRightPane();
@@ -74,7 +71,10 @@ public class ResultList {
                 .setOrientation(Orientation.VERTICAL);
         graphicsManager.getResultSplit()
                 .setDividerPositions(0.9);
-        resultStack2.setMaxSize(100, 100);
+
+        resultStack2.setMaxHeight(1);
+        buttons.setAlignment(Pos.CENTER);
+        buttons.setSpacing(20);
         graphicsManager.getResultSplit()
                 .getItems()
                 .addAll(resultStack1, resultStack2);
@@ -106,7 +106,6 @@ public class ResultList {
         Text confirmationText = new Text(setConfirmationText());
         Button startComparison = new Button("Start");
 
-
         startComparison.setOnAction(event2 -> {
             executeAlgorithms();
             confirmAction.close();
@@ -136,6 +135,7 @@ public class ResultList {
             if (algorithm.getBox().isSelected()) {
                 if (algorithm.getAlgorithm() instanceof AStatisticallyInformedAlgorithm) {
                     AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm = (AStatisticallyInformedAlgorithm) algorithm.getAlgorithm();
+                    midiReferenceNotificationWindow();
                     try{setCollection(statisticallyInformedAlgorithm);}
                     catch(InvalidMidiDataException | IOException e){ System.out.println("Invalid file loaded into the sequence reader");}
                 }
@@ -160,8 +160,21 @@ public class ResultList {
         statisticallyInformedAlgorithm.setMelodyCollection(melodies);
     }
 
+    private void midiReferenceNotificationWindow(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("You have selected an algorithm that needs to be statistically informed of which " +
+                "types of melodies are common and which types are not." +
+                "\n\nFor this purpose, you will now be allowed to select as many MIDI files as you feel necessary." +
+                "\n\nDo not be alarmed if this message appears multiple times, as that just means you've selected multiple " +
+                "algorithms that require these statistics.");
+        alert.setHeaderText("Please read:");
+        alert.setTitle("Statistically informed algorithms need statistics.");
+        alert.showAndWait();
+    }
+
     private void saveResultsToFile() {
         saveResults.setText("Save Results");
+        saveResults.setStyle("-fx-font-size: 10pt;");
         saveResults.setOnAction(event -> {
             try {
                 PrintWriter writer = new PrintWriter(getDate() + ".txt", "UTF-8");
