@@ -25,7 +25,13 @@ public abstract class AStatisticallyInformedAlgorithm implements
 		this.nGramLists = getNGramLists(sourceMelodies, magnitude);
 	}
 
-	public void readCollection(
+	/**
+	 * Sets the collection used for statistical comparison.
+	 *
+	 * @param melodyCollection
+	 * @param magnitude
+	 */
+	public void setMelodyCollection(
 			Collection<AMelody> melodyCollection, int magnitude
 	){
 		nGramLists = getNGramLists(melodyCollection, magnitude);
