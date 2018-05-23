@@ -31,7 +31,6 @@ public class ResultList {
     private StackPane resultStack1 = new StackPane(this.getTable());
     private StackPane resultStack2 = new StackPane(buttons);
     private GraphicsManager graphicsManager;
-    private SettingsFile settings;
 
     public void addTableEntry(String compInformation, double result) {
         data.add(new DataResult(compInformation, result));
@@ -42,8 +41,7 @@ public class ResultList {
         table.setPrefWidth(windowWidth / 3);
     }
 
-    public ResultList(GraphicsManager graphicsManager, double windowWidth) {
-        this.settings = settings;
+    public ResultList(GraphicsManager graphicsManager) {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         fileName1.setCellValueFactory(new PropertyValueFactory<DataResult, String>
