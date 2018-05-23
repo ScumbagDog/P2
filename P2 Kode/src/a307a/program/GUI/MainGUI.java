@@ -13,9 +13,9 @@ import java.util.List;
 public class MainGUI extends Application {
     private Stage stage = new Stage();
     private SettingsFile settings = new SettingsFile();
-    private List<CheckBox> listOfAlgorithms = AlgorithmList.listAlgorithm();
+    private List<SelectableAlgorithm> listOfAlgorithms = AlgorithmList.listAlgorithm();
     private GraphicsManager graphicsManager = new GraphicsManager();
-    private ResultList resultList = new ResultList(graphicsManager);
+    private ResultList resultList = new ResultList(graphicsManager, listOfAlgorithms);
 
 
     //Essentially the 'main' method of JavaFX.

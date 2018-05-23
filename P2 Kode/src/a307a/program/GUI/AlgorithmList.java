@@ -1,5 +1,9 @@
 package a307a.program.GUI;
 
+import a307a.algorithm.IAlgorithm;
+import a307a.algorithm.SumCommon;
+import a307a.algorithm.TFIDFSumUnion;
+import a307a.algorithm.Ukkonen;
 import javafx.scene.control.CheckBox;
 
 import java.util.ArrayList;
@@ -11,9 +15,9 @@ public class AlgorithmList extends CheckBox {
     public static List<SelectableAlgorithm> listAlgorithm() {
         //TODO: NGrams-algoritmer skal kende MAGNITUDEN af NGrams.
         List<SelectableAlgorithm> algorithmList = new ArrayList<>();
-        algorithmList.add(new SelectableAlgorithm("Ukkonen Measure Algorithm"));
-        algorithmList.add(new SelectableAlgorithm("Sum Common Measure Algorithm"));
-        algorithmList.add(new SelectableAlgorithm("TFID Sum Union Algorithm"));
+        algorithmList.add(new SelectableAlgorithm("Ukkonen Measure Algorithm", new Ukkonen()));
+        algorithmList.add(new SelectableAlgorithm("Sum Common Measure Algorithm", new SumCommon()));
+        algorithmList.add(new SelectableAlgorithm("TFIDF Sum Union Algorithm", new TFIDFSumUnion()));
 
         return algorithmList;
     }

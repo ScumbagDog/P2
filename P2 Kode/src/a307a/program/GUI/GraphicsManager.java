@@ -2,7 +2,6 @@ package a307a.program.GUI;
 
 import a307a.program.GUI.MenuBar.*;
 import a307a.program.GUI.Splits.FileList;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -12,7 +11,7 @@ import java.util.List;
 
 public class GraphicsManager {
     private BorderPane elementHolder;
-    private VBox algorithms;
+    private VBox algorithmVBox;
     private StackPane algorithmStack;
     private Text fileName;
     private FileList fileList;
@@ -22,8 +21,8 @@ public class GraphicsManager {
 
     public GraphicsManager() {
         elementHolder = new BorderPane();
-        algorithms = new VBox();
-        algorithmStack = new StackPane(algorithms);
+        algorithmVBox = new VBox();
+        algorithmStack = new StackPane(algorithmVBox);
         fileName = new Text("Awaiting action...");
         fileList = new FileList(this);
         selectedFiles = new FileStorage();
@@ -32,7 +31,7 @@ public class GraphicsManager {
     }
 
     public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis) {
-        listOfFiles.addAll(FileListEditor.AddFile());
+        listOfFiles.addAll(FileListEditor.addFile());
         selectedFiles.initiateMidiFileList(listOfFiles, listOfMidis);
         fileName.setText("File \"" + listOfMidis.get(listOfMidis.size() - 1)
                 .getFilePath()
@@ -54,10 +53,11 @@ public class GraphicsManager {
         elementHolder.setRight(resultSplit);
     }
 
-    public void loadAlgorithms(List<CheckBox> listOfAlgorithms) {
-        for (int i = 0; i < listOfAlgorithms.size(); ++i) {
-            algorithms.getChildren()
-                    .add(listOfAlgorithms.get(i));
+    public void loadAlgorithms(List<SelectableAlgorithm> listOfAlgorithms) {
+        for (SelectableAlgorithm listOfAlgorithm : listOfAlgorithms) {
+            HBox algorithmHBox = new HBox();
+            algorithmHBox.getChildren().addAll(listOfAlgorithm.getBox(), listOfAlgorithm.getTextField());
+            algorithmVBox.getChildren().add(algorithmHBox);
         }
     }
 
@@ -80,4 +80,6 @@ public class GraphicsManager {
     public FileList getFileList() {
         return fileList;
     }
+
+
 }
