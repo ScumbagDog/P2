@@ -1,5 +1,6 @@
 package a307a.program.GUI;
 
+import a307a.algorithm.IAlgorithm;
 import a307a.algorithm.Ukkonen;
 import a307a.midilib.parser.*;
 import a307a.program.GUI.MenuBar.MidiFile;
@@ -26,9 +27,8 @@ public class Comparison {
     private ResultList resultList;
     private List<MidiFile> srcFiles;
     private List<MidiFile> compFiles;
-	private Ukkonen ukkonen = new Ukkonen(2);
 
-	public void useUkkonen(){
+    public void useAlgorithm(IAlgorithm algorithm) {
         try {
             for (MidiFile srcFile : srcFiles) {
                 prepareSrcReader(srcFile);
@@ -44,7 +44,7 @@ public class Comparison {
                                  ++compBoxes) {
                                 if (compFile.getCheckBoxes().get(compBoxes).isSelected()) {
                                     prepareCompMelody(compFile, compBoxes);
-	                                executeUkkonen();
+                                    executeAlgorithm(algorithm);
                                 }
                             }
                         }
@@ -71,10 +71,10 @@ public class Comparison {
         this.compFiles = compFiles;
     }
 
-	private void executeUkkonen(){
+    private void executeAlgorithm(IAlgorithm algorithm){
         resultList.addTableEntry(srcName + " Channel"
-                + srcText + " to " + compName + " Channel" + compText,
-		        ukkonen.compareTo(srcMelody, compMelody));
+                + srcText + " to " + compName + " Channel"
+                + compText, algorithm.compareTo(srcMelody, compMelody));
     }
 
     private void prepareSrcReader(MidiFile file) throws InvalidMidiDataException, IOException {

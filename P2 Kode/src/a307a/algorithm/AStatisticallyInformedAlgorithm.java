@@ -12,7 +12,6 @@ public abstract class AStatisticallyInformedAlgorithm implements
 	private Collection<Collection<INGram>> nGramLists;
 
 	public AStatisticallyInformedAlgorithm(){
-		super();
 	}
 
 	/**
@@ -28,17 +27,6 @@ public abstract class AStatisticallyInformedAlgorithm implements
 
 	/**
 	 * Sets the collection used for statistical comparison.
-	 *
-	 * @param melodyCollection
-	 */
-	public void setMelodyCollection(
-			Collection<AMelody> melodyCollection
-	){
-		nGramLists = getNGramLists(melodyCollection, magnitude);
-	}
-
-	/**
-	 * Sets the collection used for statistical comparison .
 	 *
 	 * @param melodyCollection
 	 * @param magnitude
