@@ -63,7 +63,7 @@ public class ResultList {
                 .setOrientation(Orientation.VERTICAL);
         graphicsManager.getResultSplit()
                 .setDividerPositions(0.9);
-        //resultStack2.setMaxSize(100, 100);
+        resultStack2.setMaxSize(100, 100);
         graphicsManager.getResultSplit()
                 .getItems()
                 .addAll(resultStack1, resultStack2);
@@ -116,6 +116,10 @@ public class ResultList {
         content.setRight(cancelComparison);
         confirmAction.setScene(new Scene(content));
         confirmAction.show();
+    }
+
+    private void executeAlgorithms(){
+
     }
 
     private void saveResultsToFile(){
