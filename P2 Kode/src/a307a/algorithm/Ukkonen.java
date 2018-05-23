@@ -13,6 +13,9 @@ public class Ukkonen implements IAlgorithm {
     private final String name = "Ukkonen Measure Algorithm";
     private int nGramMagnitude;
 
+    public Ukkonen(){
+        this(2);
+    }
     public Ukkonen(int nGramMagnitude) {
         this.nGramMagnitude = nGramMagnitude;
     }

@@ -6,12 +6,38 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-public class TFIDFRelationAlgorithm extends
-		AStatisticallyInformedAlgorithm{
-	public TFIDFRelationAlgorithm(
+public class TFIDFSumUnion extends AStatisticallyInformedAlgorithm{
+	private int nGramMagnitude;
+
+	public TFIDFSumUnion(){
+		magnitude = 2;
+	}
+
+	public TFIDFSumUnion(
 			Collection<AMelody> sourceMelodies, int magnitude
 	){
 		super(sourceMelodies, magnitude);
+	}
+
+	@Override
+	public String getName(){
+		return "TF-IDF Sum union";
+	}
+
+	@Override
+	public double compareTo(
+			AMelody midiMelody1, AMelody midiMelody2
+	){
+		double result = sumUnion(midiMelody1, midiMelody2, (d1, d2)->d1 * d2);
+
+		double normalized = 1 / result;
+		System.out.println("Res: " + normalized);
+		return normalized;
+	}
+
+	@Override
+	public void setNGramMagnitude(int magnitude){
+		nGramMagnitude = magnitude;
 	}
 
 	double TFIDF(
@@ -54,19 +80,4 @@ public class TFIDFRelationAlgorithm extends
 		return result;
 	}
 
-	@Override
-	public String getName(){
-		return null;
-	}
-
-	@Override
-	public double compareTo(
-			AMelody midiMelody1, AMelody midiMelody2
-	){
-		double result = sumUnion(midiMelody1, midiMelody2, (d1, d2)->d1 * d2);
-
-		double normalized = 1 / result;
-		System.out.println("Res: " + normalized);
-		return normalized;
-	}
 }

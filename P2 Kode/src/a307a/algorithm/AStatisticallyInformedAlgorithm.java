@@ -8,14 +8,27 @@ import java.util.stream.Collectors;
 
 public abstract class AStatisticallyInformedAlgorithm implements
 		IAlgorithm{
-	final Collection<List<INGram>> nGramLists;
-	final int magnitude;
+	int magnitude;
+	private Collection<Collection<INGram>> nGramLists;
 
+	public AStatisticallyInformedAlgorithm(){
+	}
+
+	/**
+	 * @param sourceMelodies
+	 * @param magnitude
+	 */
 	public AStatisticallyInformedAlgorithm(
 			Collection<AMelody> sourceMelodies, int magnitude
 	){
 		this.magnitude = magnitude;
 		this.nGramLists = getNGramLists(sourceMelodies, magnitude);
+	}
+
+	public void readCollection(
+			Collection<AMelody> melodyCollection, int magnitude
+	){
+		nGramLists = getNGramLists(melodyCollection, magnitude);
 	}
 
 	protected double getTermFrequency(AMelody melody, INGram melodicTerm){
@@ -49,7 +62,7 @@ public abstract class AStatisticallyInformedAlgorithm implements
 				.count();
 	}
 
-	private Collection<List<INGram>> getNGramLists(
+	private Collection<Collection<INGram>> getNGramLists(
 			Collection<AMelody> melodies, int magnitude
 	){
 		INGramFactory nFact = new NGramFactory();
