@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 
 import javax.sound.midi.InvalidMidiDataException;
 import java.io.*;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,16 +220,6 @@ public class ResultList{
 				System.err.println("Invalid encoding, fix it.");
 			}
 		});
-	}
-
-	private String getDate(){
-		ZonedDateTime date = ZonedDateTime.now();
-		String dash = "-";
-		return Integer.toString(date.getHour()) + dash
-				+ Integer.toString(date.getMinute()) + dash
-				+ Integer.toString(date.getDayOfMonth()) + dash + Integer
-				.toString(
-				date.getMonthValue()) + dash + Integer.toString(date.getYear());
 	}
 
 	public TableView getTable(){
