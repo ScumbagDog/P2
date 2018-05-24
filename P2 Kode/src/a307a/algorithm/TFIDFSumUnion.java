@@ -32,7 +32,7 @@ public class TFIDFSumUnion extends AStatisticallyInformedAlgorithm{
 
 		double normalized = 1 / result;
 		System.out.println("Res: " + normalized);
-		return normalized;
+		return result;
 	}
 
 	@Override

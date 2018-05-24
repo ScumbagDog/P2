@@ -159,7 +159,7 @@ public class ResultList{
 		try{
 			setCollection(algorithm);
 		}catch(InvalidMidiDataException | IOException e){
-			System.out.println(
+			System.err.println(
 					"Invalid file loaded into the sequence " + "reader");
 		}
 	}

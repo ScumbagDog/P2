@@ -65,11 +65,11 @@ public class Test_TFIDF{
 
 		m2 = msr.getMelody(1);
 		result = tfidf.compareTo(m1, m2);
-		assertTrue(result < 1.0);
+		assertTrue(result > 1.0);
 
 		m2 = msr.getMelody(2);
 		result = tfidf.compareTo(m1, m2);
-		assertTrue(result < 1.0);
+		assertTrue(result > 1.0);
 	}
 
 	@Test
@@ -90,7 +90,7 @@ public class Test_TFIDF{
 
 		/* Assert that even though the melodies are similar, they are not
 		identical. */
-		assertTrue(resultAlmostSame < 1.0);
+		assertTrue(resultAlmostSame > 1.0);
 
 		/* Get a melody from a very different piece. */
 		msr = MidiTools.getMidiSequenceReader(new File(
@@ -100,6 +100,6 @@ public class Test_TFIDF{
 		/* Assert that the very different melody return a smaller value. */
 		double resultVeryDifferent = tfidf.compareTo(melody1Almost,
 				veryDifferent);
-		assertTrue(resultAlmostSame > resultVeryDifferent);
+		assertTrue(resultAlmostSame < resultVeryDifferent);
 	}
 }
