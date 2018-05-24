@@ -133,15 +133,19 @@ public class ResultList {
 
         for (SelectableAlgorithm algorithm : listOfAlgorithms) {
             if (algorithm.getBox().isSelected()) {
-                if (algorithm.getAlgorithm() instanceof AStatisticallyInformedAlgorithm) {
-                    AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm = (AStatisticallyInformedAlgorithm) algorithm.getAlgorithm();
-                    midiReferenceNotificationWindow();
-                    try{setCollection(statisticallyInformedAlgorithm);}
-                    catch(InvalidMidiDataException | IOException e){ System.out.println("Invalid file loaded into the sequence reader");}
-                }
+                isStatisticallyInformedAlgorithm(algorithm);
                 algorithm.getAlgorithm().setNGramMagnitude(Integer.parseInt(algorithm.getTextField().getText()));
                 comparison.useAlgorithm(algorithm.getAlgorithm());
             }
+        }
+    }
+
+    private void isStatisticallyInformedAlgorithm(SelectableAlgorithm algorithm){
+        if (algorithm.getAlgorithm() instanceof AStatisticallyInformedAlgorithm) {
+            AStatisticallyInformedAlgorithm statisticallyInformedAlgorithm = (AStatisticallyInformedAlgorithm) algorithm.getAlgorithm();
+            midiReferenceNotificationWindow();
+            try{setCollection(statisticallyInformedAlgorithm);}
+            catch(InvalidMidiDataException | IOException e){ System.out.println("Invalid file loaded into the sequence reader");}
         }
     }
 
