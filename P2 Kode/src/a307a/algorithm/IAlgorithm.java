@@ -8,5 +8,10 @@ public interface IAlgorithm {
 
     double compareTo(AMelody midiMelody1, AMelody midiMelody2);
 
-    void setNGramMagnitude(int magnitude);
+	/**
+	 * Sets the magnitude of ngrams to be used with this algorithm.
+	 *
+	 * @param magnitude
+	 */
+	public void setNGramMagnitude(int magnitude);
 }

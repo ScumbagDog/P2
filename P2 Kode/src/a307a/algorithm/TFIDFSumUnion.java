@@ -40,7 +40,7 @@ public class TFIDFSumUnion extends AStatisticallyInformedAlgorithm{
 		nGramMagnitude = magnitude;
 	}
 
-	double TFIDF(
+	private double TFIDF(
 			AMelody melody,
 			INGram term,
 			BiFunction<Double, Double, Double> operator
@@ -50,7 +50,7 @@ public class TFIDFSumUnion extends AStatisticallyInformedAlgorithm{
 		return res;
 	}
 
-	double sumUnion(
+	private double sumUnion(
 			AMelody m1, AMelody m2, BiFunction<Double, Double, Double> operator
 	){
 		List<INGram> terms1 = MidiTools.getNGrams(m1, magnitude);

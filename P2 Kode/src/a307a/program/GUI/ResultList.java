@@ -208,13 +208,12 @@ public class ResultList{
 		saveResults.setOnAction(event->{
 			try{
 				PrintWriter writer = new PrintWriter(getDate() + ".txt", "UTF-8");
-				data.stream()
-						.forEach(dataResult->writer.println(dataResult.getEntry()));
+				data.forEach(dataResult->writer.println(dataResult.getEntry()));
 				writer.close();
 			}catch(FileNotFoundException e){
-				System.out.println("The file you made does not exist");
+				System.err.println("File made does not exist");
 			}catch(UnsupportedEncodingException e){
-				System.out.println("Invalid encoding, fix it.");
+				System.err.println("Invalid encoding, fix it.");
 			}
 		});
 	}
