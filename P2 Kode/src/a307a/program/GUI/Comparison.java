@@ -72,7 +72,8 @@ public class Comparison {
     }
 
     private void executeAlgorithm(IAlgorithm algorithm){
-        resultList.addTableEntry(srcName + " Channel"
+        resultList.addTableEntry(algorithm.getName() + ": "
+                + srcName + " Channel"
                 + srcText + " to " + compName + " Channel"
                 + compText, algorithm.compareTo(srcMelody, compMelody));
     }
