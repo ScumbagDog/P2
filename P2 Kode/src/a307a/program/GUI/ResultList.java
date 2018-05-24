@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -207,7 +208,11 @@ public class ResultList{
 		saveResults.setStyle("-fx-font-size: 10pt;");
 		saveResults.setOnAction(event->{
 			try{
-				PrintWriter writer = new PrintWriter(getDate() + ".txt", "UTF-8");
+                FileChooser pathFinder = new FileChooser();
+                FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Text (.txt)", ".txt");
+                pathFinder.getExtensionFilters().add(filter);
+                String fileName = pathFinder.showSaveDialog(new Stage()).toString();
+				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 				data.forEach(dataResult->writer.println(dataResult.getEntry()));
 				writer.close();
 			}catch(FileNotFoundException e){
