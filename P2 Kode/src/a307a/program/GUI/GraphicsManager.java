@@ -27,7 +27,7 @@ public class GraphicsManager {
         fileList = new FileList(this);
         selectedFiles = new FileStorage();
         resultSplit = new SplitPane();
-        accessBar = new AccessBar(fileList);
+        accessBar = new AccessBar(this.infoText);
     }
 
     public void loadFile(List<File> listOfFiles, List<MidiFile> listOfMidis) {
@@ -83,5 +83,5 @@ public class GraphicsManager {
         return fileList;
     }
 
-
+    public Text getInfoText() { return infoText; }
 }
