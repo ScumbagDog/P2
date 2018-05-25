@@ -12,7 +12,7 @@ public class SettingsMenu {
 
     //This method is needed to create the window users interact with to change the
     // settings.
-    public static void WindowSettings(String version) {
+    public static void WindowSettings(String version, Text infoText) {
         Stage stage = new Stage();
         stage.setTitle("Settings");
         BorderPane generalPane = new BorderPane();
@@ -46,6 +46,8 @@ public class SettingsMenu {
                 fileEditor.EditSettings("fullscreen", "true");
             else
                 fileEditor.EditSettings("fullscreen", "false");
+            infoText.setText("Settings successfully saved!");
+            stage.close();
         });
         clearSettings.setOnAction(event -> {
             SettingsFile fileEditor = new SettingsFile();

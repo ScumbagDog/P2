@@ -108,6 +108,7 @@ public class ResultList{
 
 		startComparison.setOnAction(event2->{
 			executeAlgorithms();
+			graphicsManager.getInfoText().setText( "Files have been successfully compared!");
 			confirmAction.close();
 		});
 

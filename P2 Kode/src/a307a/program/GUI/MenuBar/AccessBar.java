@@ -5,6 +5,7 @@ import a307a.program.GUI.GraphicsManager;
 import a307a.program.GUI.MenuBar.settings.SettingsMenu;
 import a307a.program.GUI.Splits.FileList;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 public class AccessBar {
     private MenuBar menuBar;
@@ -14,10 +15,9 @@ public class AccessBar {
     private MenuItem addCompFile;
     private Menu menuSetting;
     private MenuItem addSetting;
-    private FileList fileList;
 
 
-    public AccessBar(FileList fileList) {
+    public AccessBar(Text infoText) {
         menuBar = new MenuBar();
         menuFile = new Menu("Files");
         addSrcFile = new MenuItem("Add Source");
@@ -25,10 +25,9 @@ public class AccessBar {
         addCompFile = new MenuItem("Add Comparison");
         menuSetting = new Menu("Window");
         addSetting = new MenuItem("Settings");
-        this.fileList = fileList;
         menuBar.getMenus()
                 .addAll(menuFile, menuSetting);
-        setSettingsMenuItemFunctionality();
+        setSettingsMenuItemFunctionality(infoText);
     }
 
     public void setFileMenuItemFunctionality(
@@ -57,10 +56,10 @@ public class AccessBar {
                 .addAll(addSrcFile, addCompFile, removeFile);
     }
 
-    private void setSettingsMenuItemFunctionality() {
+    private void setSettingsMenuItemFunctionality(Text infoText) {
         addSetting.setOnAction(event -> {
             String version = "???";
-            SettingsMenu.WindowSettings(version);
+            SettingsMenu.WindowSettings(version, infoText);
         });
         menuSetting.getItems()
                 .add(addSetting);
